@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Earning545 - Premium Earning Platform</title>
+  <title>Daily Earning545 | Premium Earning Platform</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Segoe UI', system-ui, sans-serif;
     }
     
     :root {
@@ -22,7 +22,6 @@
       --danger: #ef4444;
       --dark: #1e293b;
       --light: #f8fafc;
-      --gray: #94a3b8;
       --card-bg: #ffffff;
       --body-bg: #f1f5f9;
       --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
@@ -78,7 +77,7 @@
     /* Profile Section */
     .profile-container {
       position: relative;
-      padding: 20px 0 40px;
+      padding: 20px 0 30px;
       overflow: hidden;
     }
     
@@ -103,13 +102,23 @@
       padding: 0 20px;
     }
     
+    .profile-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
+    }
+    
     .profile-img-container {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto 15px;
-      border: 4px solid rgba(255, 255, 255, 0.3);
+      border: 3px solid rgba(67, 97, 238, 0.2);
       box-shadow: var(--shadow);
     }
     
@@ -119,50 +128,65 @@
       object-fit: cover;
     }
     
+    .profile-info {
+      text-align: left;
+      flex: 1;
+    }
+    
     .name {
       font-size: 1.3rem;
       font-weight: 700;
-      margin: 5px 0;
-      color: white;
+      margin-bottom: 5px;
+      color: var(--dark);
+    }
+    
+    .user-id {
+      font-size: 0.85rem;
+      color: var(--primary);
+      background: rgba(67, 97, 238, 0.1);
+      padding: 3px 8px;
+      border-radius: 20px;
+      display: inline-block;
     }
     
     .balance-label {
-      color: rgba(255, 255, 255, 0.8);
+      color: #666;
       font-size: 0.9rem;
     }
     
     .usd {
-      font-size: 1.8rem;
-      margin: 10px 0 15px;
-      color: white;
+      font-size: 1.6rem;
+      margin: 10px 0;
+      color: var(--dark);
       font-weight: 800;
     }
     
-    .referral-info {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 15px;
-      display: flex;
-      justify-content: space-between;
+    /* Stats Section */
+    .stats-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .stat-card {
+      background: white;
+      border-radius: 12px;
+      padding: 15px 10px;
       box-shadow: var(--shadow);
-      max-width: 300px;
-      margin: 0 auto;
-    }
-    
-    .ref-item {
       text-align: center;
-      padding: 0 10px;
     }
     
-    .ref-value {
-      font-size: 1.2rem;
+    .stat-value {
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--primary);
     }
     
-    .ref-label {
+    .stat-label {
       font-size: 0.8rem;
-      color: var(--gray);
+      color: #666;
+      margin-top: 5px;
     }
     
     /* Card Styles */
@@ -227,7 +251,7 @@
     
     .info-label {
       font-weight: 500;
-      color: var(--gray);
+      color: #666;
     }
     
     .info-value {
@@ -294,6 +318,92 @@
       transform: none;
     }
     
+    /* Referral Section */
+    .referral-card {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      margin: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .referral-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+    }
+    
+    .referral-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+    
+    .referral-header i {
+      font-size: 1.8rem;
+    }
+    
+    .referral-header h3 {
+      font-size: 1.2rem;
+    }
+    
+    .referral-content {
+      padding: 10px 0;
+    }
+    
+    .referral-stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+      margin: 20px 0;
+    }
+    
+    .referral-stat {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+    }
+    
+    .referral-stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+    
+    .referral-stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .referral-link {
+      background: white;
+      color: var(--primary);
+      padding: 15px;
+      border-radius: 15px;
+      font-weight: 500;
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .referral-link span {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 10px;
+    }
+    
     /* Input Styles */
     .input-group {
       margin-bottom: 15px;
@@ -340,7 +450,7 @@
       text-align: center;
       font-size: 0.7rem;
       cursor: pointer;
-      color: var(--gray);
+      color: #666;
       transition: var(--transition);
       width: 70px;
     }
@@ -396,7 +506,7 @@
     
     .counter-label {
       font-size: 0.8rem;
-      color: var(--gray);
+      color: #666;
       margin-top: 5px;
     }
     
@@ -433,27 +543,61 @@
   
   <div class="profile-container">
     <div class="profile">
-      <div class="profile-img-container">
-        <img src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Profile">
+      <div class="profile-header">
+        <div class="profile-img-container">
+          <img src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Profile">
+        </div>
+        <div class="profile-info">
+          <div class="name" id="username">Username</div>
+          <div class="user-id">ID: <span id="user-id">123456</span></div>
+        </div>
       </div>
-      <div class="name" id="username">Username</div>
-      <div class="balance-label">Total Balance</div>
-      <div class="usd" id="usd-balance">USD $0.000</div>
       
-      <div class="referral-info">
-        <div class="ref-item">
-          <div class="ref-value" id="ref-count">0</div>
-          <div class="ref-label">Referrals</div>
+      <div class="stats-container">
+        <div class="stat-card">
+          <div class="stat-value" id="total-earned">$0.000</div>
+          <div class="stat-label">Total Earned</div>
         </div>
-        <div class="ref-item">
-          <div class="ref-value" id="completed">0</div>
-          <div class="ref-label">Completed</div>
+        <div class="stat-card">
+          <div class="stat-value" id="tasks-completed">0</div>
+          <div class="stat-label">Tasks Done</div>
         </div>
-        <div class="ref-item">
-          <div class="ref-value" id="remaining">100</div>
-          <div class="ref-label">Remaining</div>
+        <div class="stat-card">
+          <div class="stat-value" id="referral-count">0</div>
+          <div class="stat-label">Referrals</div>
         </div>
       </div>
+    </div>
+  </div>
+  
+  <div class="referral-card">
+    <div class="referral-header">
+      <i class="fas fa-users"></i>
+      <h3>Refer & Earn</h3>
+    </div>
+    
+    <div class="referral-content">
+      <p>Invite friends and earn $1 for each successful referral. Share your link and start earning!</p>
+      
+      <div class="referral-stats">
+        <div class="referral-stat">
+          <div class="referral-stat-value" id="ref-earned">$0</div>
+          <div class="referral-stat-label">Referral Earnings</div>
+        </div>
+        <div class="referral-stat">
+          <div class="referral-stat-value" id="ref-pending">0</div>
+          <div class="referral-stat-label">Pending Referrals</div>
+        </div>
+      </div>
+      
+      <div class="referral-link">
+        <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
+        <i class="fas fa-copy" onclick="copyReferralLink()"></i>
+      </div>
+      
+      <button class="button" onclick="shareReferralLink()">
+        <i class="fas fa-share-alt"></i> Share Referral Link
+      </button>
     </div>
   </div>
   
@@ -555,7 +699,7 @@
       </div>
       <div class="card-content">
         <p class="info-label" style="margin-bottom: 20px; text-align: center;">
-          <i class="fas fa-info-circle"></i> আপনি বিজ্ঞাপনগুলি দেখে উপার্জন করুন। টাস্কটি সম্পূর্ণ করতে ১৫ সেকেন্ড ads এ ঘুরাঘুরি করুন এবং প্রতি টাস্কে $0.025 উপার্জন করুন!
+          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 15 seconds to complete a task and earn $0.025 per task!
         </p>
         
         <div class="task-counter">
@@ -575,10 +719,6 @@
         
         <button class="button" onclick="startTask()">
           <i class="fas fa-play"></i> Start Earning ▶
-        </button>
-        
-        <button class="button button-secondary" onclick="copyReferralLink()">
-          <i class="fas fa-user-plus"></i> Refer & Earn
         </button>
       </div>
     </div>
@@ -620,8 +760,16 @@
  
     const today = new Date().toLocaleDateString();
 
+    // Initialize user data with referral tracking
     let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
-      userId, username, referrals: 0, lifetimeEarning: 0
+      userId, 
+      username, 
+      referrals: 0,
+      referralEarnings: 0,
+      pendingReferrals: 0,
+      lifetimeEarning: 0,
+      totalTasks: 0,
+      joinDate: new Date().toLocaleDateString()
     };
 
     let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
@@ -632,38 +780,43 @@
       data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
     }
 
+    // Process referral if exists
     if (ref && ref.startsWith("ref_")) {
       const refId = ref.split("ref_")[1];
-      const referredUsers = JSON.parse(localStorage.getItem(`referrals_${refId}`)) || [];
-      if (!referredUsers.includes(userId)) {
-        referredUsers.push(userId);
-        localStorage.setItem(`referrals_${refId}`, JSON.stringify(referredUsers));
-        if (userId !== refId) {
-          const refCount = parseInt(localStorage.getItem(`ref_count_${refId}`) || "0");
-          localStorage.setItem(`ref_count_${refId}`, refCount + 1);
+      if (userId !== refId) {
+        const referredUsers = JSON.parse(localStorage.getItem(`referrals_${refId}`)) || [];
+        if (!referredUsers.includes(userId)) {
+          referredUsers.push(userId);
+          localStorage.setItem(`referrals_${refId}`, JSON.stringify(referredUsers));
+          
+          const refUserData = JSON.parse(localStorage.getItem(`MTEarningData_${refId}`)) || {};
+          refUserData.pendingReferrals = (refUserData.pendingReferrals || 0) + 1;
+          localStorage.setItem(`MTEarningData_${refId}`, JSON.stringify(refUserData));
         }
       }
     }
 
-    const refCount = parseInt(localStorage.getItem(`ref_count_${userId}`) || "0");
-    userData.referrals = refCount;
+    // Update referral counts
+    const referredUsers = JSON.parse(localStorage.getItem(`referrals_${userId}`)) || [];
+    userData.referrals = referredUsers.length;
+    
+    // Update storage
+    localStorage.setItem("MTEarningData", JSON.stringify(userData));
+    localStorage.setItem(`MTEarningData_${userId}`, JSON.stringify(userData));
 
     function updateStorage() {
       localStorage.setItem("MTEarningData", JSON.stringify(userData));
       localStorage.setItem("dailyEarningData", JSON.stringify(data));
+      localStorage.setItem(`MTEarningData_${userId}`, JSON.stringify(userData));
     }
 
     function updateDisplay() {
       document.getElementById("username").innerText = username;
-      document.getElementById("completed").innerText = data.completed;
-      document.getElementById("remaining").innerText = data.remaining;
+      document.getElementById("user-id").innerText = userId;
       document.getElementById("completed-card").innerText = data.completed;
       document.getElementById("remaining-card").innerText = data.remaining;
-      document.getElementById("ecompleted").innerText = data.completed;
-      document.getElementById("eremaining").innerText = data.remaining;
       document.getElementById("todays-earning").innerText = data.todaysEarning.toFixed(3);
       document.getElementById("lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
-      document.getElementById("usd-balance").innerText = "USD $" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("available").innerText = userData.lifetimeEarning.toFixed(3);
       document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       
@@ -672,7 +825,15 @@
       document.getElementById("progress-bar").style.width = progressPercent + "%";
       document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
       
-      document.getElementById("ref-count").innerText = userData.referrals;
+      // Update profile stats
+      document.getElementById("total-earned").innerText = "$" + userData.lifetimeEarning.toFixed(3);
+      document.getElementById("tasks-completed").innerText = userData.totalTasks + data.completed;
+      document.getElementById("referral-count").innerText = userData.referrals;
+      
+      // Update referral section
+      document.getElementById("ref-earned").innerText = "$" + userData.referralEarnings.toFixed(2);
+      document.getElementById("ref-pending").innerText = userData.pendingReferrals;
+      document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
     }
 
     const taskLinks = [
@@ -685,98 +846,7 @@
       "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
       "https://otieu.com/4/9453955",
       "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453941",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9452846",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453948",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453954",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453950",
-      "https://www.profitableratecpm.com/itk03buj?key=10d89b1e27b4f2c067fb264420de2a82",
-      "https://otieu.com/4/9453931",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9452846",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9453952",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453947",
-      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://otieu.com/4/9453956",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453939",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453953",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453938",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453949",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9453943",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453942",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453951",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453932",
-      "https://www.profitableratecpm.com/itk03buj?key=10d89b1e27b4f2c067fb264420de2a82",
-      "https://otieu.com/4/9453944",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453955",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9453941",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453945",
-      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://otieu.com/4/9453948",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453954",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453950",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453931",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9452846",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9453952",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453947",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453956",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453939",
-      "https://www.profitableratecpm.com/itk03buj?key=10d89b1e27b4f2c067fb264420de2a82",
-      "https://otieu.com/4/9453953",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453938",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9453949",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453943",
-      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://otieu.com/4/9453942",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453942",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453932",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453944",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453955",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9453941",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453945",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453948",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453954",
-      "https://www.profitableratecpm.com/itk03buj?key=10d89b1e27b4f2c067fb264420de2a82",
-      "https://otieu.com/4/9453950",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453931",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396"
+      "https://otieu.com/4/9453941"
     ];
 
     function startTask() {
@@ -792,11 +862,12 @@
             data.remaining--;
             data.todaysEarning += 0.025;
             userData.lifetimeEarning += 0.025;
+            userData.totalTasks++;
             updateStorage();
             updateDisplay();
-            alert("✅ Task completed! $0.025 added.");
+            alert("✅ Task completed! $0.025 added to your balance.");
           } else {
-            alert("⏱️ আপনাকে অবশ্যই কমপক্ষে 15 সেকেন্ডের জন্য বিজ্ঞাপনটি দেখতে হবে!");
+            alert("⏱️ You must view the ad for at least 15 seconds to complete the task!");
           }
         }
       }, 500);
@@ -804,10 +875,10 @@
 
     function submitWithdrawal() {
       const amount = parseFloat(document.getElementById("withdraw-amount").value);
-      if (isNaN(amount) return alert("Please enter a valid amount.");
-      if (amount < 30) return alert("You need at least $30 to withdraw.");
+      if (isNaN(amount)) return alert("Please enter a valid amount.");
+      if (amount < 30) return alert("Minimum withdrawal amount is $30.");
       if (amount > userData.lifetimeEarning) return alert("Insufficient balance.");
-      if (userData.referrals < 10) return alert("আপনার এখনো ১০টি রেফার হয়নি! প্রথম বার পেমেন্ট নিতে হলে কমপক্ষে ১০টি রেফারেল দরকার।");
+      if (userData.referrals < 10) return alert("You need at least 10 referrals to withdraw.");
       
       // Update balance
       userData.lifetimeEarning -= amount;
@@ -818,6 +889,7 @@
 
     function show(section) {
       document.querySelector('.profile-container').style.display = section === 'home' ? 'block' : 'none';
+      document.querySelector('.referral-card').style.display = section === 'home' ? 'block' : 'none';
       
       // Hide all cards first
       document.querySelectorAll('.card').forEach(card => {
@@ -843,12 +915,27 @@
     function copyReferralLink() {
       const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => alert("✅ আপনার রেফার লিংক কপি করা হয়েছে! প্রতি রেফারে পাবেন $1 ডলার। 👫 রেফার করে অল্প সময়ে বেশি ইনকাম করতে চাইলে আপনার বন্ধুদের রেফার লিংক শেয়ার করুন অথবা Facebook এর ইনকাম Group গুলোর পোস্টের কমেন্ট বক্সে আপনার লিংক পেস্ট করুন!"))
+        .then(() => alert("✅ Referral link copied! You earn $1 for each successful referral."))
         .catch(() => alert("Failed to copy link."));
     }
+    
+    function shareReferralLink() {
+      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      if (navigator.share) {
+        navigator.share({
+          title: 'Earn with Daily Earning545',
+          text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
+          url: refLink
+        })
+        .then(() => console.log('Shared successfully'))
+        .catch((error) => console.log('Sharing failed', error));
+      } else {
+        copyReferralLink();
+      }
+    }
 
+    // Initialize display
     updateDisplay();
-    updateStorage();
   </script>
 </body>
 </html>
