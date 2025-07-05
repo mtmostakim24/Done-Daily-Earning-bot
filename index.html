@@ -149,22 +149,10 @@
       display: inline-block;
     }
     
-    .balance-label {
-      color: #666;
-      font-size: 0.9rem;
-    }
-    
-    .usd {
-      font-size: 1.6rem;
-      margin: 10px 0;
-      color: var(--dark);
-      font-weight: 800;
-    }
-    
     /* Stats Section */
     .stats-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       margin-bottom: 20px;
     }
@@ -283,80 +271,60 @@
       transition: var(--transition);
     }
     
-    /* Button Styles */
-    .button {
-      display: block;
-      width: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      padding: 15px;
-      text-align: center;
-      border-radius: 15px;
-      margin-top: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-      border: none;
-      font-size: 1rem;
-    }
-    
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
-    }
-    
-    .button-secondary {
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      box-shadow: none;
-    }
-    
-    .button-secondary:hover {
-      background: #f8fafc;
-      transform: none;
-    }
-    
-    /* Referral Section */
-    .referral-card {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
+    /* Profile Page Styles */
+    #profile-page {
+      display: none;
       padding: 20px;
+    }
+    
+    .profile-card {
+      background: white;
       border-radius: 20px;
-      margin: 15px;
-      position: relative;
-      overflow: hidden;
+      padding: 25px;
+      box-shadow: var(--shadow);
+      margin-bottom: 20px;
     }
     
-    .referral-card::before {
-      content: '';
-      position: absolute;
-      top: -50px;
-      right: -50px;
-      width: 150px;
-      height: 150px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50%;
+    .profile-section {
+      margin-bottom: 25px;
     }
     
-    .referral-header {
+    .profile-section-title {
       display: flex;
       align-items: center;
       gap: 10px;
       margin-bottom: 15px;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 1.1rem;
     }
     
-    .referral-header i {
-      font-size: 1.8rem;
+    .profile-info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
     }
     
-    .referral-header h3 {
-      font-size: 1.2rem;
+    .profile-info-item:last-child {
+      border-bottom: none;
     }
     
-    .referral-content {
-      padding: 10px 0;
+    .info-title {
+      color: #666;
+    }
+    
+    .info-data {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .referral-section {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
     }
     
     .referral-stats {
@@ -397,14 +365,42 @@
       align-items: center;
     }
     
-    .referral-link span {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      padding-right: 10px;
+    /* Button Styles */
+    .button {
+      display: block;
+      width: 100%;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      border-radius: 15px;
+      margin-top: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+      border: none;
+      font-size: 1rem;
     }
     
-    /* Input Styles */
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+    }
+    
+    .button-secondary {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      box-shadow: none;
+    }
+    
+    .button-secondary:hover {
+      background: #f8fafc;
+      transform: none;
+    }
+    
+    /* Input Styles - Fixed sizing */
     .input-group {
       margin-bottom: 15px;
     }
@@ -562,46 +558,11 @@
           <div class="stat-value" id="tasks-completed">0</div>
           <div class="stat-label">Tasks Done</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-value" id="referral-count">0</div>
-          <div class="stat-label">Referrals</div>
-        </div>
       </div>
     </div>
   </div>
   
-  <div class="referral-card">
-    <div class="referral-header">
-      <i class="fas fa-users"></i>
-      <h3>Refer & Earn</h3>
-    </div>
-    
-    <div class="referral-content">
-      <p>Invite friends and earn $1 for each successful referral. Share your link and start earning!</p>
-      
-      <div class="referral-stats">
-        <div class="referral-stat">
-          <div class="referral-stat-value" id="ref-earned">$0</div>
-          <div class="referral-stat-label">Referral Earnings</div>
-        </div>
-        <div class="referral-stat">
-          <div class="referral-stat-value" id="ref-pending">0</div>
-          <div class="referral-stat-label">Pending Referrals</div>
-        </div>
-      </div>
-      
-      <div class="referral-link">
-        <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
-        <i class="fas fa-copy" onclick="copyReferralLink()"></i>
-      </div>
-      
-      <button class="button" onclick="shareReferralLink()">
-        <i class="fas fa-share-alt"></i> Share Referral Link
-      </button>
-    </div>
-  </div>
-  
-  <div class="cards-container">
+  <div class="cards-container" id="home-content">
     <div class="card">
       <div class="card-header">
         <i class="fas fa-tasks"></i>
@@ -654,71 +615,208 @@
       </div>
     </div>
     
-    <div class="card" id="withdraw" style="display:none;">
-      <div class="card-header">
-        <i class="fas fa-money-bill-wave"></i>
-        <h3>Withdraw Funds</h3>
+    <div class="referral-section">
+      <div class="referral-header">
+        <i class="fas fa-users"></i>
+        <h3>Refer & Earn</h3>
       </div>
-      <div class="card-content">
-        <div class="info-row">
-          <span class="info-label">Available Balance</span>
-          <span class="info-value">USD $<span id="available">0.000</span></span>
+      
+      <div class="referral-content">
+        <p>Invite friends and earn $1 for each successful referral. Share your link and start earning!</p>
+        
+        <div class="referral-stats">
+          <div class="referral-stat">
+            <div class="referral-stat-value" id="ref-earned">$0</div>
+            <div class="referral-stat-label">Referral Earnings</div>
+          </div>
+          <div class="referral-stat">
+            <div class="referral-stat-value" id="referral-count">0</div>
+            <div class="referral-stat-label">Referrals</div>
+          </div>
         </div>
         
-        <div class="input-group">
-          <label>Withdrawal Method</label>
-          <select>
-            <option>Select a method</option>
-            <option>Bkash $30</option>
-            <option>Nagad $30</option>
-            <option>Payeer $50</option>
-            <option>USDT (TRC20) $50</option>
-          </select>
+        <div class="referral-link">
+          <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
+          <i class="fas fa-copy" onclick="copyReferralLink()"></i>
         </div>
         
-        <div class="input-group">
-          <label>Amount (USD)</label>
-          <input type="text" id="withdraw-amount" placeholder="Enter amount">
-        </div>
-        
-        <div class="input-group">
-          <label>Withdrawal Address</label>
-          <input type="text" placeholder="Enter wallet address">
-        </div>
-        
-        <button class="button" onclick="submitWithdrawal()">
-          <i class="fas fa-paper-plane"></i> Submit Withdrawal
+        <!-- Added Share Referral Link button -->
+        <button class="button" onclick="shareReferralLink()">
+          <i class="fas fa-share-alt"></i> Share Referral Link
         </button>
       </div>
     </div>
-    
-    <div class="card" id="earn" style="display:none;">
-      <div class="card-header">
-        <i class="fas fa-coins"></i>
-        <h3>Earn Money</h3>
+  </div>
+  
+  <!-- Withdraw Section -->
+  <div class="card" id="withdraw" style="display:none;">
+    <div class="card-header">
+      <i class="fas fa-money-bill-wave"></i>
+      <h3>Withdraw Funds</h3>
+    </div>
+    <div class="card-content">
+      <div class="info-row">
+        <span class="info-label">Available Balance</span>
+        <span class="info-value">USD $<span id="available">0.000</span></span>
       </div>
-      <div class="card-content">
-        <p class="info-label" style="margin-bottom: 20px; text-align: center;">
-          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 15 seconds to complete a task and earn $0.025 per task!
-        </p>
-        
-        <div class="task-counter">
-          <div class="counter-item">
-            <div class="counter-value" id="etotal">100</div>
-            <div class="counter-label">Total Tasks</div>
-          </div>
-          <div class="counter-item">
-            <div class="counter-value" id="ecompleted">0</div>
-            <div class="counter-label">Completed</div>
-          </div>
-          <div class="counter-item">
-            <div class="counter-value" id="eremaining">100</div>
-            <div class="counter-label">Remaining</div>
-          </div>
+      
+      <div class="input-group">
+        <label>Withdrawal Method</label>
+        <select>
+          <option>Select a method</option>
+          <option>Bkash $30</option>
+          <option>Nagad $30</option>
+          <option>Payeer $50</option>
+          <option>USDT (TRC20) $50</option>
+          <option>Skrill $30</option>
+          <option>Neteller $30</option>
+          <option>Perfect Money $50</option>
+        </select>
+      </div>
+      
+      <div class="input-group">
+        <label>Amount (USD)</label>
+        <input type="text" id="withdraw-amount" placeholder="Enter amount">
+      </div>
+      
+      <div class="input-group">
+        <label>Withdrawal Address</label>
+        <input type="text" placeholder="Enter wallet address">
+      </div>
+      
+      <button class="button" onclick="submitWithdrawal()">
+        <i class="fas fa-paper-plane"></i> Submit Withdrawal
+      </button>
+    </div>
+  </div>
+  
+  <!-- Earn Section -->
+  <div class="card" id="earn" style="display:none;">
+    <div class="card-header">
+      <i class="fas fa-coins"></i>
+      <h3>Earn Money</h3>
+    </div>
+    <div class="card-content">
+      <p class="info-label" style="margin-bottom: 20px; text-align: center;">
+        <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 15 seconds to complete a task and earn $0.025 per task!
+      </p>
+      
+      <div class="task-counter">
+        <div class="counter-item">
+          <div class="counter-value" id="etotal">100</div>
+          <div class="counter-label">Total Tasks</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-value" id="ecompleted">0</div>
+          <div class="counter-label">Completed</div>
+        </div>
+        <div class="counter-item">
+          <div class="counter-value" id="eremaining">100</div>
+          <div class="counter-label">Remaining</div>
+        </div>
+      </div>
+      
+      <button class="button" onclick="startTask()">
+        <i class="fas fa-play"></i> Start Earning ▶
+      </button>
+    </div>
+  </div>
+  
+  <!-- Profile Page -->
+  <div id="profile-page">
+    <div class="profile-card">
+      <div class="profile-section">
+        <div class="profile-section-title">
+          <i class="fas fa-user-circle"></i>
+          <h3>Account Information</h3>
         </div>
         
-        <button class="button" onclick="startTask()">
-          <i class="fas fa-play"></i> Start Earning ▶
+        <div class="profile-info-item">
+          <div class="info-title">Username</div>
+          <div class="info-data" id="profile-username">Username</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">User ID</div>
+          <div class="info-data" id="profile-user-id">123456</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Join Date</div>
+          <div class="info-data" id="join-date">2023-10-15</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="profile-card">
+      <div class="profile-section">
+        <div class="profile-section-title">
+          <i class="fas fa-wallet"></i>
+          <h3>Financial Summary</h3>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Current Balance</div>
+          <div class="info-data" id="profile-balance">$0.000</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Total Withdrew</div>
+          <div class="info-data" id="profile-withdrew">$0.000</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Today's Earnings</div>
+          <div class="info-data" id="profile-today-earning">$0.000</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Lifetime Earnings</div>
+          <div class="info-data" id="profile-lifetime-earning">$0.000</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="profile-card">
+      <div class="profile-section">
+        <div class="profile-section-title">
+          <i class="fas fa-users"></i>
+          <h3>Referral Program</h3>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Total Referrals</div>
+          <div class="info-data" id="profile-refer-count">0</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Referral Earnings</div>
+          <div class="info-data" id="profile-refer-earnings">$0.000</div>
+        </div>
+        
+        <div class="profile-info-item">
+          <div class="info-title">Pending Referrals</div>
+          <div class="info-data" id="profile-pending-refs">0</div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="referral-section">
+      <div class="referral-header">
+        <i class="fas fa-share-alt"></i>
+        <h3>Share Your Referral Link</h3>
+      </div>
+      
+      <div class="referral-content">
+        <p>Earn $1 for every friend who signs up using your referral link!</p>
+        
+        <div class="referral-link">
+          <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
+          <i class="fas fa-copy" onclick="copyReferralLink()"></i>
+        </div>
+        
+        <button class="button" onclick="shareReferralLink()">
+          <i class="fas fa-share-alt"></i> Share Referral Link
         </button>
       </div>
     </div>
@@ -743,7 +841,7 @@
       </div>
       <div class="nav-label">Withdraw</div>
     </div>
-    <div class="nav-item" id="nav-profile" onclick="show('home')">
+    <div class="nav-item" id="nav-profile" onclick="show('profile')">
       <div class="nav-icon">
         <i class="fas fa-user"></i>
       </div>
@@ -760,7 +858,7 @@
  
     const today = new Date().toLocaleDateString();
 
-    // Initialize user data with referral tracking
+    // Initialize user data
     let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
       userId, 
       username, 
@@ -768,6 +866,7 @@
       referralEarnings: 0,
       pendingReferrals: 0,
       lifetimeEarning: 0,
+      withdrew: 0,
       totalTasks: 0,
       joinDate: new Date().toLocaleDateString()
     };
@@ -811,6 +910,7 @@
     }
 
     function updateDisplay() {
+      // Update home screen
       document.getElementById("username").innerText = username;
       document.getElementById("user-id").innerText = userId;
       document.getElementById("completed-card").innerText = data.completed;
@@ -828,12 +928,24 @@
       // Update profile stats
       document.getElementById("total-earned").innerText = "$" + userData.lifetimeEarning.toFixed(3);
       document.getElementById("tasks-completed").innerText = userData.totalTasks + data.completed;
-      document.getElementById("referral-count").innerText = userData.referrals;
       
       // Update referral section
       document.getElementById("ref-earned").innerText = "$" + userData.referralEarnings.toFixed(2);
-      document.getElementById("ref-pending").innerText = userData.pendingReferrals;
+      document.getElementById("referral-count").innerText = userData.referrals;
       document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
+      
+      // Update profile page
+      document.getElementById("profile-username").innerText = username;
+      document.getElementById("profile-user-id").innerText = userId;
+      document.getElementById("profile-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
+      document.getElementById("profile-withdrew").innerText = "$" + userData.withdrew.toFixed(3);
+      document.getElementById("profile-refer-count").innerText = userData.referrals;
+      document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(3);
+      document.getElementById("profile-today-earning").innerText = "$" + data.todaysEarning.toFixed(3);
+      document.getElementById("profile-lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
+      document.getElementById("join-date").innerText = userData.joinDate;
+      document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals;
+      document.getElementById("profile-ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
     }
 
     const taskLinks = [
@@ -882,27 +994,30 @@
       
       // Update balance
       userData.lifetimeEarning -= amount;
+      userData.withdrew += amount;
       updateStorage();
       updateDisplay();
       alert("Withdrawal request submitted successfully! It will be processed within 24-48 hours.");
     }
 
     function show(section) {
-      document.querySelector('.profile-container').style.display = section === 'home' ? 'block' : 'none';
-      document.querySelector('.referral-card').style.display = section === 'home' ? 'block' : 'none';
+      // Hide all sections first
+      document.getElementById("home-content").style.display = "none";
+      document.getElementById("withdraw").style.display = "none";
+      document.getElementById("earn").style.display = "none";
+      document.getElementById("profile-page").style.display = "none";
+      document.querySelector(".profile-container").style.display = "none";
       
-      // Hide all cards first
-      document.querySelectorAll('.card').forEach(card => {
-        card.style.display = 'none';
-      });
-      
-      // Show appropriate cards
+      // Show appropriate section
       if (section === 'home') {
-        document.querySelectorAll('.card').forEach((card, index) => {
-          if (index < 2) card.style.display = 'block';
-        });
-      } else {
-        document.getElementById(section).style.display = 'block';
+        document.querySelector(".profile-container").style.display = "block";
+        document.getElementById("home-content").style.display = "block";
+      } else if (section === 'withdraw') {
+        document.getElementById("withdraw").style.display = "block";
+      } else if (section === 'earn') {
+        document.getElementById("earn").style.display = "block";
+      } else if (section === 'profile') {
+        document.getElementById("profile-page").style.display = "block";
       }
       
       // Update navigation
