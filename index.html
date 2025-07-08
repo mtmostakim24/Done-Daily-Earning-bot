@@ -525,6 +525,39 @@
       background: var(--success);
     }
     
+    /* Notification */
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: white;
+      padding: 15px 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transform: translateX(120%);
+      transition: transform 0.3s ease;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      border-left: 4px solid var(--success);
+    }
+    
+    .notification.error {
+      border-left: 4px solid var(--danger);
+    }
+    
+    .notification.warning {
+      border-left: 4px solid var(--warning);
+    }
+    
     /* Responsive */
     @media (min-width: 768px) {
       .cards-container {
@@ -545,6 +578,11 @@
   </style>
 </head>
 <body>
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <span id="notification-message">Notification message</span>
+  </div>
+  
   <header>
     <div class="title">
       <i class="fas fa-robot"></i>
@@ -552,7 +590,7 @@
     </div>
     <div class="balance-display">
       <i class="fas fa-wallet"></i>
-      <span id="header-balance">$0.000</span>
+      <span id="header-balance">$47.000</span>
     </div>
   </header>
   
@@ -570,7 +608,7 @@
       
       <div class="stats-container">
         <div class="stat-card">
-          <div class="stat-value" id="total-earned">$0.000</div>
+          <div class="stat-value" id="total-earned">$.000</div>
           <div class="stat-label">Total Earned</div>
         </div>
         <div class="stat-card">
@@ -626,11 +664,11 @@
       <div class="card-content">
         <div class="info-row">
           <span class="info-label">Today's Earnings</span>
-          <span class="info-value">USD $<span id="todays-earning">0.000</span></span>
+          <span class="info-value">USD $<span id="todays-earning">12.000</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">0.000</span></span>
+          <span class="info-value">USD $<span id="lifetime-earning">47.000</span></span>
         </div>
         <div class="info-row">
           <span class="info-label">Avg. per Task</span>
@@ -650,11 +688,11 @@
         
         <div class="referral-stats">
           <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$0</div>
+            <div class="referral-stat-value" id="ref-earned">$27</div>
             <div class="referral-stat-label">Referral Earnings</div>
           </div>
           <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">0</div>
+            <div class="referral-stat-value" id="referral-count">27</div>
             <div class="referral-stat-label">Referrals</div>
           </div>
         </div>
@@ -680,7 +718,7 @@
     <div class="card-content">
       <div class="info-row">
         <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">0.000</span></span>
+        <span class="info-value">USD $<span id="available">47.000</span></span>
       </div>
       
       <div class="input-group">
@@ -897,8 +935,34 @@
   </div>
   
   <script>
-    const userId = Math.floor(Math.random() * 1000000);
-    const username = "User" + userId;
+    // Generate persistent user ID and username
+    let userId = localStorage.getItem("userId");
+    let username = localStorage.getItem("username");
+    
+    // If not stored, generate new values
+    if (!userId) {
+      userId = Math.floor(Math.random() * 1000000);
+      localStorage.setItem("userId", userId);
+    }
+    
+    if (!username) {
+      // Check if we're in Telegram environment
+      if (window.Telegram && window.Telegram.WebApp) {
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+        if (user && user.username) {
+          username = user.username;
+        } else if (user && user.first_name) {
+          username = user.first_name;
+          if (user.last_name) username += " " + user.last_name;
+        } else {
+          username = "User" + userId;
+        }
+      } else {
+        username = "User" + userId;
+      }
+      localStorage.setItem("username", username);
+    }
+    
     const today = new Date().toLocaleDateString();
 
     // Initialize user data
@@ -1009,27 +1073,143 @@
       }
     }
 
+    // FIXED taskLinks array with commas
     const taskLinks = [
       "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
       "https://otieu.com/4/9453951",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
+      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
       "https://otieu.com/4/9453932",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
+      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
       "https://otieu.com/4/9453944",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
+      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
       "https://otieu.com/4/9453955",
+      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
+      "https://otieu.com/4/9453945",
+      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
+      "https://otieu.com/4/9453941",
+      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
+      "https://otieu.com/4/9453948",
+      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
+      "https://otieu.com/4/9453954",
+      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
+      "https://otieu.com/4/9453950",
       "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453941"
+      "https://otieu.com/4/9453931",
+      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
+      "https://otieu.com/4/9452846",
+      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
+      "https://otieu.com/4/9453952",
+      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
+      "https://otieu.com/4/9453947",
+      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
+      "https://otieu.com/4/9453956",
+      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
+      "https://otieu.com/4/9453939",
+      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
+      "https://otieu.com/4/9453953",
+      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
+      "https://otieu.com/4/9453938",
+      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
+      "https://otieu.com/4/9453949",
+      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
+      "https://otieu.com/4/9453943",
+      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
+      "https://otieu.com/4/9453942",
+      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
+      "https://otieu.com/4/9453951",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://otieu.com/4/9453932",
+      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
+      "https://otieu.com/4/9453944",
+      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
+      "https://otieu.com/4/9453955",
+      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
+      "https://otieu.com/4/9453945",
+      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
+      "https://otieu.com/4/9453941",
+      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
+      "https://otieu.com/4/9453948",
+      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
+      "https://otieu.com/4/9453954",
+      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
+      "https://otieu.com/4/9453950",
+      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
+      "https://otieu.com/4/9453931",
+      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
+      "https://otieu.com/4/9452846",
+      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
+      "https://otieu.com/4/9453952",
+      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
+      "https://otieu.com/4/9453947",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://otieu.com/4/9453956",
+      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
+      "https://otieu.com/4/9453939",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://otieu.com/4/9453953",
+      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
+      "https://otieu.com/4/9453938",
+      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
+      "https://otieu.com/4/9453949",
+      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
+      "https://otieu.com/4/9453943",
+      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
+      "https://otieu.com/4/9453942",
+      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
+      "https://otieu.com/4/9453941",
+      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
+      "https://otieu.com/4/9453948",
+      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
+      "https://otieu.com/4/9453954",
+      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
+      "https://otieu.com/4/9453950",
+      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
+      "https://otieu.com/4/9453931",
+      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
+      "https://otieu.com/4/9453953",
+      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
+      "https://otieu.com/4/9453938",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://otieu.com/4/9453949",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://otieu.com/4/9453943",
+      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
+      "https://otieu.com/4/9453942",
+      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
     ];
 
+    function showNotification(message, type) {
+      const notification = document.getElementById("notification");
+      const messageElement = document.getElementById("notification-message");
+      
+      messageElement.textContent = message;
+      notification.className = "notification " + type;
+      notification.classList.add("show");
+      
+      setTimeout(() => {
+        notification.classList.remove("show");
+      }, 3000);
+    }
+
     function startTask() {
-      if (data.completed >= 100) return alert("You have completed all tasks for today!");
+      if (data.completed >= 100) {
+        showNotification("You have completed all tasks for today!", "warning");
+        return;
+      }
+      
       const start = Date.now();
       const ad = window.open(taskLinks[data.completed % taskLinks.length], "_blank");
+      
+      if (!ad) {
+        showNotification("Please allow popups to complete tasks", "error");
+        return;
+      }
+      
       const check = setInterval(() => {
         if (ad.closed) {
           clearInterval(check);
           const duration = (Date.now() - start) / 1000;
+          
           if (duration >= 15) {
             data.completed++;
             data.remaining = 100 - data.completed;
@@ -1038,9 +1218,9 @@
             userData.totalTasks++;
             updateStorage();
             updateDisplay();
-            alert("✅ Task completed! $0.025 added to your balance.");
+            showNotification("✅ Task completed! $0.025 added to your balance.", "success");
           } else {
-            alert("⏱️ You must view the ad for at least 15 seconds to complete the task!");
+            showNotification("⏱️ You must view the ad for at least 15 seconds to complete the task!", "error");
           }
         }
       }, 500);
@@ -1051,19 +1231,37 @@
       const method = document.getElementById("withdraw-method").value;
       const address = document.getElementById("withdraw-address").value;
       
-      if (isNaN(amount)) return alert("Please enter a valid amount.");
-      if (amount < 30) return alert("Minimum withdrawal amount is $30.");
-      if (amount > userData.lifetimeEarning) return alert("Insufficient balance.");
-      if (userData.referrals < 10) return alert("You need at least 10 referrals to withdraw.");
-      if (method === "Select a method") return alert("Please select a withdrawal method.");
-      if (!address) return alert("Please enter your withdrawal address.");
+      if (isNaN(amount)) {
+        showNotification("Please enter a valid amount", "error");
+        return;
+      }
+      if (amount < 30) {
+        showNotification("Minimum withdrawal amount is $30", "error");
+        return;
+      }
+      if (amount > userData.lifetimeEarning) {
+        showNotification("Insufficient balance", "error");
+        return;
+      }
+      if (userData.referrals < 10) {
+        showNotification("You need at least 10 referrals to withdraw", "error");
+        return;
+      }
+      if (method === "Select a method") {
+        showNotification("Please select a withdrawal method", "error");
+        return;
+      }
+      if (!address) {
+        showNotification("Please enter your withdrawal address", "error");
+        return;
+      }
       
       // Update balance
       userData.lifetimeEarning -= amount;
       userData.withdrew += amount;
       updateStorage();
       updateDisplay();
-      alert("Withdrawal request submitted successfully! It will be processed within 24-48 hours.");
+      showNotification("Withdrawal request submitted successfully! It will be processed within 24-48 hours.", "success");
     }
 
     function show(section) {
@@ -1096,21 +1294,35 @@
     function copyReferralLink() {
       const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
       navigator.clipboard.writeText(refLink)
-        .then(() => alert("✅ Referral link copied! You earn $1 for each successful referral."))
-        .catch(() => alert("Failed to copy link."));
+        .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
+        .catch(() => showNotification("Failed to copy link", "error"));
     }
     
     function shareReferralLink() {
       const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
-      if (navigator.share) {
+      
+      // Check if we're in a Telegram environment
+      if (window.Telegram && window.Telegram.WebApp) {
+        // Use Telegram's share functionality
+        window.Telegram.WebApp.share(refLink, { title: 'Earn with Daily Earning545' }, (success) => {
+          if (!success) {
+            // Fallback to copy if sharing fails
+            copyReferralLink();
+          }
+        });
+      } else if (navigator.share) {
+        // Use Web Share API for browsers that support it
         navigator.share({
           title: 'Earn with Daily Earning545',
           text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
           url: refLink
         })
-        .then(() => console.log('Shared successfully'))
-        .catch((error) => console.log('Sharing failed', error));
+        .catch((error) => {
+          console.error('Sharing failed:', error);
+          copyReferralLink();
+        });
       } else {
+        // Fallback to copying the link
         copyReferralLink();
       }
     }
