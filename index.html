@@ -1,1334 +1,930 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Earning545 | Premium Earning Platform</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-    }
-    
-    :root {
-      --primary: #4361ee;
-      --primary-dark: #3a56d4;
-      --secondary: #4cc9f0;
-      --success: #4ade80;
-      --warning: #f59e0b;
-      --danger: #ef4444;
-      --dark: #1e293b;
-      --light: #f8fafc;
-      --card-bg: #ffffff;
-      --body-bg: #f1f5f9;
-      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-      --transition: all 0.3s ease;
-    }
-    
-    body {
-      background-color: var(--body-bg);
-      color: var(--dark);
-      padding-bottom: 80px;
-      min-height: 100vh;
-      background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
-    }
-    
-    /* Header Styles */
-    header {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      padding: 15px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: var(--shadow);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    header .title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: white;
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-    
-    header .title i {
-      font-size: 1.5rem;
-    }
-    
-    header .balance-display {
-      background: rgba(255, 255, 255, 0.2);
-      padding: 6px 12px;
-      border-radius: 50px;
-      font-size: 0.9rem;
-      color: white;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-    
-    /* Profile Section */
-    .profile-container {
-      position: relative;
-      padding: 20px 0 30px;
-      overflow: hidden;
-    }
-    
-    .profile-container::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 70%;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      z-index: 0;
-      border-radius: 0 0 30px 30px;
-    }
-    
-    .profile {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    .profile-header {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-    
-    .profile-img-container {
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid rgba(67, 97, 238, 0.2);
-      box-shadow: var(--shadow);
-    }
-    
-    .profile img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    
-    .profile-info {
-      text-align: left;
-      flex: 1;
-    }
-    
-    .name {
-      font-size: 1.3rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-      color: var(--dark);
-    }
-    
-    .user-id {
-      font-size: 0.85rem;
-      color: var(--primary);
-      background: rgba(67, 97, 238, 0.1);
-      padding: 3px 8px;
-      border-radius: 20px;
-      display: inline-block;
-    }
-    
-    /* Stats Section */
-    .stats-container {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-    
-    .stat-card {
-      background: white;
-      border-radius: 12px;
-      padding: 15px 10px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-    
-    .stat-value {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--primary);
-    }
-    
-    .stat-label {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 5px;
-    }
-    
-    /* Card Styles */
-    .card {
-      background: var(--card-bg);
-      margin: 15px;
-      padding: 20px;
-      border-radius: 20px;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 5px;
-      width: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-    }
-    
-    .card-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 20px;
-      gap: 10px;
-    }
-    
-    .card-header i {
-      width: 40px;
-      height: 40px;
-      background: rgba(67, 97, 238, 0.1);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      font-size: 1.2rem;
-    }
-    
-    .card-header h3 {
-      font-size: 1.1rem;
-      color: var(--dark);
-    }
-    
-    .card-content {
-      padding: 5px 0;
-    }
-    
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-    
-    .info-row:last-child {
-      border-bottom: none;
-    }
-    
-    .info-label {
-      font-weight: 500;
-      color: #666;
-    }
-    
-    .info-value {
-      font-weight: 700;
-      color: var(--dark);
-    }
-    
-    .progress-container {
-      margin-top: 20px;
-    }
-    
-    .progress-header {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-    
-    .progress {
-      height: 12px;
-      background: #e2e8f0;
-      border-radius: 10px;
-      overflow: hidden;
-    }
-    
-    .progress-bar {
-      height: 100%;
-      background: linear-gradient(to right, var(--primary), var(--secondary));
-      border-radius: 10px;
-      transition: var(--transition);
-    }
-    
-    /* Profile Page Styles */
-    #profile-page {
-      display: none;
-      padding: 20px;
-    }
-    
-    .profile-card {
-      background: white;
-      border-radius: 20px;
-      padding: 25px;
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
-    }
-    
-    .profile-section {
-      margin-bottom: 25px;
-    }
-    
-    .profile-section-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 15px;
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-    
-    .profile-info-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f0f0;
-    }
-    
-    .profile-info-item:last-child {
-      border-bottom: none;
-    }
-    
-    .info-title {
-      color: #666;
-    }
-    
-    .info-data {
-      font-weight: 600;
-      color: var(--dark);
-    }
-    
-    .referral-section {
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      padding: 20px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-    
-    .referral-stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-      margin: 20px 0;
-    }
-    
-    .referral-stat {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 15px;
-      padding: 15px;
-      text-align: center;
-      backdrop-filter: blur(5px);
-    }
-    
-    .referral-stat-value {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 5px;
-    }
-    
-    .referral-stat-label {
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
-    
-    .referral-link {
-      background: white;
-      color: var(--primary);
-      padding: 15px;
-      border-radius: 15px;
-      font-weight: 500;
-      margin: 20px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    /* Button Styles */
-    .button {
-      display: block;
-      width: 100%;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-      color: white;
-      padding: 15px;
-      text-align: center;
-      border-radius: 15px;
-      margin-top: 15px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-      box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
-      border: none;
-      font-size: 1rem;
-    }
-    
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
-    }
-    
-    .button-secondary {
-      background: white;
-      color: var(--primary);
-      border: 2px solid var(--primary);
-      box-shadow: none;
-    }
-    
-    .button-secondary:hover {
-      background: #f8fafc;
-      transform: none;
-    }
-    
-    /* Input Styles - Fixed sizing */
-    .input-group {
-      margin-bottom: 15px;
-    }
-    
-    .input-group label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 500;
-      color: var(--dark);
-    }
-    
-    input, select {
-      width: 100%;
-      padding: 14px;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      font-size: 1rem;
-      background: #f8fafc;
-      transition: var(--transition);
-    }
-    
-    input:focus, select:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-    }
-    
-    /* Navigation */
-    .nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-around;
-      background: var(--card-bg);
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
-      padding: 10px 0;
-      z-index: 100;
-    }
-    
-    .nav-item {
-      text-align: center;
-      font-size: 0.7rem;
-      cursor: pointer;
-      color: #666;
-      transition: var(--transition);
-      width: 70px;
-    }
-    
-    .nav-icon {
-      width: 24px;
-      height: 24px;
-      margin: 0 auto 5px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #f1f5f9;
-      border-radius: 10px;
-      padding: 12px;
-      transition: var(--transition);
-    }
-    
-    .nav-item.active {
-      color: var(--primary);
-      font-weight: 600;
-    }
-    
-    .nav-item.active .nav-icon {
-      background: rgba(67, 97, 238, 0.1);
-      color: var(--primary);
-    }
-    
-    .nav-label {
-      font-size: 0.75rem;
-    }
-    
-    /* Task Counter */
-    .task-counter {
-      display: flex;
-      justify-content: space-between;
-      margin: 20px 0;
-    }
-    
-    .counter-item {
-      text-align: center;
-      background: #f8fafc;
-      border-radius: 15px;
-      padding: 15px;
-      flex: 1;
-      margin: 0 5px;
-    }
-    
-    .counter-value {
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-    
-    .counter-label {
-      font-size: 0.8rem;
-      color: #666;
-      margin-top: 5px;
-    }
-    
-    /* Task Visualization */
-    .task-visualization {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin: 20px 0;
-    }
-    
-    .task-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #e2e8f0;
-    }
-    
-    .task-dot.completed {
-      background: var(--success);
-    }
-    
-    /* Notification */
-    .notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: white;
-      padding: 15px 25px;
-      border-radius: 10px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      transform: translateX(120%);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .notification.show {
-      transform: translateX(0);
-    }
-    
-    .notification.success {
-      border-left: 4px solid var(--success);
-    }
-    
-    .notification.error {
-      border-left: 4px solid var(--danger);
-    }
-    
-    .notification.warning {
-      border-left: 4px solid var(--warning);
-    }
-    
-    /* Responsive */
-    @media (min-width: 768px) {
-      .cards-container {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
-        margin: 15px;
-      }
-      
-      .card {
-        margin: 0;
-      }
-      
-      .profile {
-        max-width: 600px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>কর্মবাজার - বাংলাদেশের শীর্ষ মাইক্রোজব প্ল্যাটফর্ম</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* বেসিক সেটআপ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'SolaimanLipi', sans-serif;
+        }
+        
+        :root {
+            --primary: #2ecc71;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin: 50px 0 30px;
+            color: var(--dark);
+            position: relative;
+            font-size: 2rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* হেডার স্টাইল */
+        header {
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 45px;
+            margin-right: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* হিরো সেকশন */
+        .hero {
+            background: linear-gradient(to right, rgba(46, 204, 113, 0.9), rgba(52, 152, 219, 0.8)), url('https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+        }
+        
+        /* ক্যাটাগরি সেকশন */
+        .categories {
+            padding: 60px 0;
+            background: white;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .category-card {
+            background: var(--light);
+            border-radius: 8px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .category-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .category-card h3 {
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .category-card p {
+            color: #7f8c8d;
+        }
+        
+        /* সার্ভিস সেকশন */
+        .services {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+        
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .service-header {
+            padding: 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-seller-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--secondary);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .service-seller-info h4 {
+            margin-bottom: 5px;
+        }
+        
+        .service-seller-info .rating {
+            color: #f39c12;
+        }
+        
+        .service-img {
+            height: 200px;
+            background: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        .service-details {
+            padding: 20px;
+        }
+        
+        .service-details h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            margin: 15px 0;
+        }
+        
+        .service-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        
+        .service-delivery {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #7f8c8d;
+        }
+        
+        .service-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f8f9fa;
+            border-top: 1px solid #eee;
+        }
+        
+        /* হাউ ইট ওয়ার্কস */
+        .how-it-works {
+            padding: 80px 0;
+            background: white;
+            text-align: center;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+        }
+        
+        .step-card {
+            max-width: 280px;
+            position: relative;
+            padding-top: 80px;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .step-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* ফুটার */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-logo {
+            margin-bottom: 20px;
+        }
+        
+        .footer-about p {
+            margin-bottom: 20px;
+            color: #bdc3c7;
+        }
+        
+        .footer-links h3 {
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .payment-methods {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .payment-method {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            width: 70px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bdc3c7;
+            font-size: 0.9rem;
+        }
+        
+        /* রেস্পন্সিভ ডিজাইন */
+        @media (max-width: 992px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="notification" id="notification">
-    <i class="fas fa-check-circle"></i>
-    <span id="notification-message">Notification message</span>
-  </div>
-  
-  <header>
-    <div class="title">
-      <i class="fas fa-robot"></i>
-      <span>Daily Earning545</span>
-    </div>
-    <div class="balance-display">
-      <i class="fas fa-wallet"></i>
-      <span id="header-balance">$47.000</span>
-    </div>
-  </header>
-  
-  <div class="profile-container" id="home-profile">
-    <div class="profile">
-      <div class="profile-header">
-        <div class="profile-img-container">
-          <img src="https://i.ibb.co/6R45cM6C/Polish-20250529-015530961.jpg" alt="Profile">
+    <!-- হেডার -->
+    <header>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <h1>কর্ম<span>বাজার</span></h1>
+                </div>
+                
+                <div class="nav-links">
+                    <a href="#" class="active">হোম</a>
+                    <a href="#">সার্ভিস</a>
+                    <a href="#">ফ্রিল্যান্সার</a>
+                    <a href="#">কিভাবে কাজ করে</a>
+                    <a href="#">ব্লগ</a>
+                    <a href="#">যোগাযোগ</a>
+                </div>
+                
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">লগইন</a>
+                    <a href="#" class="btn">রেজিস্টার</a>
+                </div>
+            </div>
         </div>
-        <div class="profile-info">
-          <div class="name" id="username">Username</div>
-          <div class="user-id">ID: <span id="user-id">123456</span></div>
-        </div>
-      </div>
-      
-      <div class="stats-container">
-        <div class="stat-card">
-          <div class="stat-value" id="total-earned">$.000</div>
-          <div class="stat-label">Total Earned</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="tasks-completed">0</div>
-          <div class="stat-label">Tasks Done</div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Home Page Content -->
-  <div class="cards-container" id="home-content">
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-tasks"></i>
-        <h3>Today's Tasks</h3>
-      </div>
-      <div class="card-content">
-        <div class="info-row">
-          <span class="info-label">Total Tasks</span>
-          <span class="info-value" id="total">100</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Completed</span>
-          <span class="info-value" id="completed-card">0</span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Remaining</span>
-          <span class="info-value" id="remaining-card">100</span>
-        </div>
-        
-        <div class="progress-container">
-          <div class="progress-header">
-            <span class="info-label">Task Progress</span>
-            <span class="info-value" id="progress-percent">0%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" id="progress-bar"></div>
-          </div>
-        </div>
-        
-        <div class="task-visualization" id="task-visual">
-          <!-- Task dots will be generated here -->
-        </div>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-chart-line"></i>
-        <h3>Earnings</h3>
-      </div>
-      <div class="card-content">
-        <div class="info-row">
-          <span class="info-label">Today's Earnings</span>
-          <span class="info-value">USD $<span id="todays-earning">12.000</span></span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Lifetime Earnings</span>
-          <span class="info-value">USD $<span id="lifetime-earning">47.000</span></span>
-        </div>
-        <div class="info-row">
-          <span class="info-label">Avg. per Task</span>
-          <span class="info-value">$0.025</span>
-        </div>
-      </div>
-    </div>
-    
-    <div class="referral-section">
-      <div class="referral-header">
-        <i class="fas fa-users"></i>
-        <h3>Refer & Earn</h3>
-      </div>
-      
-      <div class="referral-content">
-        <p>Invite friends and earn $1 for each successful referral. Share your link and start earning!</p>
-        
-        <div class="referral-stats">
-          <div class="referral-stat">
-            <div class="referral-stat-value" id="ref-earned">$27</div>
-            <div class="referral-stat-label">Referral Earnings</div>
-          </div>
-          <div class="referral-stat">
-            <div class="referral-stat-value" id="referral-count">27</div>
-            <div class="referral-stat-label">Referrals</div>
-          </div>
-        </div>
-        
-        <div class="referral-link">
-          <span id="ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
-          <i class="fas fa-copy" onclick="copyReferralLink()"></i>
-        </div>
-        
-        <button class="button" onclick="shareReferralLink()">
-          <i class="fas fa-share-alt"></i> Share Referral Link
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Withdraw Section -->
-  <div class="card" id="withdraw" style="display:none;">
-    <div class="card-header">
-      <i class="fas fa-money-bill-wave"></i>
-      <h3>Withdraw Funds</h3>
-    </div>
-    <div class="card-content">
-      <div class="info-row">
-        <span class="info-label">Available Balance</span>
-        <span class="info-value">USD $<span id="available">47.000</span></span>
-      </div>
-      
-      <div class="input-group">
-        <label>Withdrawal Method</label>
-        <select id="withdraw-method">
-          <option>Select a method</option>
-          <option>Bkash $30</option>
-          <option>Nagad $30</option>
-          <option>Payeer $50</option>
-          <option>USDT (TRC20) $50</option>
-          <option>Skrill $30</option>
-          <option>Neteller $30</option>
-          <option>Perfect Money $50</option>
-        </select>
-      </div>
-      
-      <div class="input-group">
-        <label>Amount (USD)</label>
-        <input type="text" id="withdraw-amount" placeholder="Enter amount">
-      </div>
-      
-      <div class="input-group">
-        <label>Withdrawal Address</label>
-        <input type="text" id="withdraw-address" placeholder="Enter wallet address">
-      </div>
-      
-      <button class="button" onclick="submitWithdrawal()">
-        <i class="fas fa-paper-plane"></i> Submit Withdrawal
-      </button>
-    </div>
-  </div>
-  
-  <!-- Earn Section -->
-  <div id="earn" style="display:none;">
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-coins"></i>
-        <h3>Earn Money</h3>
-      </div>
-      <div class="card-content">
-        <p class="info-label" style="margin-bottom: 20px; text-align: center;">
-          <i class="fas fa-info-circle"></i> Earn money by viewing ads. Stay on the ad page for 15 seconds to complete a task and earn $0.025 per task!
-        </p>
-        
-        <div class="task-counter">
-          <div class="counter-item">
-            <div class="counter-value" id="etotal">100</div>
-            <div class="counter-label">Total Tasks</div>
-          </div>
-          <div class="counter-item">
-            <div class="counter-value" id="ecompleted">0</div>
-            <div class="counter-label">Completed</div>
-          </div>
-          <div class="counter-item">
-            <div class="counter-value" id="eremaining">100</div>
-            <div class="counter-label">Remaining</div>
-          </div>
-        </div>
-        
-        <div class="progress-container">
-          <div class="progress-header">
-            <span class="info-label">Task Progress</span>
-            <span class="info-value" id="earn-progress-percent">0%</span>
-          </div>
-          <div class="progress">
-            <div class="progress-bar" id="earn-progress-bar"></div>
-          </div>
-        </div>
-        
-        <button class="button" onclick="startTask()">
-          <i class="fas fa-play"></i> Start Earning ▶
-        </button>
-      </div>
-    </div>
-    
-    <div class="card">
-      <div class="card-header">
-        <i class="fas fa-trophy"></i>
-        <h3>Task Completion</h3>
-      </div>
-      <div class="card-content">
-        <div class="task-visualization" id="earn-task-visual">
-          <!-- Task dots will be generated here -->
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Profile Page -->
-  <div id="profile-page">
-    <div class="profile-card">
-      <div class="profile-section">
-        <div class="profile-section-title">
-          <i class="fas fa-user-circle"></i>
-          <h3>Account Information</h3>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Username</div>
-          <div class="info-data" id="profile-username">Username</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">User ID</div>
-          <div class="info-data" id="profile-user-id">123456</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Join Date</div>
-          <div class="info-data" id="join-date">2023-10-15</div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="profile-card">
-      <div class="profile-section">
-        <div class="profile-section-title">
-          <i class="fas fa-wallet"></i>
-          <h3>Financial Summary</h3>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Current Balance</div>
-          <div class="info-data" id="profile-balance">$0.000</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Total Withdrew</div>
-          <div class="info-data" id="profile-withdrew">$0.000</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Today's Earnings</div>
-          <div class="info-data" id="profile-today-earning">$0.000</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Lifetime Earnings</div>
-          <div class="info-data" id="profile-lifetime-earning">$0.000</div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="profile-card">
-      <div class="profile-section">
-        <div class="profile-section-title">
-          <i class="fas fa-users"></i>
-          <h3>Referral Program</h3>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Total Referrals</div>
-          <div class="info-data" id="profile-refer-count">0</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Referral Earnings</div>
-          <div class="info-data" id="profile-refer-earnings">$0.000</div>
-        </div>
-        
-        <div class="profile-info-item">
-          <div class="info-title">Pending Referrals</div>
-          <div class="info-data" id="profile-pending-refs">0</div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="referral-section">
-      <div class="referral-header">
-        <i class="fas fa-share-alt"></i>
-        <h3>Share Your Referral Link</h3>
-      </div>
-      
-      <div class="referral-content">
-        <p>Earn $1 for every friend who signs up using your referral link!</p>
-        
-        <div class="referral-link">
-          <span id="profile-ref-link">https://t.me/Daily_Earning_545_Bot?start=ref_123456</span>
-          <i class="fas fa-copy" onclick="copyReferralLink()"></i>
-        </div>
-        
-        <button class="button" onclick="shareReferralLink()">
-          <i class="fas fa-share-alt"></i> Share Referral Link
-        </button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="nav">
-    <div class="nav-item active" id="nav-home" onclick="show('home')">
-      <div class="nav-icon">
-        <i class="fas fa-home"></i>
-      </div>
-      <div class="nav-label">Home</div>
-    </div>
-    <div class="nav-item" id="nav-earn" onclick="show('earn')">
-      <div class="nav-icon">
-        <i class="fas fa-coins"></i>
-      </div>
-      <div class="nav-label">Earn</div>
-    </div>
-    <div class="nav-item" id="nav-withdraw" onclick="show('withdraw')">
-      <div class="nav-icon">
-        <i class="fas fa-wallet"></i>
-      </div>
-      <div class="nav-label">Withdraw</div>
-    </div>
-    <div class="nav-item" id="nav-profile" onclick="show('profile')">
-      <div class="nav-icon">
-        <i class="fas fa-user"></i>
-      </div>
-      <div class="nav-label">Profile</div>
-    </div>
-  </div>
-  
-  <script>
-    // Generate persistent user ID and username
-    let userId = localStorage.getItem("userId");
-    let username = localStorage.getItem("username");
-    
-    // If not stored, generate new values
-    if (!userId) {
-      userId = Math.floor(Math.random() * 1000000);
-      localStorage.setItem("userId", userId);
-    }
-    
-    if (!username) {
-      // Check if we're in Telegram environment
-      if (window.Telegram && window.Telegram.WebApp) {
-        const user = window.Telegram.WebApp.initDataUnsafe.user;
-        if (user && user.username) {
-          username = user.username;
-        } else if (user && user.first_name) {
-          username = user.first_name;
-          if (user.last_name) username += " " + user.last_name;
-        } else {
-          username = "User" + userId;
-        }
-      } else {
-        username = "User" + userId;
-      }
-      localStorage.setItem("username", username);
-    }
-    
-    const today = new Date().toLocaleDateString();
+    </header>
 
-    // Initialize user data
-    let userData = JSON.parse(localStorage.getItem("MTEarningData")) || {
-      userId, 
-      username, 
-      referrals: 0,
-      referralEarnings: 0,
-      pendingReferrals: 0,
-      lifetimeEarning: 0,
-      withdrew: 0,
-      totalTasks: 0,
-      joinDate: new Date().toLocaleDateString()
-    };
+    <!-- হিরো সেকশন -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2>পেশাদারদের সাথে ক্ষুদ্র কাজের সেরা মার্কেটপ্লেস</h2>
+                <p>গ্রাফিক ডিজাইন, কন্টেন্ট রাইটিং, ওয়েব ডেভেলপমেন্ট এবং আরও শতাধিক সার্ভিস বাংলাদেশের সেরা ফ্রিল্যান্সারদের কাছ থেকে পেয়ে যান</p>
+                
+                <div class="hero-buttons">
+                    <a href="#" class="btn">সার্ভিস কিনুন</a>
+                    <a href="#" class="btn btn-outline">ফ্রিল্যান্সার হোন</a>
+                </div>
+                
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">25,000+</div>
+                        <div class="stat-label">সক্রিয় ফ্রিল্যান্সার</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">1,50,000+</div>
+                        <div class="stat-label">সম্পন্ন কাজ</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4.8/5</div>
+                        <div class="stat-label">গড় রেটিং</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    let data = JSON.parse(localStorage.getItem("dailyEarningData")) || {
-      date: today, completed: 0, remaining: 100, todaysEarning: 0
-    };
+    <!-- ক্যাটাগরি সেকশন -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">জনপ্রিয় ক্যাটাগরি</h2>
+            
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>গ্রাফিক ডিজাইন</h3>
+                    <p>লোগো, ব্যানার, সোশ্যাল মিডিয়া ডিজাইন</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <h3>ওয়েব ডেভেলপমেন্ট</h3>
+                    <p>ওয়েবসাইট, ওয়ার্ডপ্রেস, ই-কমার্স</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-pen-alt"></i>
+                    </div>
+                    <h3>কন্টেন্ট রাইটিং</h3>
+                    <p>ব্লগ আর্টিকেল, কপিরাইটিং, ট্রান্সলেশন</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-bullhorn"></i>
+                    </div>
+                    <h3>ডিজিটাল মার্কেটিং</h3>
+                    <p>এসইও, সোশ্যাল মিডিয়া মার্কেটিং</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>মোবাইল অ্যাপ</h3>
+                    <p>অ্যান্ড্রয়েড ও আইওএস অ্যাপ ডেভেলপমেন্ট</p>
+                </div>
+                
+                <div class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>ভিডিও এডিটিং</h3>
+                    <p>ইউটিউব ভিডিও, প্রোমো ভিডিও, অ্যানিমেশন</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    if (data.date !== today) {
-      data = { date: today, completed: 0, remaining: 100, todaysEarning: 0 };
-    }
+    <!-- সার্ভিস সেকশন -->
+    <section class="services">
+        <div class="container">
+            <h2 class="section-title">জনপ্রিয় সার্ভিস</h2>
+            
+            <div class="filter-bar">
+                <button class="filter-btn active">সব</button>
+                <button class="filter-btn">টপ রেটেড</button>
+                <button class="filter-btn">নতুন</button>
+                <button class="filter-btn">অফার</button>
+                <button class="filter-btn">২৪ ঘন্টার মধ্যে</button>
+            </div>
+            
+            <div class="services-grid">
+                <!-- সার্ভিস ১ -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-seller-img">আর</div>
+                        <div class="service-seller-info">
+                            <h4>আরিফ রহমান</h4>
+                            <div class="rating">★★★★★ (২১৩)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-img">
+                        লোগো ডিজাইন
+                    </div>
+                    
+                    <div class="service-details">
+                        <h3>পেশাদার লোগো ডিজাইন করব</h3>
+                        <p>যেকোনো ব্যবসার জন্য ইউনিক ও মেমোরেবল লোগো ডিজাইন করব। ৩টি কনসেপ্ট সহ ২৪ ঘন্টার মধ্যে ডেলিভারি</p>
+                        
+                        <div class="service-meta">
+                            <div class="service-delivery">
+                                <i class="fas fa-clock"></i> ১ দিন
+                            </div>
+                            <div class="service-price">৳ ৫০০</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-footer">
+                        <div>
+                            <i class="fas fa-heart"></i> ১২৪
+                        </div>
+                        <a href="#" class="btn">অর্ডার করুন</a>
+                    </div>
+                </div>
+                
+                <!-- সার্ভিস ২ -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-seller-img">স</div>
+                        <div class="service-seller-info">
+                            <h4>সাদিয়া ইসলাম</h4>
+                            <div class="rating">★★★★★ (১৫৭)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-img">
+                        কন্টেন্ট রাইটিং
+                    </div>
+                    
+                    <div class="service-details">
+                        <h3>বাংলা ব্লগ আর্টিকেল লিখব</h3>
+                        <p>যেকোনো বিষয়ে স্টাডি করে বাংলায় মানসম্মত ব্লগ আর্টিকেল লিখব। এসইও ফ্রেন্ডলি কন্টেন্ট</p>
+                        
+                        <div class="service-meta">
+                            <div class="service-delivery">
+                                <i class="fas fa-clock"></i> ২ দিন
+                            </div>
+                            <div class="service-price">৳ ৩০০</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-footer">
+                        <div>
+                            <i class="fas fa-heart"></i> ৯৮
+                        </div>
+                        <a href="#" class="btn">অর্ডার করুন</a>
+                    </div>
+                </div>
+                
+                <!-- সার্ভিস ৩ -->
+                <div class="service-card">
+                    <div class="service-header">
+                        <div class="service-seller-img">কে</div>
+                        <div class="service-seller-info">
+                            <h4>কামরুল হাসান</h4>
+                            <div class="rating">★★★★☆ (৮৭)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-img">
+                        ওয়েব ডেভেলপমেন্ট
+                    </div>
+                    
+                    <div class="service-details">
+                        <h3>ওয়ার্ডপ্রেস ব্যবসায়িক ওয়েবসাইট</h3>
+                        <p>৫-৭ পেইজের ব্যবসায়িক ওয়েবসাইট তৈরি করব। সম্পূর্ণ কাস্টমাইজেবল ও রেস্পন্সিভ ডিজাইন</p>
+                        
+                        <div class="service-meta">
+                            <div class="service-delivery">
+                                <i class="fas fa-clock"></i> ৫ দিন
+                            </div>
+                            <div class="service-price">৳ ৫,০০০</div>
+                        </div>
+                    </div>
+                    
+                    <div class="service-footer">
+                        <div>
+                            <i class="fas fa-heart"></i> ৬৭
+                        </div>
+                        <a href="#" class="btn">অর্ডার করুন</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    // Initialize display
-    updateDisplay();
+    <!-- হাউ ইট ওয়ার্কস -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">কিভাবে কাজ করে</h2>
+            
+            <div class="steps">
+                <div class="step-card">
+                    <div class="step-number">১</div>
+                    <div class="step-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>সার্ভিস খুঁজুন</h3>
+                    <p>আপনার প্রয়োজন অনুযায়ী সার্ভিস খুঁজুন বা ফ্রিল্যান্সার ব্রাউজ করুন</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">২</div>
+                    <div class="step-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>অর্ডার করুন</h3>
+                    <p>পছন্দের সার্ভিস অর্ডার করুন ও পেমেন্ট সম্পন্ন করুন</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">৩</div>
+                    <div class="step-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>কাজ সম্পন্ন করুন</h3>
+                    <p>ফ্রিল্যান্সার আপনার কাজ নির্দিষ্ট সময়ে সম্পন্ন করবে</p>
+                </div>
+                
+                <div class="step-card">
+                    <div class="step-number">৪</div>
+                    <div class="step-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>কাজ গ্রহণ করুন</h3>
+                    <p>কাজ পছন্দ হলে গ্রহণ করুন ও রিভিউ দিন</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    function updateStorage() {
-      localStorage.setItem("MTEarningData", JSON.stringify(userData));
-      localStorage.setItem("dailyEarningData", JSON.stringify(data));
-    }
+    <!-- ফুটার -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">
+                        <h2>কর্মবাজার</h2>
+                    </div>
+                    <p>বাংলাদেশের শীর্ষস্থানীয় মাইক্রোজব প্ল্যাটফর্ম যেখানে আপনি সহজেই আপনার প্রয়োজনীয় সার্ভিস কিনতে বা বিক্রি করতে পারবেন</p>
+                    
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>লিঙ্কসমূহ</h3>
+                    <ul>
+                        <li><a href="#">হোম</a></li>
+                        <li><a href="#">সার্ভিস</a></li>
+                        <li><a href="#">ফ্রিল্যান্সার</a></li>
+                        <li><a href="#">ব্লগ</a></li>
+                        <li><a href="#">যোগাযোগ</a></li>
+                        <li><a href="#">প্রাইভেসি পলিসি</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>ক্যাটাগরি</h3>
+                    <ul>
+                        <li><a href="#">গ্রাফিক ডিজাইন</a></li>
+                        <li><a href="#">ডিজিটাল মার্কেটিং</a></li>
+                        <li><a href="#">ওয়েব ডেভেলপমেন্ট</a></li>
+                        <li><a href="#">কন্টেন্ট রাইটিং</a></li>
+                        <li><a href="#">ভিডিও এডিটিং</a></li>
+                        <li><a href="#">সব ক্যাটাগরি</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h3>পেমেন্ট মেথড</h3>
+                    <p>সুরক্ষিত পেমেন্ট সিস্টেম</p>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method">bKash</div>
+                        <div class="payment-method">Nagad</div>
+                        <div class="payment-method">Rocket</div>
+                        <div class="payment-method">Visa</div>
+                        <div class="payment-method">Master</div>
+                        <div class="payment-method">PayPal</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; ২০২৫ কর্মবাজার - বাংলাদেশের শীর্ষ মাইক্রোজব প্ল্যাটফর্ম। সকল অধিকার সংরক্ষিত</p>
+                <p>ডেভেলপড বাই: আপনার কোম্পানি | যোগাযোগ: info@kormobazar.com</p>
+            </div>
+        </div>
+    </footer>
 
-    function updateDisplay() {
-      // Update home screen
-      document.getElementById("username").innerText = username;
-      document.getElementById("user-id").innerText = userId;
-      document.getElementById("completed-card").innerText = data.completed;
-      document.getElementById("remaining-card").innerText = data.remaining;
-      document.getElementById("todays-earning").innerText = data.todaysEarning.toFixed(3);
-      document.getElementById("lifetime-earning").innerText = userData.lifetimeEarning.toFixed(3);
-      document.getElementById("available").innerText = userData.lifetimeEarning.toFixed(3);
-      document.getElementById("header-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
-      
-      // Update progress bar
-      const progressPercent = (data.completed / 100 * 100);
-      document.getElementById("progress-bar").style.width = progressPercent + "%";
-      document.getElementById("progress-percent").innerText = progressPercent.toFixed(0) + "%";
-      
-      // Update profile stats
-      document.getElementById("total-earned").innerText = "$" + userData.lifetimeEarning.toFixed(3);
-      document.getElementById("tasks-completed").innerText = userData.totalTasks;
-      
-      // Update referral section
-      document.getElementById("ref-earned").innerText = "$" + userData.referralEarnings.toFixed(2);
-      document.getElementById("referral-count").innerText = userData.referrals;
-      document.getElementById("ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
-      
-      // Update profile page
-      document.getElementById("profile-username").innerText = username;
-      document.getElementById("profile-user-id").innerText = userId;
-      document.getElementById("profile-balance").innerText = "$" + userData.lifetimeEarning.toFixed(3);
-      document.getElementById("profile-withdrew").innerText = "$" + userData.withdrew.toFixed(3);
-      document.getElementById("profile-refer-count").innerText = userData.referrals;
-      document.getElementById("profile-refer-earnings").innerText = "$" + userData.referralEarnings.toFixed(3);
-      document.getElementById("profile-today-earning").innerText = "$" + data.todaysEarning.toFixed(3);
-      document.getElementById("profile-lifetime-earning").innerText = "$" + userData.lifetimeEarning.toFixed(3);
-      document.getElementById("join-date").innerText = userData.joinDate;
-      document.getElementById("profile-pending-refs").innerText = userData.pendingReferrals;
-      document.getElementById("profile-ref-link").innerText = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
-      
-      // Update earn section
-      document.getElementById("ecompleted").innerText = data.completed;
-      document.getElementById("eremaining").innerText = data.remaining;
-      document.getElementById("earn-progress-bar").style.width = progressPercent + "%";
-      document.getElementById("earn-progress-percent").innerText = progressPercent.toFixed(0) + "%";
-      
-      // Update task visualization
-      updateTaskVisualization();
-    }
-
-    function updateTaskVisualization() {
-      const homeVisual = document.getElementById("task-visual");
-      const earnVisual = document.getElementById("earn-task-visual");
-      homeVisual.innerHTML = "";
-      earnVisual.innerHTML = "";
-      
-      // Create 100 dots (10 rows of 10)
-      for (let i = 0; i < 10; i++) {
-        const row = document.createElement("div");
-        row.style.display = "flex";
-        row.style.justifyContent = "center";
-        row.style.gap = "5px";
-        row.style.marginBottom = "5px";
-        
-        for (let j = 0; j < 10; j++) {
-          const dot = document.createElement("div");
-          dot.className = "task-dot";
-          const index = i * 10 + j;
-          
-          if (index < data.completed) {
-            dot.classList.add("completed");
-          }
-          
-          row.appendChild(dot);
-        }
-        
-        homeVisual.appendChild(row.cloneNode(true));
-        earnVisual.appendChild(row.cloneNode(true));
-      }
-    }
-
-    // FIXED taskLinks array with commas
-    const taskLinks = [
-      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-      "https://otieu.com/4/9453951",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453932",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453944",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453955",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9453945",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453941",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453948",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453954",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453950",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453931",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9452846",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453952",
-      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
-      "https://otieu.com/4/9453947",
-      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
-      "https://otieu.com/4/9453956",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453939",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453953",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453938",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9453949",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453943",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453942",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453951",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453932",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9453944",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453955",
-      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
-      "https://otieu.com/4/9453945",
-      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
-      "https://otieu.com/4/9453941",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453948",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453954",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453950",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453931",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9452846",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453952",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453947",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453956",
-      "https://www.profitableratecpm.com/kbdab1z3s?key=b5be9e22867bff3e30c2b62cf16912fb",
-      "https://otieu.com/4/9453939",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453953",
-      "https://www.profitableratecpm.com/xqu4056vbg?key=c56bd280d6af1bab103452830a1cfcff",
-      "https://otieu.com/4/9453938",
-      "https://www.profitableratecpm.com/ysqpjek5h?key=832387bbca524e7c22bb700085d23d49",
-      "https://otieu.com/4/9453949",
-      "https://www.profitableratecpm.com/gw4zyy45z?key=50574ef50b71c2f6d5a020f48dae142f",
-      "https://otieu.com/4/9453943",
-      "https://www.profitableratecpm.com/sxvehv45s7?key=7a96e21e458cdc9c3619f1feed1cffa2",
-      "https://otieu.com/4/9453942",
-      "https://www.profitableratecpm.com/y7my9aizec?key=0fd7a3fec9a14245c6c6195f254294db",
-      "https://otieu.com/4/9453941",
-      "https://www.profitableratecpm.com/yppak428s?key=9cfcbb64a76c0c153ff07b5dcf3c6025",
-      "https://otieu.com/4/9453948",
-      "https://www.profitableratecpm.com/f8iikei3?key=33119cb486103a46370813277eacf7d5",
-      "https://otieu.com/4/9453954",
-      "https://www.profitableratecpm.com/aceejemvu?key=fac70a57e2295cbed71bbfd848a9cb0e",
-      "https://otieu.com/4/9453950",
-      "https://www.profitableratecpm.com/fstpz6h3b?key=52099a2067c8f5ed7a76532ac1657396",
-      "https://otieu.com/4/9453931",
-      "https://www.profitableratecpm.com/yb78vf3e4?key=2b7b3e9a4c7f7f8bf37199e48361bd84",
-      "https://otieu.com/4/9453953",
-      "https://www.profitableratecpm.com/uvhjwgzvvu?key=7d8eefe589a22bff00200aa016cdf4c5",
-      "https://otieu.com/4/9453938",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453949",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453943",
-      "https://www.profitableratecpm.com/ftpxujeri3?key=f2ea352cc8949e9314e7762abb19c1ab",
-      "https://otieu.com/4/9453942",
-      "https://www.profitableratecpm.com/xi12f9t2ka?key=b4d48b8bf0cc620cc6eaff47ec2bf989",
-    ];
-
-    function showNotification(message, type) {
-      const notification = document.getElementById("notification");
-      const messageElement = document.getElementById("notification-message");
-      
-      messageElement.textContent = message;
-      notification.className = "notification " + type;
-      notification.classList.add("show");
-      
-      setTimeout(() => {
-        notification.classList.remove("show");
-      }, 3000);
-    }
-
-    function startTask() {
-      if (data.completed >= 100) {
-        showNotification("You have completed all tasks for today!", "warning");
-        return;
-      }
-      
-      const start = Date.now();
-      const ad = window.open(taskLinks[data.completed % taskLinks.length], "_blank");
-      
-      if (!ad) {
-        showNotification("Please allow popups to complete tasks", "error");
-        return;
-      }
-      
-      const check = setInterval(() => {
-        if (ad.closed) {
-          clearInterval(check);
-          const duration = (Date.now() - start) / 1000;
-          
-          if (duration >= 15) {
-            data.completed++;
-            data.remaining = 100 - data.completed;
-            data.todaysEarning += 0.025;
-            userData.lifetimeEarning += 0.025;
-            userData.totalTasks++;
-            updateStorage();
-            updateDisplay();
-            showNotification("✅ Task completed! $0.025 added to your balance.", "success");
-          } else {
-            showNotification("⏱️ You must view the ad for at least 15 seconds to complete the task!", "error");
-          }
-        }
-      }, 500);
-    }
-
-    function submitWithdrawal() {
-      const amount = parseFloat(document.getElementById("withdraw-amount").value);
-      const method = document.getElementById("withdraw-method").value;
-      const address = document.getElementById("withdraw-address").value;
-      
-      if (isNaN(amount)) {
-        showNotification("Please enter a valid amount", "error");
-        return;
-      }
-      if (amount < 30) {
-        showNotification("Minimum withdrawal amount is $30", "error");
-        return;
-      }
-      if (amount > userData.lifetimeEarning) {
-        showNotification("Insufficient balance", "error");
-        return;
-      }
-      if (userData.referrals < 10) {
-        showNotification("You need at least 10 referrals to withdraw", "error");
-        return;
-      }
-      if (method === "Select a method") {
-        showNotification("Please select a withdrawal method", "error");
-        return;
-      }
-      if (!address) {
-        showNotification("Please enter your withdrawal address", "error");
-        return;
-      }
-      
-      // Update balance
-      userData.lifetimeEarning -= amount;
-      userData.withdrew += amount;
-      updateStorage();
-      updateDisplay();
-      showNotification("Withdrawal request submitted successfully! It will be processed within 24-48 hours.", "success");
-    }
-
-    function show(section) {
-      // Hide all sections first
-      document.getElementById("home-profile").style.display = "none";
-      document.getElementById("home-content").style.display = "none";
-      document.getElementById("withdraw").style.display = "none";
-      document.getElementById("earn").style.display = "none";
-      document.getElementById("profile-page").style.display = "none";
-      
-      // Show appropriate section
-      if (section === 'home') {
-        document.getElementById("home-profile").style.display = "block";
-        document.getElementById("home-content").style.display = "block";
-      } else if (section === 'withdraw') {
-        document.getElementById("withdraw").style.display = "block";
-      } else if (section === 'earn') {
-        document.getElementById("earn").style.display = "block";
-      } else if (section === 'profile') {
-        document.getElementById("profile-page").style.display = "block";
-      }
-      
-      // Update navigation
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      document.getElementById("nav-" + section).classList.add('active');
-    }
-
-    function copyReferralLink() {
-      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
-      navigator.clipboard.writeText(refLink)
-        .then(() => showNotification("✅ Referral link copied! You earn $1 for each successful referral.", "success"))
-        .catch(() => showNotification("Failed to copy link", "error"));
-    }
-    
-    function shareReferralLink() {
-      const refLink = `https://t.me/Daily_Earning_545_Bot?start=ref_${userId}`;
-      
-      // Check if we're in a Telegram environment
-      if (window.Telegram && window.Telegram.WebApp) {
-        // Use Telegram's share functionality
-        window.Telegram.WebApp.share(refLink, { title: 'Earn with Daily Earning545' }, (success) => {
-          if (!success) {
-            // Fallback to copy if sharing fails
-            copyReferralLink();
-          }
+    <script>
+        // ফিল্টার বাটন সক্রিয় করা
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
         });
-      } else if (navigator.share) {
-        // Use Web Share API for browsers that support it
-        navigator.share({
-          title: 'Earn with Daily Earning545',
-          text: 'Join Daily Earning545 and start earning money by completing simple tasks!',
-          url: refLink
-        })
-        .catch((error) => {
-          console.error('Sharing failed:', error);
-          copyReferralLink();
+        
+        // সার্ভিস কার্ডে হোভার ইফেক্ট
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
-      } else {
-        // Fallback to copying the link
-        copyReferralLink();
-      }
-    }
-
-    // Initialize task visualization
-    updateTaskVisualization();
-  </script>
+    </script>
 </body>
 </html>
