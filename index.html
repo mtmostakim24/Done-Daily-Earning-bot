@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daily Earning545 | Admin Panel</title>
+  <title>Daily Earning545 | Real Admin Panel</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     * {
@@ -64,7 +64,7 @@
     /* Admin Panel Styles */
     .admin-container {
       padding: 20px;
-      max-width: 1200px;
+      max-width: 1400px;
       margin: 0 auto;
     }
     
@@ -73,6 +73,8 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 25px;
+      flex-wrap: wrap;
+      gap: 15px;
     }
     
     .admin-title {
@@ -242,6 +244,11 @@
       box-shadow: 0 4px 10px rgba(239, 68, 68, 0.3);
     }
     
+    .button-warning {
+      background: linear-gradient(135deg, var(--warning) 0%, #d97706 100%);
+      box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);
+    }
+    
     .button-small {
       padding: 6px 12px;
       font-size: 0.8rem;
@@ -259,7 +266,7 @@
       color: var(--dark);
     }
     
-    input, select {
+    input, select, textarea {
       width: 100%;
       padding: 14px;
       border: 1px solid #e2e8f0;
@@ -269,7 +276,7 @@
       transition: var(--transition);
     }
     
-    input:focus, select:focus {
+    input:focus, select:focus, textarea:focus {
       outline: none;
       border-color: var(--primary);
       box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
@@ -356,6 +363,7 @@
       display: flex;
       border-bottom: 1px solid #e2e8f0;
       margin-bottom: 20px;
+      flex-wrap: wrap;
     }
     
     .tab {
@@ -380,6 +388,101 @@
       display: block;
     }
     
+    /* User Management */
+    .user-card {
+      background: white;
+      border-radius: 15px;
+      padding: 15px;
+      box-shadow: var(--shadow);
+      margin-bottom: 15px;
+    }
+    
+    .user-header {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .user-name {
+      font-weight: 600;
+      color: var(--dark);
+    }
+    
+    .user-id {
+      font-size: 0.8rem;
+      color: #666;
+    }
+    
+    .user-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .user-stat {
+      text-align: center;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    
+    .user-stat-value {
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .user-stat-label {
+      font-size: 0.7rem;
+      color: #666;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 20px;
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    
+    .modal-header {
+      display: flex;
+      justify-content: between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
       .admin-stats {
@@ -395,6 +498,14 @@
         padding: 8px 15px;
         font-size: 0.8rem;
       }
+      
+      .tabs {
+        flex-direction: column;
+      }
+      
+      .tab {
+        text-align: center;
+      }
     }
   </style>
 </head>
@@ -404,15 +515,16 @@
     <span id="notification-message">Notification message</span>
   </div>
   
+  <!-- Login Page -->
   <div id="login-page" class="login-container">
     <div class="login-card">
       <div class="login-logo">
-        <i class="fas fa-robot"></i>
+        <i class="fas fa-user-shield"></i>
       </div>
       <div class="login-title">Daily Earning545 Admin</div>
       
       <div class="input-group">
-        <label>Username</label>
+        <label>Admin Username</label>
         <input type="text" id="admin-username" placeholder="Enter admin username">
       </div>
       
@@ -421,21 +533,28 @@
         <input type="password" id="admin-password" placeholder="Enter admin password">
       </div>
       
-      <button class="button" style="width: 100%;" onclick="adminLogin()">
-        <i class="fas fa-sign-in-alt"></i> Login
+      <button class="button" style="width: 100%; margin-top: 10px;" onclick="adminLogin()">
+        <i class="fas fa-sign-in-alt"></i> Login to Admin Panel
       </button>
+      
+      <div style="margin-top: 20px; padding: 15px; background: #f8fafc; border-radius: 10px; font-size: 0.9rem;">
+        <strong>Default Login:</strong><br>
+        Username: <code>admin</code><br>
+        Password: <code>admin123</code>
+      </div>
     </div>
   </div>
   
+  <!-- Admin Panel -->
   <div id="admin-panel" style="display: none;">
     <header>
       <div class="title">
-        <i class="fas fa-robot"></i>
-        <span>Daily Earning545 - Admin Panel</span>
-      </div>
-      <div style="color: white; display: flex; align-items: center; gap: 10px;">
         <i class="fas fa-user-shield"></i>
-        <span id="admin-name">Admin</span>
+        <span>Daily Earning545 - Real Admin Panel</span>
+      </div>
+      <div style="color: white; display: flex; align-items: center; gap: 15px;">
+        <i class="fas fa-user-circle"></i>
+        <span id="admin-name">Super Admin</span>
         <button class="button button-danger button-small" onclick="adminLogout()">
           <i class="fas fa-sign-out-alt"></i> Logout
         </button>
@@ -444,100 +563,215 @@
     
     <div class="admin-container">
       <div class="admin-header">
-        <div class="admin-title">Withdrawal Management</div>
+        <div class="admin-title">Admin Dashboard</div>
         <div class="search-bar">
-          <input type="text" id="search-input" placeholder="Search by user ID, name or address...">
-          <button class="button" onclick="searchWithdrawals()">
+          <input type="text" id="search-input" placeholder="Search users, withdrawals...">
+          <button class="button" onclick="searchData()">
             <i class="fas fa-search"></i> Search
           </button>
         </div>
       </div>
       
+      <!-- Statistics -->
       <div class="admin-stats">
+        <div class="stat-card">
+          <div class="stat-value" id="total-users">0</div>
+          <div class="stat-label">Total Users</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value" id="pending-withdrawals">0</div>
+          <div class="stat-label">Pending Withdrawals</div>
+        </div>
         <div class="stat-card">
           <div class="stat-value" id="total-withdrawals">0</div>
           <div class="stat-label">Total Withdrawals</div>
         </div>
         <div class="stat-card">
-          <div class="stat-value" id="pending-withdrawals">0</div>
-          <div class="stat-label">Pending Requests</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="completed-withdrawals">0</div>
-          <div class="stat-label">Completed</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-value" id="total-amount">$0</div>
-          <div class="stat-label">Total Amount</div>
+          <div class="stat-value" id="total-earned">$0</div>
+          <div class="stat-label">Platform Earnings</div>
         </div>
       </div>
       
+      <!-- Tabs -->
       <div class="tabs">
-        <div class="tab active" onclick="switchTab('pending')">Pending Requests</div>
-        <div class="tab" onclick="switchTab('completed')">Completed</div>
-        <div class="tab" onclick="switchTab('rejected')">Rejected</div>
-        <div class="tab" onclick="switchTab('all')">All Requests</div>
-      </div>
-      
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-money-bill-wave"></i>
-          <h3>Withdrawal Requests</h3>
+        <div class="tab active" onclick="switchTab('withdrawals')">
+          <i class="fas fa-money-bill-wave"></i> Withdrawals
         </div>
-        <div class="card-content">
-          <div class="table-container">
-            <table id="withdrawals-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>User ID</th>
-                  <th>Username</th>
-                  <th>Amount</th>
-                  <th>Method</th>
-                  <th>Address</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="withdrawals-tbody">
-                <!-- Table rows will be generated here -->
-              </tbody>
-            </table>
-          </div>
+        <div class="tab" onclick="switchTab('users')">
+          <i class="fas fa-users"></i> Users
+        </div>
+        <div class="tab" onclick="switchTab('settings')">
+          <i class="fas fa-cog"></i> Settings
+        </div>
+        <div class="tab" onclick="switchTab('broadcast')">
+          <i class="fas fa-bullhorn"></i> Broadcast
         </div>
       </div>
       
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-cog"></i>
-          <h3>Admin Settings</h3>
+      <!-- Withdrawals Tab -->
+      <div id="withdrawals-tab" class="tab-content active">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-money-bill-wave"></i>
+            <h3>Withdrawal Requests</h3>
+          </div>
+          <div class="card-content">
+            <div class="table-container">
+              <table id="withdrawals-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Address</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="withdrawals-tbody">
+                  <!-- Table rows will be generated here -->
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-        <div class="card-content">
-          <div class="input-group">
-            <label>Minimum Withdrawal Amount</label>
-            <input type="number" id="min-withdrawal" placeholder="Enter minimum withdrawal amount">
+      </div>
+      
+      <!-- Users Tab -->
+      <div id="users-tab" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-users"></i>
+            <h3>User Management</h3>
           </div>
-          
-          <div class="input-group">
-            <label>Minimum Referrals for Withdrawal</label>
-            <input type="number" id="min-referrals" placeholder="Enter minimum referrals">
+          <div class="card-content">
+            <div id="users-container">
+              <!-- User cards will be generated here -->
+            </div>
           </div>
-          
-          <button class="button" onclick="saveSettings()">
-            <i class="fas fa-save"></i> Save Settings
-          </button>
+        </div>
+      </div>
+      
+      <!-- Settings Tab -->
+      <div id="settings-tab" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-cog"></i>
+            <h3>Platform Settings</h3>
+          </div>
+          <div class="card-content">
+            <div class="input-group">
+              <label>Minimum Withdrawal Amount ($)</label>
+              <input type="number" id="min-withdrawal" placeholder="30">
+            </div>
+            
+            <div class="input-group">
+              <label>Minimum Referrals for Withdrawal</label>
+              <input type="number" id="min-referrals" placeholder="10">
+            </div>
+            
+            <div class="input-group">
+              <label>Earnings Per Task ($)</label>
+              <input type="number" id="earnings-per-task" step="0.001" placeholder="0.025">
+            </div>
+            
+            <div class="input-group">
+              <label>Referral Bonus ($)</label>
+              <input type="number" id="referral-bonus" step="0.01" placeholder="0.50">
+            </div>
+            
+            <div class="input-group">
+              <label>Daily Task Limit</label>
+              <input type="number" id="daily-task-limit" placeholder="100">
+            </div>
+            
+            <button class="button" onclick="saveSettings()">
+              <i class="fas fa-save"></i> Save All Settings
+            </button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Broadcast Tab -->
+      <div id="broadcast-tab" class="tab-content">
+        <div class="card">
+          <div class="card-header">
+            <i class="fas fa-bullhorn"></i>
+            <h3>Broadcast Message</h3>
+          </div>
+          <div class="card-content">
+            <div class="input-group">
+              <label>Message Title</label>
+              <input type="text" id="broadcast-title" placeholder="Enter message title">
+            </div>
+            
+            <div class="input-group">
+              <label>Message Content</label>
+              <textarea id="broadcast-content" rows="5" placeholder="Enter your broadcast message..."></textarea>
+            </div>
+            
+            <button class="button" onclick="sendBroadcast()">
+              <i class="fas fa-paper-plane"></i> Send Broadcast to All Users
+            </button>
+          </div>
         </div>
       </div>
     </div>
   </div>
   
+  <!-- Payment Proof Modal -->
+  <div class="modal" id="payment-proof-modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Submit Payment Proof</div>
+        <button class="modal-close" onclick="closeModal('payment-proof-modal')">&times;</button>
+      </div>
+      
+      <div class="input-group">
+        <label>Transaction ID</label>
+        <input type="text" id="transaction-id" placeholder="Enter transaction ID">
+      </div>
+      
+      <div class="input-group">
+        <label>Payment Screenshot URL</label>
+        <input type="text" id="payment-screenshot" placeholder="Enter screenshot URL">
+      </div>
+      
+      <div class="input-group">
+        <label>Additional Notes</label>
+        <textarea id="payment-notes" rows="3" placeholder="Any additional notes..."></textarea>
+      </div>
+      
+      <button class="button button-success" onclick="submitPaymentProof()">
+        <i class="fas fa-check"></i> Submit Payment Proof
+      </button>
+    </div>
+  </div>
+  
   <script>
-    // Admin credentials (in a real app, this would be stored securely on the server)
-    const ADMIN_USERNAME = "admin";
-    const ADMIN_PASSWORD = "admin123";
+    // Real Admin System
+    const ADMIN_CREDENTIALS = {
+      username: "admin",
+      password: "admin123"
+    };
     
-    // Check if admin is already logged in
+    // Initialize data
+    let adminData = JSON.parse(localStorage.getItem("adminData")) || {
+      users: [],
+      withdrawals: [],
+      settings: {
+        minWithdrawal: 30,
+        minReferrals: 10,
+        earningsPerTask: 0.025,
+        referralBonus: 0.50,
+        dailyTaskLimit: 100
+      },
+      broadcastMessages: []
+    };
+    
+    // Check if admin is logged in
     if (localStorage.getItem("adminLoggedIn") === "true") {
       showAdminPanel();
     }
@@ -546,12 +780,15 @@
       const username = document.getElementById("admin-username").value;
       const password = document.getElementById("admin-password").value;
       
-      if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
         localStorage.setItem("adminLoggedIn", "true");
         showAdminPanel();
-        showNotification("Admin login successful", "success");
+        showNotification("Admin login successful!", "success");
+        
+        // Load real user data from main app
+        loadRealUserData();
       } else {
-        showNotification("Invalid username or password", "error");
+        showNotification("Invalid username or password!", "error");
       }
     }
     
@@ -564,8 +801,7 @@
     function showAdminPanel() {
       document.getElementById("login-page").style.display = "none";
       document.getElementById("admin-panel").style.display = "block";
-      loadWithdrawals();
-      loadSettings();
+      loadDashboard();
     }
     
     function showNotification(message, type) {
@@ -578,54 +814,95 @@
       
       setTimeout(() => {
         notification.classList.remove("show");
-      }, 3000);
+      }, 4000);
     }
     
-    // Withdrawal data structure
-    let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
-    let settings = JSON.parse(localStorage.getItem("adminSettings")) || {
-      minWithdrawal: 30,
-      minReferrals: 10
-    };
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll(".tab-content").forEach(tab => {
+        tab.classList.remove("active");
+      });
+      
+      // Remove active class from all tabs
+      document.querySelectorAll(".tab").forEach(tab => {
+        tab.classList.remove("active");
+      });
+      
+      // Show selected tab
+      document.getElementById(tabName + "-tab").classList.add("active");
+      event.target.classList.add("active");
+      
+      // Load tab data
+      if (tabName === "withdrawals") {
+        loadWithdrawals();
+      } else if (tabName === "users") {
+        loadUsers();
+      } else if (tabName === "settings") {
+        loadSettings();
+      }
+    }
+    
+    function loadDashboard() {
+      loadWithdrawals();
+      updateStats();
+    }
+    
+    function updateStats() {
+      const totalUsers = adminData.users.length;
+      const pendingWithdrawals = adminData.withdrawals.filter(w => w.status === "pending").length;
+      const totalWithdrawals = adminData.withdrawals.length;
+      const totalEarned = adminData.withdrawals
+        .filter(w => w.status === "completed")
+        .reduce((sum, w) => sum + parseFloat(w.amount), 0);
+      
+      document.getElementById("total-users").textContent = totalUsers;
+      document.getElementById("pending-withdrawals").textContent = pendingWithdrawals;
+      document.getElementById("total-withdrawals").textContent = totalWithdrawals;
+      document.getElementById("total-earned").textContent = "$" + totalEarned.toFixed(2);
+    }
+    
+    function loadRealUserData() {
+      // Load users from main app
+      try {
+        const mainAppUsers = JSON.parse(localStorage.getItem("MTEarningData"));
+        if (mainAppUsers && !Array.isArray(mainAppUsers)) {
+          // Convert single user to array
+          adminData.users = [mainAppUsers];
+        } else if (Array.isArray(mainAppUsers)) {
+          adminData.users = mainAppUsers;
+        }
+        
+        // Load withdrawals from main app
+        const mainAppWithdrawals = JSON.parse(localStorage.getItem("withdrawals"));
+        if (mainAppWithdrawals) {
+          adminData.withdrawals = mainAppWithdrawals;
+        }
+        
+        localStorage.setItem("adminData", JSON.stringify(adminData));
+        loadDashboard();
+      } catch (e) {
+        console.log("No existing user data found");
+      }
+    }
     
     function loadWithdrawals() {
       const tbody = document.getElementById("withdrawals-tbody");
       tbody.innerHTML = "";
       
-      let totalAmount = 0;
-      let pendingCount = 0;
-      let completedCount = 0;
-      
-      // Filter by active tab
-      const activeTab = document.querySelector(".tab.active").getAttribute("onclick").replace("switchTab('", "").replace("')", "");
-      let filteredWithdrawals = withdrawals;
-      
-      if (activeTab !== "all") {
-        filteredWithdrawals = withdrawals.filter(w => w.status === activeTab);
+      if (adminData.withdrawals.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px;">No withdrawal requests found</td></tr>`;
+        return;
       }
       
-      // Apply search filter if any
-      const searchTerm = document.getElementById("search-input").value.toLowerCase();
-      if (searchTerm) {
-        filteredWithdrawals = filteredWithdrawals.filter(w => 
-          w.userId.toLowerCase().includes(searchTerm) || 
-          w.username.toLowerCase().includes(searchTerm) ||
-          w.address.toLowerCase().includes(searchTerm)
-        );
-      }
-      
-      filteredWithdrawals.forEach(withdrawal => {
+      adminData.withdrawals.forEach(withdrawal => {
         const row = document.createElement("tr");
-        
-        // Calculate stats
-        totalAmount += parseFloat(withdrawal.amount);
-        if (withdrawal.status === "pending") pendingCount++;
-        if (withdrawal.status === "completed") completedCount++;
         
         row.innerHTML = `
           <td>${withdrawal.id}</td>
-          <td>${withdrawal.userId}</td>
-          <td>${withdrawal.username}</td>
+          <td>
+            <strong>${withdrawal.username}</strong><br>
+            <small>ID: ${withdrawal.userId}</small>
+          </td>
           <td>$${withdrawal.amount}</td>
           <td>${withdrawal.method}</td>
           <td>${withdrawal.address}</td>
@@ -633,15 +910,15 @@
           <td class="status-${withdrawal.status}">${withdrawal.status.charAt(0).toUpperCase() + withdrawal.status.slice(1)}</td>
           <td>
             ${withdrawal.status === "pending" ? `
-              <button class="button button-success button-small" onclick="updateWithdrawalStatus(${withdrawal.id}, 'completed')">
-                <i class="fas fa-check"></i> Complete
+              <button class="button button-success button-small" onclick="completeWithdrawal(${withdrawal.id})">
+                <i class="fas fa-check"></i> Pay
               </button>
-              <button class="button button-danger button-small" onclick="updateWithdrawalStatus(${withdrawal.id}, 'rejected')">
+              <button class="button button-danger button-small" onclick="rejectWithdrawal(${withdrawal.id})">
                 <i class="fas fa-times"></i> Reject
               </button>
             ` : ""}
-            <button class="button button-danger button-small" onclick="deleteWithdrawal(${withdrawal.id})">
-              <i class="fas fa-trash"></i> Delete
+            <button class="button button-warning button-small" onclick="viewWithdrawal(${withdrawal.id})">
+              <i class="fas fa-eye"></i> Details
             </button>
           </td>
         `;
@@ -649,88 +926,284 @@
         tbody.appendChild(row);
       });
       
-      // Update stats
-      document.getElementById("total-withdrawals").innerText = withdrawals.length;
-      document.getElementById("pending-withdrawals").innerText = withdrawals.filter(w => w.status === "pending").length;
-      document.getElementById("completed-withdrawals").innerText = completedCount;
-      document.getElementById("total-amount").innerText = "$" + totalAmount.toFixed(2);
+      updateStats();
     }
     
-    function switchTab(tabName) {
-      // Update active tab
-      document.querySelectorAll(".tab").forEach(tab => {
-        tab.classList.remove("active");
-      });
-      event.target.classList.add("active");
+    function loadUsers() {
+      const container = document.getElementById("users-container");
+      container.innerHTML = "";
       
-      // Reload withdrawals with new filter
-      loadWithdrawals();
-    }
-    
-    function searchWithdrawals() {
-      loadWithdrawals();
-    }
-    
-    function updateWithdrawalStatus(id, status) {
-      const withdrawal = withdrawals.find(w => w.id === id);
-      if (withdrawal) {
-        withdrawal.status = status;
-        withdrawal.processedDate = new Date().toLocaleDateString();
-        localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
-        loadWithdrawals();
-        
-        showNotification(`Withdrawal ${status} successfully`, "success");
+      if (adminData.users.length === 0) {
+        container.innerHTML = `<div style="text-align: center; padding: 20px;">No users found</div>`;
+        return;
       }
-    }
-    
-    function deleteWithdrawal(id) {
-      if (confirm("Are you sure you want to delete this withdrawal request?")) {
-        withdrawals = withdrawals.filter(w => w.id !== id);
-        localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
-        loadWithdrawals();
+      
+      adminData.users.forEach(user => {
+        const userCard = document.createElement("div");
+        userCard.className = "user-card";
         
-        showNotification("Withdrawal deleted successfully", "success");
-      }
+        userCard.innerHTML = `
+          <div class="user-header">
+            <div>
+              <div class="user-name">${user.username}</div>
+              <div class="user-id">ID: ${user.userId}</div>
+            </div>
+            <button class="button button-small" onclick="viewUser(${user.userId})">
+              <i class="fas fa-eye"></i> View
+            </button>
+          </div>
+          
+          <div class="user-stats">
+            <div class="user-stat">
+              <div class="user-stat-value">$${user.lifetimeEarning ? user.lifetimeEarning.toFixed(3) : "0.000"}</div>
+              <div class="user-stat-label">Earnings</div>
+            </div>
+            <div class="user-stat">
+              <div class="user-stat-value">${user.referrals || 0}</div>
+              <div class="user-stat-label">Referrals</div>
+            </div>
+            <div class="user-stat">
+              <div class="user-stat-value">${user.totalTasks || 0}</div>
+              <div class="user-stat-label">Tasks</div>
+            </div>
+          </div>
+          
+          <div style="font-size: 0.8rem; color: #666;">
+            Joined: ${user.joinDate || "Unknown"}
+          </div>
+        `;
+        
+        container.appendChild(userCard);
+      });
     }
     
     function loadSettings() {
-      document.getElementById("min-withdrawal").value = settings.minWithdrawal;
-      document.getElementById("min-referrals").value = settings.minReferrals;
+      document.getElementById("min-withdrawal").value = adminData.settings.minWithdrawal;
+      document.getElementById("min-referrals").value = adminData.settings.minReferrals;
+      document.getElementById("earnings-per-task").value = adminData.settings.earningsPerTask;
+      document.getElementById("referral-bonus").value = adminData.settings.referralBonus;
+      document.getElementById("daily-task-limit").value = adminData.settings.dailyTaskLimit;
+    }
+    
+    function completeWithdrawal(id) {
+      const withdrawal = adminData.withdrawals.find(w => w.id === id);
+      if (withdrawal) {
+        withdrawal.status = "completed";
+        withdrawal.processedDate = new Date().toLocaleDateString();
+        withdrawal.processedBy = "admin";
+        
+        localStorage.setItem("adminData", JSON.stringify(adminData));
+        
+        // Also update main app data
+        const mainAppWithdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
+        const mainWithdrawal = mainAppWithdrawals.find(w => w.id === id);
+        if (mainWithdrawal) {
+          mainWithdrawal.status = "completed";
+          localStorage.setItem("withdrawals", JSON.stringify(mainAppWithdrawals));
+        }
+        
+        showNotification(`Payment completed for $${withdrawal.amount} to ${withdrawal.username}`, "success");
+        loadWithdrawals();
+        
+        // Open payment proof modal
+        document.getElementById("payment-proof-modal").style.display = "flex";
+        currentWithdrawalId = id;
+      }
+    }
+    
+    function rejectWithdrawal(id) {
+      const withdrawal = adminData.withdrawals.find(w => w.id === id);
+      if (withdrawal) {
+        withdrawal.status = "rejected";
+        withdrawal.processedDate = new Date().toLocaleDateString();
+        withdrawal.processedBy = "admin";
+        
+        localStorage.setItem("adminData", JSON.stringify(adminData));
+        
+        // Also update main app data
+        const mainAppWithdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
+        const mainWithdrawal = mainAppWithdrawals.find(w => w.id === id);
+        if (mainWithdrawal) {
+          mainWithdrawal.status = "rejected";
+          localStorage.setItem("withdrawals", JSON.stringify(mainAppWithdrawals));
+        }
+        
+        showNotification(`Withdrawal rejected for $${withdrawal.amount}`, "warning");
+        loadWithdrawals();
+      }
+    }
+    
+    function viewWithdrawal(id) {
+      const withdrawal = adminData.withdrawals.find(w => w.id === id);
+      if (withdrawal) {
+        alert(`Withdrawal Details:\n\nUser: ${withdrawal.username} (ID: ${withdrawal.userId})\nAmount: $${withdrawal.amount}\nMethod: ${withdrawal.method}\nAddress: ${withdrawal.address}\nDate: ${withdrawal.date}\nStatus: ${withdrawal.status}\n${withdrawal.processedDate ? `Processed: ${withdrawal.processedDate} by ${withdrawal.processedBy}` : ''}`);
+      }
+    }
+    
+    function viewUser(userId) {
+      const user = adminData.users.find(u => u.userId == userId);
+      if (user) {
+        alert(`User Details:\n\nUsername: ${user.username}\nUser ID: ${user.userId}\nTotal Earnings: $${user.lifetimeEarning ? user.lifetimeEarning.toFixed(3) : "0.000"}\nTotal Tasks: ${user.totalTasks || 0}\nReferrals: ${user.referrals || 0}\nReferral Earnings: $${user.referralEarnings ? user.referralEarnings.toFixed(3) : "0.000"}\nJoin Date: ${user.joinDate || "Unknown"}`);
+      }
     }
     
     function saveSettings() {
-      settings.minWithdrawal = parseInt(document.getElementById("min-withdrawal").value) || 30;
-      settings.minReferrals = parseInt(document.getElementById("min-referrals").value) || 10;
+      adminData.settings.minWithdrawal = parseInt(document.getElementById("min-withdrawal").value) || 30;
+      adminData.settings.minReferrals = parseInt(document.getElementById("min-referrals").value) || 10;
+      adminData.settings.earningsPerTask = parseFloat(document.getElementById("earnings-per-task").value) || 0.025;
+      adminData.settings.referralBonus = parseFloat(document.getElementById("referral-bonus").value) || 0.50;
+      adminData.settings.dailyTaskLimit = parseInt(document.getElementById("daily-task-limit").value) || 100;
       
-      localStorage.setItem("adminSettings", JSON.stringify(settings));
-      showNotification("Settings saved successfully", "success");
+      localStorage.setItem("adminData", JSON.stringify(adminData));
+      
+      // Also update main app settings
+      const mainAppSettings = JSON.parse(localStorage.getItem("adminSettings")) || {};
+      Object.assign(mainAppSettings, adminData.settings);
+      localStorage.setItem("adminSettings", JSON.stringify(mainAppSettings));
+      
+      showNotification("Settings saved successfully!", "success");
     }
     
-    // Function to add a withdrawal request (for testing)
-    function addTestWithdrawal() {
-      const testWithdrawal = {
+    function sendBroadcast() {
+      const title = document.getElementById("broadcast-title").value;
+      const content = document.getElementById("broadcast-content").value;
+      
+      if (!title || !content) {
+        showNotification("Please enter both title and content!", "error");
+        return;
+      }
+      
+      const broadcast = {
         id: Date.now(),
-        userId: "user" + Math.floor(Math.random() * 1000),
-        username: "TestUser" + Math.floor(Math.random() * 1000),
-        amount: (Math.random() * 100 + 30).toFixed(2),
-        method: ["Bkash", "Nagad", "Payeer", "USDT"][Math.floor(Math.random() * 4)],
-        address: "test_address_" + Math.floor(Math.random() * 10000),
-        date: new Date().toLocaleDateString(),
-        status: "pending"
+        title,
+        content,
+        date: new Date().toLocaleString(),
+        sentBy: "admin"
       };
       
-      withdrawals.push(testWithdrawal);
-      localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
-      loadWithdrawals();
+      adminData.broadcastMessages.push(broadcast);
+      localStorage.setItem("adminData", JSON.stringify(adminData));
       
-      showNotification("Test withdrawal added", "success");
+      // Clear form
+      document.getElementById("broadcast-title").value = "";
+      document.getElementById("broadcast-content").value = "";
+      
+      showNotification("Broadcast message sent to all users!", "success");
+    }
+    
+    function searchData() {
+      const searchTerm = document.getElementById("search-input").value.toLowerCase();
+      
+      // For now, just filter withdrawals
+      const filteredWithdrawals = adminData.withdrawals.filter(w => 
+        w.username.toLowerCase().includes(searchTerm) ||
+        w.userId.toLowerCase().includes(searchTerm) ||
+        w.address.toLowerCase().includes(searchTerm) ||
+        w.method.toLowerCase().includes(searchTerm)
+      );
+      
+      const tbody = document.getElementById("withdrawals-tbody");
+      tbody.innerHTML = "";
+      
+      if (filteredWithdrawals.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 20px;">No matching withdrawals found</td></tr>`;
+        return;
+      }
+      
+      filteredWithdrawals.forEach(withdrawal => {
+        const row = document.createElement("tr");
+        
+        row.innerHTML = `
+          <td>${withdrawal.id}</td>
+          <td>
+            <strong>${withdrawal.username}</strong><br>
+            <small>ID: ${withdrawal.userId}</small>
+          </td>
+          <td>$${withdrawal.amount}</td>
+          <td>${withdrawal.method}</td>
+          <td>${withdrawal.address}</td>
+          <td>${withdrawal.date}</td>
+          <td class="status-${withdrawal.status}">${withdrawal.status.charAt(0).toUpperCase() + withdrawal.status.slice(1)}</td>
+          <td>
+            ${withdrawal.status === "pending" ? `
+              <button class="button button-success button-small" onclick="completeWithdrawal(${withdrawal.id})">
+                <i class="fas fa-check"></i> Pay
+              </button>
+              <button class="button button-danger button-small" onclick="rejectWithdrawal(${withdrawal.id})">
+                <i class="fas fa-times"></i> Reject
+              </button>
+            ` : ""}
+            <button class="button button-warning button-small" onclick="viewWithdrawal(${withdrawal.id})">
+              <i class="fas fa-eye"></i> Details
+            </button>
+          </td>
+        `;
+        
+        tbody.appendChild(row);
+      });
+    }
+    
+    let currentWithdrawalId = null;
+    
+    function closeModal(modalId) {
+      document.getElementById(modalId).style.display = "none";
+    }
+    
+    function submitPaymentProof() {
+      const transactionId = document.getElementById("transaction-id").value;
+      const screenshot = document.getElementById("payment-screenshot").value;
+      const notes = document.getElementById("payment-notes").value;
+      
+      if (!transactionId) {
+        showNotification("Please enter transaction ID!", "error");
+        return;
+      }
+      
+      const withdrawal = adminData.withdrawals.find(w => w.id === currentWithdrawalId);
+      if (withdrawal) {
+        withdrawal.transactionId = transactionId;
+        withdrawal.paymentScreenshot = screenshot;
+        withdrawal.paymentNotes = notes;
+        withdrawal.paymentDate = new Date().toLocaleString();
+        
+        localStorage.setItem("adminData", JSON.stringify(adminData));
+        
+        // Clear form
+        document.getElementById("transaction-id").value = "";
+        document.getElementById("payment-screenshot").value = "";
+        document.getElementById("payment-notes").value = "";
+        
+        closeModal("payment-proof-modal");
+        showNotification("Payment proof submitted successfully!", "success");
+      }
     }
     
     // Add some test data if none exists
-    if (withdrawals.length === 0) {
-      for (let i = 0; i < 5; i++) {
-        addTestWithdrawal();
-      }
+    if (adminData.withdrawals.length === 0) {
+      adminData.withdrawals = [
+        {
+          id: 1001,
+          userId: "user123",
+          username: "TestUser1",
+          amount: "35.50",
+          method: "Bkash",
+          address: "017XXXXXXXX",
+          date: new Date().toLocaleDateString(),
+          status: "pending"
+        },
+        {
+          id: 1002,
+          userId: "user456",
+          username: "TestUser2",
+          amount: "50.00",
+          method: "USDT",
+          address: "TYgXXXXXXXXXXXX",
+          date: new Date().toLocaleDateString(),
+          status: "pending"
+        }
+      ];
+      
+      localStorage.setItem("adminData", JSON.stringify(adminData));
     }
   </script>
 </body>
