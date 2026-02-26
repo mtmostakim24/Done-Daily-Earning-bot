@@ -7,6 +7,7 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
+    /* ... (styles remain exactly as provided) ... */
     * {
       margin: 0;
       padding: 0;
@@ -865,6 +866,29 @@
         grid-template-columns: 1fr;
       }
     }
+
+    /* Notice card style */
+    .notice-card {
+      background: rgba(255, 193, 7, 0.2);
+      border-left: 4px solid #ffc107;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .notice-card i {
+      font-size: 24px;
+      color: #ffc107;
+    }
+    .notice-card p {
+      margin: 0;
+      font-size: 14px;
+    }
+    .notice-card strong {
+      color: #ffc107;
+    }
   </style>
 </head>
 <body>
@@ -1149,8 +1173,14 @@
       </div>
     </div>
 
-    <!-- Withdraw Section -->
+    <!-- Withdraw Section (only withdrawal history) -->
     <div id="withdraw" class="cards-container" style="display: none;">
+      <!-- Timing Notice -->
+      <div class="notice-card">
+        <i class="fas fa-clock"></i>
+        <p><strong>⏰ Withdrawal Time:</strong> সকাল 10 টা থেকে রাত 10 টা পর্যন্ত আপনি withdraw করতে পারবেন। লেনদেন সঠিকভাবে সম্পন্ন করুন।</p>
+      </div>
+
       <div class="card">
         <div class="card-header">
           <i class="fas fa-money-bill-wave"></i>
@@ -1208,7 +1238,7 @@
         </button>
       </div>
 
-      <!-- Withdrawal History -->
+      <!-- Withdrawal History (only) -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-history"></i>
@@ -1216,19 +1246,16 @@
         </div>
         <div id="withdrawal-history" class="history-list"></div>
       </div>
-
-      <!-- Deposit History -->
-      <div class="card">
-        <div class="card-header">
-          <i class="fas fa-history"></i>
-          <h3>Deposit History (Last 5)</h3>
-        </div>
-        <div id="deposit-history" class="history-list"></div>
-      </div>
     </div>
 
-    <!-- Deposit Section -->
+    <!-- Deposit Section (with deposit history and notice) -->
     <div id="deposit" class="cards-container" style="display: none;">
+      <!-- Timing Notice -->
+      <div class="notice-card">
+        <i class="fas fa-clock"></i>
+        <p><strong>⏰ Deposit Time:</strong> সকাল 10 টা থেকে রাত 10 টা পর্যন্ত আপনি deposit করতে পারবেন। সঠিক নম্বরে টাকা পাঠান এবং ট্রানজেকশন আইডি দিন।</p>
+      </div>
+
       <div class="card">
         <div class="card-header">
           <i class="fas fa-credit-card"></i>
@@ -1271,6 +1298,15 @@
         <button class="btn btn-secondary" onclick="submitDeposit()">
           <i class="fas fa-paper-plane"></i> Submit Deposit
         </button>
+      </div>
+
+      <!-- Deposit History (moved from withdraw) -->
+      <div class="card">
+        <div class="card-header">
+          <i class="fas fa-history"></i>
+          <h3>Deposit History (Last 5)</h3>
+        </div>
+        <div id="deposit-history" class="history-list"></div>
       </div>
     </div>
 
@@ -1376,7 +1412,7 @@
 
   <script>
     // ==================== CONFIGURATION ====================
-    const BOT_TOKEN = "8287384068:AAH54NwdnoIbJ9jjktWdqdRj9TiVecKGErU";
+    const BOT_TOKEN = "7886120175:AAEq3IrdoIEVQ-rPV0o0HeByBpbzeL2buGE";
     const ADMIN_CHAT_ID = "7578470500";
     const MIN_RATE = 0.050;
     const COMMISSION_PERCENT = 10; // 10% commission on withdraw
@@ -2042,7 +2078,7 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
         showNotification("Insufficient balance", "error");
         return;
       }
-      if ((userData.referrals || 0) < 0) {
+      if ((userData.referrals || 0) < 10) {
         showNotification("You need at least 10 referrals to withdraw", "error");
         return;
       }
@@ -2298,7 +2334,7 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
 
     // ==================== ADMIN FUNCTIONS ====================
     function checkAdminAccess() {
-      const adminUsers = [7578470500, 7578470500]; // Add your admin IDs
+      const adminUsers = [7578470500, 123456789]; // Add your admin IDs
       
       if (userData && adminUsers.includes(userData.userId)) {
         userData.isAdmin = true;
@@ -2472,9 +2508,10 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
       } else if (section === 'withdraw') {
         document.getElementById("withdraw").style.display = "block";
         updateWithdrawHistory();
-        updateDepositHistory();
+        // Do not call deposit history here
       } else if (section === 'deposit') {
         document.getElementById("deposit").style.display = "block";
+        updateDepositHistory(); // update deposit history when deposit section is shown
       } else if (section === 'profile') {
         document.getElementById("profile-page").style.display = "block";
         updateReferralHistory();
