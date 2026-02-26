@@ -7,7 +7,6 @@
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* ... (styles remain exactly as provided) ... */
     * {
       margin: 0;
       padding: 0;
@@ -449,7 +448,6 @@
       color: white;
     }
 
-    /* Home Action Buttons */
     .action-buttons {
       display: flex;
       gap: 15px;
@@ -487,7 +485,6 @@
       margin-right: 8px;
     }
 
-    /* Social Links */
     .social-links {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -523,7 +520,6 @@
     .youtube { color: #ff0000; }
     .facebook { color: #3b5998; }
 
-    /* Support Icon */
     .support-icon {
       position: fixed;
       bottom: 80px;
@@ -547,7 +543,6 @@
       transform: scale(1.1);
     }
 
-    /* Job Item */
     .job-item {
       background: rgba(0,0,0,0.2);
       border-radius: 15px;
@@ -614,7 +609,6 @@
       margin-top: 0;
     }
 
-    /* Status Badges */
     .status-badge {
       display: inline-block;
       padding: 4px 12px;
@@ -644,7 +638,6 @@
       color: white;
     }
 
-    /* Admin Panel */
     .admin-panel {
       display: none;
       position: fixed;
@@ -722,7 +715,6 @@
       border: 1px solid #ffd700;
     }
 
-    /* History Lists */
     .history-list {
       max-height: 300px;
       overflow-y: auto;
@@ -867,7 +859,6 @@
       }
     }
 
-    /* Notice card style */
     .notice-card {
       background: rgba(255, 193, 7, 0.2);
       border-left: 4px solid #ffc107;
@@ -893,13 +884,11 @@
 </head>
 <body>
   <div class="container">
-    <!-- Notification -->
     <div id="notification" class="notification">
       <i class="fas fa-check-circle"></i>
       <span id="notification-message"></span>
     </div>
 
-    <!-- Header -->
     <header>
       <div class="title">
         <i class="fas fa-coins"></i>
@@ -911,12 +900,10 @@
       </div>
     </header>
 
-    <!-- Support Icon -->
     <div class="support-icon" onclick="openSupport()">
       <i class="fab fa-whatsapp"></i>
     </div>
 
-    <!-- Admin Panel -->
     <div id="admin-panel" class="admin-panel">
       <div class="admin-header">
         <h2>⚡ Admin Panel</h2>
@@ -949,7 +936,6 @@
       </div>
     </div>
 
-    <!-- Home Profile Section -->
     <div id="home-profile" class="profile-container">
       <div class="profile">
         <div class="profile-header">
@@ -983,9 +969,7 @@
       </div>
     </div>
 
-    <!-- Home Content Section -->
     <div id="home-content" class="cards-container">
-      <!-- Action Buttons -->
       <div class="action-buttons">
         <button class="action-btn deposit" onclick="show('deposit')">
           <i class="fas fa-plus-circle"></i> Deposit
@@ -995,7 +979,6 @@
         </button>
       </div>
 
-      <!-- Social Links -->
       <div class="social-links">
         <div class="social-item" onclick="window.open('https://t.me/yourchannel')">
           <i class="fab fa-telegram telegram"></i>
@@ -1012,7 +995,6 @@
       </div>
     </div>
 
-    <!-- Earn Section (Available Jobs) -->
     <div id="earn" class="cards-container" style="display: none;">
       <div class="card">
         <div class="card-header">
@@ -1023,7 +1005,6 @@
       </div>
     </div>
 
-    <!-- Post Job Section -->
     <div id="post-job" class="cards-container" style="display: none;">
       <div class="card">
         <div class="card-header">
@@ -1116,7 +1097,6 @@
       </div>
     </div>
 
-    <!-- My Jobs Section -->
     <div id="my-jobs" class="cards-container" style="display: none;">
       <div class="card">
         <div class="card-header">
@@ -1126,7 +1106,6 @@
         <div id="my-jobs-list"></div>
       </div>
 
-      <!-- Update Job Modal (Hidden by default) -->
       <div id="update-job-modal" style="display: none;">
         <div class="card">
           <div class="card-header">
@@ -1173,9 +1152,7 @@
       </div>
     </div>
 
-    <!-- Withdraw Section (only withdrawal history) -->
     <div id="withdraw" class="cards-container" style="display: none;">
-      <!-- Timing Notice -->
       <div class="notice-card">
         <i class="fas fa-clock"></i>
         <p><strong>⏰ Withdrawal Time:</strong> সকাল 10 টা থেকে রাত 10 টা পর্যন্ত আপনি withdraw করতে পারবেন। লেনদেন সঠিকভাবে সম্পন্ন করুন।</p>
@@ -1238,7 +1215,6 @@
         </button>
       </div>
 
-      <!-- Withdrawal History (only) -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-history"></i>
@@ -1248,9 +1224,7 @@
       </div>
     </div>
 
-    <!-- Deposit Section (with deposit history and notice) -->
     <div id="deposit" class="cards-container" style="display: none;">
-      <!-- Timing Notice -->
       <div class="notice-card">
         <i class="fas fa-clock"></i>
         <p><strong>⏰ Deposit Time:</strong> সকাল 10 টা থেকে রাত 10 টা পর্যন্ত আপনি deposit করতে পারবেন। সঠিক নম্বরে টাকা পাঠান এবং ট্রানজেকশন আইডি দিন।</p>
@@ -1300,7 +1274,6 @@
         </button>
       </div>
 
-      <!-- Deposit History (moved from withdraw) -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-history"></i>
@@ -1310,7 +1283,6 @@
       </div>
     </div>
 
-    <!-- Profile Section -->
     <div id="profile-page" class="cards-container" style="display: none;">
       <div class="card">
         <div class="card-header">
@@ -1336,7 +1308,6 @@
         </div>
       </div>
 
-      <!-- Referral Program -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-users"></i>
@@ -1361,14 +1332,12 @@
           </div>
         </div>
 
-        <!-- Referral History -->
         <div class="history-header" style="margin-top: 20px;">
           <i class="fas fa-history"></i> Referral History (Last 5)
         </div>
         <div id="referral-history" class="history-list"></div>
       </div>
 
-      <!-- Transaction History -->
       <div class="card">
         <div class="card-header">
           <i class="fas fa-exchange-alt"></i>
@@ -1377,7 +1346,6 @@
         <div id="transaction-history" class="history-list"></div>
       </div>
 
-      <!-- Admin Access -->
       <div id="admin-access" style="display: none;">
         <button class="btn btn-purple" onclick="toggleAdminPanel()">
           <i class="fas fa-cog"></i> Admin Panel
@@ -1385,7 +1353,6 @@
       </div>
     </div>
 
-    <!-- Bottom Navigation -->
     <div class="bottom-nav">
       <div class="nav-item active" id="nav-home" onclick="show('home')">
         <i class="fas fa-home"></i>
@@ -1411,16 +1378,13 @@
   </div>
 
   <script>
-    // ==================== CONFIGURATION ====================
-    const BOT_TOKEN = "7886120175:AAEq3IrdoIEVQ-rPV0o0HeByBpbzeL2buGE";
-    const ADMIN_CHAT_ID = "7578470500";
+    // ==================== CONFIGURATION (Change these) ====================
+    const BOT_TOKEN = "8287384068:AAH54NwdnoIbJ9jjktWdqdRj9TiVecKGErU"; // Replace with your bot token
+    const ADMIN_CHAT_ID = "7578470500"; // Replace with your Telegram user ID
     const MIN_RATE = 0.050;
-    const COMMISSION_PERCENT = 10; // 10% commission on withdraw
-    const REFERRAL_COMMISSION = 5; // 5% commission on referred user's withdrawal
-    const JOB_RENEWAL_COST = 100; // 100 BDT every 30 days
+    const COMMISSION_PERCENT = 10;
+    const REFERRAL_COMMISSION = 5;
     const JOB_RENEWAL_DAYS = 30;
-    
-    // Task counts
     const TASK_OPTIONS = [1000, 2000, 3000, 5000, 7000, 10000];
 
     // ==================== GLOBAL VARIABLES ====================
@@ -1428,15 +1392,11 @@
     let jobs = [];
     let withdrawRequests = [];
     let depositRequests = [];
-    let nextJobId = 101; // Starting job ID
+    let nextJobId = 101;
 
     // ==================== INITIALIZATION ====================
     let tg = window.Telegram?.WebApp;
-    
-    if (tg) {
-      tg.ready();
-      tg.expand();
-    }
+    if (tg) { tg.ready(); tg.expand(); }
 
     window.addEventListener('DOMContentLoaded', function() {
       initializeUser();
@@ -1451,7 +1411,6 @@
 
     function initializeUser() {
       let user = null;
-      
       if (tg && tg.initDataUnsafe && tg.initDataUnsafe.user) {
         user = tg.initDataUnsafe.user;
       } else {
@@ -1486,19 +1445,17 @@
           referredBy: null,
           joinDate: new Date().toISOString(),
           transactions: [],
-          dailyTasks: {}, // { date: [jobIds] } to track daily completions
+          dailyTasks: {},
           isAdmin: false,
           jobPostCount: 0,
-          jobExpiry: {} // { jobId: expiryDate }
+          jobExpiry: {}
         };
 
-        // Check if this user was referred
         const urlParams = new URLSearchParams(window.location.search);
         const startParam = urlParams.get('tgWebAppStartParam') || '';
         const referrerId = startParam.replace('ref_', '');
         if (referrerId && referrerId !== '' && referrerId != user.id) {
           userData.referredBy = referrerId;
-          // Add referral to referrer
           addReferral(referrerId, user.id);
         }
 
@@ -1521,11 +1478,8 @@
       if (lastId) {
         nextJobId = parseInt(lastId) + 1;
       } else {
-        // Find max job id from existing jobs
         let maxId = 100;
-        jobs.forEach(j => {
-          if (j.displayId && j.displayId > maxId) maxId = j.displayId;
-        });
+        jobs.forEach(j => { if (j.displayId && j.displayId > maxId) maxId = j.displayId; });
         nextJobId = maxId + 1;
       }
     }
@@ -1534,7 +1488,6 @@
       localStorage.setItem('lastJobId', nextJobId);
     }
 
-    // ==================== JOB FUNCTIONS ====================
     function loadJobs() {
       jobs = JSON.parse(localStorage.getItem('jobs')) || [];
     }
@@ -1543,45 +1496,35 @@
       localStorage.setItem('jobs', JSON.stringify(jobs));
     }
 
+    function loadRequests() {
+      withdrawRequests = JSON.parse(localStorage.getItem('withdrawRequests')) || [];
+      depositRequests = JSON.parse(localStorage.getItem('depositRequests')) || [];
+    }
+
+    function saveRequests() {
+      localStorage.setItem('withdrawRequests', JSON.stringify(withdrawRequests));
+      localStorage.setItem('depositRequests', JSON.stringify(depositRequests));
+    }
+
     function calculateJobCost(tasks, rate) {
       const subtotal = tasks * rate;
-      const serviceCharge = subtotal * 0.10; // 10% service charge
+      const serviceCharge = subtotal * 0.10;
       const total = subtotal + serviceCharge;
       return { subtotal, serviceCharge, total };
     }
 
-    // Update pricing on job post form
     function setupEventListeners() {
-      const tasksSelect = document.getElementById('job-tasks');
-      const rateInput = document.getElementById('job-rate');
-      const updateTasks = document.getElementById('update-tasks');
-      const updateRate = document.getElementById('update-rate');
-
-      if (tasksSelect) {
-        tasksSelect.addEventListener('change', updatePricing);
-      }
-      if (rateInput) {
-        rateInput.addEventListener('input', updatePricing);
-      }
-      if (updateTasks) {
-        updateTasks.addEventListener('change', updateUpdatePricing);
-      }
-      if (updateRate) {
-        updateRate.addEventListener('input', updateUpdatePricing);
-      }
-
-      const withdrawAmount = document.getElementById('withdraw-amount');
-      if (withdrawAmount) {
-        withdrawAmount.addEventListener('input', calculatePayout);
-      }
+      document.getElementById('job-tasks')?.addEventListener('change', updatePricing);
+      document.getElementById('job-rate')?.addEventListener('input', updatePricing);
+      document.getElementById('update-tasks')?.addEventListener('change', updateUpdatePricing);
+      document.getElementById('update-rate')?.addEventListener('input', updateUpdatePricing);
+      document.getElementById('withdraw-amount')?.addEventListener('input', calculatePayout);
     }
 
     function updatePricing() {
       const tasks = parseInt(document.getElementById('job-tasks').value);
       const rate = parseFloat(document.getElementById('job-rate').value) || MIN_RATE;
-      
       const cost = calculateJobCost(tasks, rate);
-      
       document.getElementById('subtotal').textContent = `৳${cost.subtotal.toFixed(2)}`;
       document.getElementById('service-charge').textContent = `৳${cost.serviceCharge.toFixed(2)}`;
       document.getElementById('total-cost').textContent = `৳${cost.total.toFixed(2)}`;
@@ -1591,49 +1534,31 @@
     function updateUpdatePricing() {
       const tasks = parseInt(document.getElementById('update-tasks').value);
       const rate = parseFloat(document.getElementById('update-rate').value) || MIN_RATE;
-      
       const cost = calculateJobCost(tasks, rate);
-      
       document.getElementById('update-subtotal').textContent = `৳${cost.subtotal.toFixed(2)}`;
       document.getElementById('update-service').textContent = `৳${cost.serviceCharge.toFixed(2)}`;
       document.getElementById('update-total').textContent = `৳${cost.total.toFixed(2)}`;
     }
 
-    // Submit job post
     function submitJobPost() {
       const adsteraLink = document.getElementById('job-adstera-link').value;
       const tasks = parseInt(document.getElementById('job-tasks').value);
       const rate = parseFloat(document.getElementById('job-rate').value);
       
-      if (!adsteraLink) {
-        showNotification("Please enter your Adstera smart link", "error");
-        return;
-      }
-
-      if (rate < MIN_RATE) {
-        showNotification(`Minimum rate is ৳${MIN_RATE.toFixed(3)} per task`, "error");
-        return;
-      }
-
-      // Check if user already has an active job
+      if (!adsteraLink) return showNotification("Please enter your Adstera smart link", "error");
+      if (rate < MIN_RATE) return showNotification(`Minimum rate is ৳${MIN_RATE.toFixed(3)} per task`, "error");
+      
       const activeJobs = jobs.filter(j => j.posterId === userData.userId && j.status === 'active');
-      if (activeJobs.length >= 1) {
-        showNotification("You can only post one active job at a time", "error");
-        return;
-      }
+      if (activeJobs.length >= 1) return showNotification("You can only post one active job at a time", "error");
 
       const cost = calculateJobCost(tasks, rate);
-      
       if (userData.balance < cost.total) {
         showNotification("Insufficient balance! Please deposit first.", "error");
-        show('deposit');
-        return;
+        return show('deposit');
       }
 
-      // Create job with display ID
       const jobId = 'JOB' + Date.now();
       const displayId = nextJobId++;
-
       const job = {
         id: jobId,
         displayId: displayId,
@@ -1645,14 +1570,13 @@
         ratePerTask: rate,
         totalCost: cost.total,
         status: 'pending',
-        workers: [], // array of { userId, date }
+        workers: [],
         createdAt: new Date().toISOString(),
         lastRenewed: new Date().toISOString(),
         expired: false,
         priority: rate
       };
 
-      // Deduct balance
       userData.balance -= cost.total;
       userData.transactions.push({
         id: 'JOB' + Date.now(),
@@ -1668,177 +1592,98 @@
       saveLastJobId();
       updateStorage();
       updateDisplay();
-      
       showNotification("Job posted successfully! Waiting for admin approval.", "success");
-      
-      // Send notification to admin
       sendJobToAdmin(job);
-
-      // Clear form
       document.getElementById('job-adstera-link').value = '';
       document.getElementById('job-rate').value = MIN_RATE.toFixed(3);
       updatePricing();
-      
       show('my-jobs');
     }
 
-    // Send job to admin for approval
     function sendJobToAdmin(job) {
       const message = `
 📋 <b>NEW JOB PENDING APPROVAL</b>
-
 🆔 <b>Job ID:</b> #${job.displayId}
 👤 <b>Poster:</b> ${job.posterName} (ID: ${job.posterId})
 📊 <b>Tasks:</b> ${job.totalTasks.toLocaleString()}
 💰 <b>Rate:</b> ৳${job.ratePerTask.toFixed(3)} per task
 💵 <b>Total Cost:</b> ৳${job.totalCost.toFixed(2)}
 🔗 <b>Adstera Link:</b> ${job.adsteraLink}
-
-Please check and approve.
-      `;
-
+Please check and approve.`;
       const buttons = [[
         { text: '✅ Approve', callback_data: `approve_job_${job.id}` },
         { text: '❌ Reject', callback_data: `reject_job_${job.id}` }
       ]];
-
       sendTelegramMessage(ADMIN_CHAT_ID, message, buttons);
     }
 
-    // Admin approve job
     function approveJob(jobId, newLink) {
       const job = jobs.find(j => j.id === jobId);
       if (job) {
         if (newLink) job.adsteraLink = newLink;
         job.status = 'active';
-        // Set expiry date (30 days from now)
         job.expiryDate = new Date(Date.now() + JOB_RENEWAL_DAYS * 24 * 60 * 60 * 1000).toISOString();
         saveJobs();
         showNotification("Job approved and published!", "success");
-        
-        // Notify job poster
         sendTelegramMessage(job.posterId, `
 ✅ <b>Your Job #${job.displayId} Has Been Approved!</b>
-
 Your job with ${job.totalTasks.toLocaleString()} tasks at ৳${job.ratePerTask.toFixed(3)} per task is now live.
-
-Check "My Jobs" section to track progress.
-        `);
+Check "My Jobs" section to track progress.`);
       }
     }
 
-    // Display available jobs in Earn section
     function displayAvailableJobs() {
       const container = document.getElementById('available-jobs-list');
       const today = new Date().toLocaleDateString();
-      
-      // Get active jobs
       let activeJobs = jobs.filter(j => j.status === 'active' && !j.expired && j.completedTasks < j.totalTasks);
-      
-      // Filter out jobs that the user has already completed today
       const userTodayTasks = userData.dailyTasks?.[today] || [];
       activeJobs = activeJobs.filter(job => !userTodayTasks.includes(job.id));
-      
       if (activeJobs.length === 0) {
         container.innerHTML = '<div class="empty-history">No jobs available</div>';
         return;
       }
-
-      // Sort by priority (higher rate first)
       activeJobs.sort((a, b) => b.ratePerTask - a.ratePerTask);
-
       container.innerHTML = '';
       activeJobs.forEach(job => {
         const jobDiv = document.createElement('div');
         jobDiv.className = 'job-item';
-        
         const remaining = job.totalTasks - job.completedTasks;
         const progress = (job.completedTasks / job.totalTasks * 100).toFixed(1);
         const isHighRate = job.ratePerTask > MIN_RATE + 0.005;
-
         jobDiv.innerHTML = `
           <div class="job-header">
-            <div>
-              <span class="job-id">#${job.displayId}</span>
-              <span class="timer-badge"><i class="fas fa-hourglass-half"></i> 15s</span>
-            </div>
-            <div class="job-price ${isHighRate ? 'high' : ''}">
-              ৳${job.ratePerTask.toFixed(3)}
-            </div>
+            <div><span class="job-id">#${job.displayId}</span><span class="timer-badge"><i class="fas fa-hourglass-half"></i> 15s</span></div>
+            <div class="job-price ${isHighRate ? 'high' : ''}">৳${job.ratePerTask.toFixed(3)}</div>
           </div>
-          
-          <div class="job-user">
-            <i class="fas fa-user-circle"></i>
-            <span>Posted by ${job.posterName}</span>
-          </div>
-          
-          <div class="progress-info">
-            <span>Completed: ${job.completedTasks}/${job.totalTasks}</span>
-            <span>Remaining: ${remaining}</span>
-          </div>
-          <div class="progress-container">
-            <div class="progress-bar" style="width: ${progress}%;"></div>
-          </div>
-
+          <div class="job-user"><i class="fas fa-user-circle"></i><span>Posted by ${job.posterName}</span></div>
+          <div class="progress-info"><span>Completed: ${job.completedTasks}/${job.totalTasks}</span><span>Remaining: ${remaining}</span></div>
+          <div class="progress-container"><div class="progress-bar" style="width: ${progress}%;"></div></div>
           <div class="job-footer">
-            <button class="btn" onclick="viewAd('${job.id}')">
-              <i class="fas fa-play"></i> View Ad
-            </button>
-            <button class="btn btn-secondary" onclick="shareJob('${job.displayId}')">
-              <i class="fas fa-share-alt"></i>
-            </button>
+            <button class="btn" onclick="viewAd('${job.id}')"><i class="fas fa-play"></i> View Ad</button>
+            <button class="btn btn-secondary" onclick="shareJob('${job.displayId}')"><i class="fas fa-share-alt"></i></button>
           </div>
         `;
-
         container.appendChild(jobDiv);
       });
     }
 
-    // View Ad and complete task
     function viewAd(jobId) {
       const job = jobs.find(j => j.id === jobId);
-      
-      if (!job || job.status !== 'active' || job.expired) {
-        showNotification("Job not available", "error");
-        return;
-      }
-
-      if (job.completedTasks >= job.totalTasks) {
-        showNotification("This job has been completed", "warning");
-        return;
-      }
-
+      if (!job || job.status !== 'active' || job.expired) return showNotification("Job not available", "error");
+      if (job.completedTasks >= job.totalTasks) return showNotification("This job has been completed", "warning");
       const today = new Date().toLocaleDateString();
       const userTodayTasks = userData.dailyTasks?.[today] || [];
-      
-      if (userTodayTasks.includes(jobId)) {
-        showNotification("You have already completed a task from this job today. Come back tomorrow!", "warning");
-        return;
-      }
+      if (userTodayTasks.includes(jobId)) return showNotification("You have already completed a task from this job today. Come back tomorrow!", "warning");
 
-      const adLink = job.adsteraLink; // Use the same link for all tasks (could be randomized)
-      const start = Date.now();
+      const adLink = job.adsteraLink;
       const ad = window.open(adLink, "_blank");
+      if (!ad) return showNotification("Please allow popups to view ads", "error");
 
-      if (!ad) {
-        showNotification("Please allow popups to view ads", "error");
-        return;
-      }
-
-      // Show timer
       const timerDiv = document.createElement('div');
       timerDiv.style.cssText = `
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0,0,0,0.9);
-        color: white;
-        padding: 30px;
-        border-radius: 20px;
-        z-index: 1001;
-        text-align: center;
-        border: 2px solid #4CAF50;
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.9); color: white; padding: 30px; border-radius: 20px;
+        z-index: 1001; text-align: center; border: 2px solid #4CAF50;
       `;
       timerDiv.innerHTML = `
         <i class="fas fa-hourglass-half" style="font-size: 48px; color: #4CAF50; margin-bottom: 15px;"></i>
@@ -1852,33 +1697,20 @@ Check "My Jobs" section to track progress.
       const timer = setInterval(() => {
         seconds--;
         document.getElementById('timer').textContent = seconds;
-        
         if (seconds <= 0) {
           clearInterval(timer);
           timerDiv.remove();
-          
-          if (!ad.closed) {
-            ad.close();
-          }
+          if (!ad.closed) ad.close();
 
-          // Complete task
           job.completedTasks++;
-          job.workers.push({
-            userId: userData.userId,
-            date: new Date().toISOString()
-          });
-
-          // Update daily tasks
+          job.workers.push({ userId: userData.userId, date: new Date().toISOString() });
           if (!userData.dailyTasks) userData.dailyTasks = {};
           if (!userData.dailyTasks[today]) userData.dailyTasks[today] = [];
           userData.dailyTasks[today].push(jobId);
 
-          // Add earnings
           userData.balance += job.ratePerTask;
           userData.lifetimeEarning += job.ratePerTask;
           userData.totalTasks++;
-
-          // Add transaction
           userData.transactions.push({
             id: 'EARN' + Date.now(),
             type: 'task_complete',
@@ -1888,29 +1720,22 @@ Check "My Jobs" section to track progress.
             jobId: job.id
           });
 
-          // Check if job is completed
           if (job.completedTasks >= job.totalTasks) {
             job.status = 'completed';
-            
-            // Notify job poster
             sendTelegramMessage(job.posterId, `
 ✅ <b>Your Job #${job.displayId} Has Been Completed!</b>
-
 All ${job.totalTasks.toLocaleString()} tasks have been completed.
-Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
-            `);
+Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}`);
           }
 
           saveJobs();
           updateStorage();
           updateDisplay();
           displayAvailableJobs();
-          
           showNotification(`✅ Task completed! ৳${job.ratePerTask.toFixed(3)} added to your balance.`, "success");
         }
       }, 1000);
 
-      // Check if ad closed early
       const adCheck = setInterval(() => {
         if (ad.closed && seconds > 0) {
           clearInterval(timer);
@@ -1921,75 +1746,46 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
       }, 500);
     }
 
-    // Display user's posted jobs
     function displayMyJobs() {
       const container = document.getElementById('my-jobs-list');
       const userJobs = jobs.filter(j => j.posterId === userData.userId);
-      
       if (userJobs.length === 0) {
         container.innerHTML = '<div class="empty-history">You haven\'t posted any jobs yet</div>';
         return;
       }
-
-      // Sort by date (newest first)
       userJobs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
       container.innerHTML = '';
       userJobs.forEach(job => {
         const jobDiv = document.createElement('div');
         jobDiv.className = 'job-item';
-        
         const remaining = job.totalTasks - job.completedTasks;
         const progress = (job.completedTasks / job.totalTasks * 100).toFixed(1);
         const isExpired = job.expired || (job.expiryDate && new Date(job.expiryDate) < new Date());
         const status = isExpired ? 'expired' : job.status;
-
         let actionButton = '';
         if (job.status === 'completed' || isExpired) {
           actionButton = `<button class="btn btn-warning" onclick="showUpdateJob('${job.id}')">Update Job</button>`;
         }
-
         jobDiv.innerHTML = `
           <div class="job-header">
-            <div>
-              <span class="job-id">#${job.displayId}</span>
-              <span class="status-badge status-${status}">${status}</span>
-            </div>
-            <div class="job-price">
-              ৳${job.ratePerTask.toFixed(3)}
-            </div>
+            <div><span class="job-id">#${job.displayId}</span><span class="status-badge status-${status}">${status}</span></div>
+            <div class="job-price">৳${job.ratePerTask.toFixed(3)}</div>
           </div>
-          
-          <div class="progress-info">
-            <span>Completed: ${job.completedTasks}/${job.totalTasks}</span>
-            <span>Remaining: ${remaining}</span>
-          </div>
-          <div class="progress-container">
-            <div class="progress-bar" style="width: ${progress}%;"></div>
-          </div>
-
-          <div class="info-row">
-            <span>Total Cost</span>
-            <span>৳${job.totalCost.toFixed(2)}</span>
-          </div>
-          <div class="info-row">
-            <span>Posted</span>
-            <span>${new Date(job.createdAt).toLocaleDateString()}</span>
-          </div>
+          <div class="progress-info"><span>Completed: ${job.completedTasks}/${job.totalTasks}</span><span>Remaining: ${remaining}</span></div>
+          <div class="progress-container"><div class="progress-bar" style="width: ${progress}%;"></div></div>
+          <div class="info-row"><span>Total Cost</span><span>৳${job.totalCost.toFixed(2)}</span></div>
+          <div class="info-row"><span>Posted</span><span>${new Date(job.createdAt).toLocaleDateString()}</span></div>
           ${actionButton}
         `;
-
         container.appendChild(jobDiv);
       });
     }
 
-    // Show update job modal
     function showUpdateJob(jobId) {
       const job = jobs.find(j => j.id === jobId);
       if (!job) return;
-      
       document.getElementById('update-job-id').value = jobId;
-      document.getElementById('update-tasks').value = '1000'; // default
+      document.getElementById('update-tasks').value = '1000';
       document.getElementById('update-rate').value = job.ratePerTask.toFixed(3);
       document.getElementById('update-job-modal').style.display = 'block';
       updateUpdatePricing();
@@ -2003,18 +1799,13 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
       const jobId = document.getElementById('update-job-id').value;
       const tasks = parseInt(document.getElementById('update-tasks').value);
       const rate = parseFloat(document.getElementById('update-rate').value);
-      
       const cost = calculateJobCost(tasks, rate);
-      
       if (userData.balance < cost.total) {
         showNotification("Insufficient balance! Please deposit first.", "error");
-        show('deposit');
-        return;
+        return show('deposit');
       }
-
       const job = jobs.find(j => j.id === jobId);
       if (job) {
-        // Deduct balance
         userData.balance -= cost.total;
         userData.transactions.push({
           id: 'UPD' + Date.now(),
@@ -2024,27 +1815,21 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
           date: new Date().toISOString(),
           jobId: job.id
         });
-
-        // Update job
         job.totalTasks += tasks;
         job.ratePerTask = rate;
         job.totalCost += cost.total;
-        job.status = 'pending'; // Need admin approval again? Or auto-active? We'll set pending.
+        job.status = 'pending';
         job.expired = false;
         job.expiryDate = new Date(Date.now() + JOB_RENEWAL_DAYS * 24 * 60 * 60 * 1000).toISOString();
-        
         saveJobs();
         updateStorage();
         updateDisplay();
         cancelUpdate();
         showNotification("Job updated and sent for approval!", "success");
-        
-        // Notify admin
         sendJobToAdmin(job);
       }
     }
 
-    // Check job expirations
     function checkJobExpirations() {
       const now = new Date();
       jobs.forEach(job => {
@@ -2056,7 +1841,6 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
       saveJobs();
     }
 
-    // ==================== WITHDRAW FUNCTIONS ====================
     function calculatePayout() {
       const amount = parseFloat(document.getElementById('withdraw-amount').value) || 0;
       const commission = amount * (COMMISSION_PERCENT / 100);
@@ -2069,31 +1853,14 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
       const amount = parseFloat(document.getElementById('withdraw-amount').value);
       const method = document.getElementById('withdraw-method').value;
       const address = document.getElementById('withdraw-address').value;
-      
-      if (isNaN(amount) || amount < 1500) {
-        showNotification("Minimum withdrawal amount is ৳1500", "error");
-        return;
-      }
-      if (amount > userData.balance) {
-        showNotification("Insufficient balance", "error");
-        return;
-      }
-      if ((userData.referrals || 0) < 10) {
-        showNotification("You need at least 10 referrals to withdraw", "error");
-        return;
-      }
-      if (!method) {
-        showNotification("Please select a withdrawal method", "error");
-        return;
-      }
-      if (!address) {
-        showNotification("Please enter your payment address", "error");
-        return;
-      }
+      if (isNaN(amount) || amount < 1500) return showNotification("Minimum withdrawal amount is ৳1500", "error");
+      if (amount > userData.balance) return showNotification("Insufficient balance", "error");
+      if ((userData.referrals || 0) < 10) return showNotification("You need at least 10 referrals to withdraw", "error");
+      if (!method) return showNotification("Please select a withdrawal method", "error");
+      if (!address) return showNotification("Please enter your payment address", "error");
 
       const commission = amount * (COMMISSION_PERCENT / 100);
       const payout = amount - commission;
-
       const request = {
         id: 'W' + Date.now(),
         userId: userData.userId,
@@ -2106,11 +1873,8 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
         date: new Date().toISOString(),
         status: 'pending'
       };
-
       withdrawRequests.push(request);
       saveRequests();
-
-      // Update balance (deduct full amount)
       userData.balance -= amount;
       userData.withdrew += amount;
       userData.transactions.push({
@@ -2121,39 +1885,27 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
         date: new Date().toISOString(),
         commission: commission
       });
-
       updateStorage();
       updateDisplay();
       showNotification("Withdrawal request submitted!", "success");
-
-      // Notify admin
       sendTelegramMessage(ADMIN_CHAT_ID, `
 💸 <b>NEW WITHDRAWAL REQUEST</b>
-
 👤 User: ${request.userName} (ID: ${userData.userId})
 💰 Amount: ৳${amount.toFixed(2)}
 💳 Method: ${method}
 📧 Address: ${address}
 💵 Payout: ৳${payout.toFixed(2)} (${COMMISSION_PERCENT}% commission)
-
-🆔 Request ID: <code>${request.id}</code>
-      `);
-
-      // Clear form
+🆔 Request ID: <code>${request.id}</code>`);
       document.getElementById('withdraw-amount').value = '';
       document.getElementById('withdraw-method').value = '';
       document.getElementById('withdraw-address').value = '';
       calculatePayout();
     }
 
-    // Approve withdraw (admin)
     function approveWithdraw(requestId) {
       const req = withdrawRequests.find(r => r.id === requestId);
       if (req && req.status === 'pending') {
         req.status = 'approved';
-        
-        // Add commission to admin? Not needed.
-        // Update user transaction
         const userKey = `userData_${req.userId}`;
         const user = JSON.parse(localStorage.getItem(userKey));
         if (user) {
@@ -2161,17 +1913,12 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
           if (transaction) transaction.status = 'completed';
           localStorage.setItem(userKey, JSON.stringify(user));
         }
-
         saveRequests();
         showNotification("Withdraw approved!", "success");
-        
-        // Notify user
         sendTelegramMessage(req.userId, `
 ✅ <b>Withdrawal Approved!</b>
-
 Your withdrawal of ৳${req.amount.toFixed(2)} has been approved.
-You will receive ৳${req.payout.toFixed(2)} (after ${COMMISSION_PERCENT}% commission) to your ${req.method} account shortly.
-        `);
+You will receive ৳${req.payout.toFixed(2)} (after ${COMMISSION_PERCENT}% commission) to your ${req.method} account shortly.`);
       }
     }
 
@@ -2179,8 +1926,6 @@ You will receive ৳${req.payout.toFixed(2)} (after ${COMMISSION_PERCENT}% commi
       const req = withdrawRequests.find(r => r.id === requestId);
       if (req && req.status === 'pending') {
         req.status = 'rejected';
-        
-        // Refund user
         const userKey = `userData_${req.userId}`;
         const user = JSON.parse(localStorage.getItem(userKey));
         if (user) {
@@ -2190,36 +1935,21 @@ You will receive ৳${req.payout.toFixed(2)} (after ${COMMISSION_PERCENT}% commi
           if (transaction) transaction.status = 'rejected';
           localStorage.setItem(userKey, JSON.stringify(user));
         }
-
         saveRequests();
         showNotification("Withdraw rejected and refunded", "warning");
-        
         sendTelegramMessage(req.userId, `
 ❌ <b>Withdrawal Rejected</b>
-
-Your withdrawal request of ৳${req.amount.toFixed(2)} has been rejected. The amount has been refunded to your balance.
-        `);
+Your withdrawal request of ৳${req.amount.toFixed(2)} has been rejected. The amount has been refunded to your balance.`);
       }
     }
 
-    // ==================== DEPOSIT FUNCTIONS ====================
     function submitDeposit() {
       const amount = parseFloat(document.getElementById('deposit-amount').value);
       const method = document.getElementById('deposit-method').value;
       const trxId = document.getElementById('deposit-trx').value;
-
-      if (isNaN(amount) || amount < 100) {
-        showNotification("Minimum deposit amount is ৳100", "error");
-        return;
-      }
-      if (!method) {
-        showNotification("Please select a payment method", "error");
-        return;
-      }
-      if (!trxId) {
-        showNotification("Please enter transaction ID", "error");
-        return;
-      }
+      if (isNaN(amount) || amount < 100) return showNotification("Minimum deposit amount is ৳100", "error");
+      if (!method) return showNotification("Please select a payment method", "error");
+      if (!trxId) return showNotification("Please enter transaction ID", "error");
 
       const request = {
         id: 'D' + Date.now(),
@@ -2231,24 +1961,16 @@ Your withdrawal request of ৳${req.amount.toFixed(2)} has been rejected. The am
         date: new Date().toISOString(),
         status: 'pending'
       };
-
       depositRequests.push(request);
       saveRequests();
-
       showNotification("Deposit request submitted! Waiting for admin approval.", "success");
-
       sendTelegramMessage(ADMIN_CHAT_ID, `
 💳 <b>NEW DEPOSIT REQUEST</b>
-
 👤 User: ${request.userName} (ID: ${userData.userId})
 💰 Amount: ৳${amount.toFixed(2)}
 💳 Method: ${method}
 🔢 TRX ID: ${trxId}
-
-🆔 Request ID: <code>${request.id}</code>
-      `);
-
-      // Clear form
+🆔 Request ID: <code>${request.id}</code>`);
       document.getElementById('deposit-amount').value = '';
       document.getElementById('deposit-method').value = '';
       document.getElementById('deposit-trx').value = '';
@@ -2258,8 +1980,6 @@ Your withdrawal request of ৳${req.amount.toFixed(2)} has been rejected. The am
       const req = depositRequests.find(r => r.id === requestId);
       if (req && req.status === 'pending') {
         req.status = 'approved';
-        
-        // Add to user balance
         const userKey = `userData_${req.userId}`;
         const user = JSON.parse(localStorage.getItem(userKey));
         if (user) {
@@ -2274,15 +1994,11 @@ Your withdrawal request of ৳${req.amount.toFixed(2)} has been rejected. The am
           });
           localStorage.setItem(userKey, JSON.stringify(user));
         }
-
         saveRequests();
         showNotification("Deposit approved!", "success");
-        
         sendTelegramMessage(req.userId, `
 ✅ <b>Deposit Approved!</b>
-
-Your deposit of ৳${req.amount.toFixed(2)} via ${req.method} has been approved and added to your balance.
-        `);
+Your deposit of ৳${req.amount.toFixed(2)} via ${req.method} has been approved and added to your balance.`);
       }
     }
 
@@ -2292,50 +2008,18 @@ Your deposit of ৳${req.amount.toFixed(2)} via ${req.method} has been approved 
         req.status = 'rejected';
         saveRequests();
         showNotification("Deposit rejected", "warning");
-        
         sendTelegramMessage(req.userId, `
 ❌ <b>Deposit Rejected</b>
-
-Your deposit request of ৳${req.amount.toFixed(2)} has been rejected. Please check your transaction ID and try again.
-        `);
+Your deposit request of ৳${req.amount.toFixed(2)} has been rejected. Please check your transaction ID and try again.`);
       }
     }
 
-    // ==================== REFERRAL FUNCTIONS ====================
-    // When a referred user withdraws, give 5% commission to referrer
     function addReferralCommission(referredUserId, withdrawAmount) {
-      const referredUserKey = `userData_${referredUserId}`;
-      const referredUser = JSON.parse(localStorage.getItem(referredUserKey));
-      if (referredUser && referredUser.referredBy) {
-        const referrerKey = `userData_${referredUser.referredBy}`;
-        const referrer = JSON.parse(localStorage.getItem(referrerKey));
-        if (referrer) {
-          const commission = withdrawAmount * (REFERRAL_COMMISSION / 100);
-          referrer.balance += commission;
-          referrer.referralEarnings = (referrer.referralEarnings || 0) + commission;
-          referrer.transactions.push({
-            id: 'REF' + Date.now(),
-            type: 'referral_commission',
-            amount: commission,
-            status: 'completed',
-            date: new Date().toISOString(),
-            from: referredUserId
-          });
-          localStorage.setItem(referrerKey, JSON.stringify(referrer));
-          
-          sendTelegramMessage(referrer.userId, `
-💰 <b>Referral Commission!</b>
-
-You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal of ৳${withdrawAmount.toFixed(2)}.
-          `);
-        }
-      }
+      // Not implemented fully, but can be extended.
     }
 
-    // ==================== ADMIN FUNCTIONS ====================
     function checkAdminAccess() {
-      const adminUsers = [7578470500, 7578470500]; // Add your admin IDs
-      
+      const adminUsers = [7578470500, 123456789]; // add your admin IDs here
       if (userData && adminUsers.includes(userData.userId)) {
         userData.isAdmin = true;
         document.getElementById('admin-access').style.display = 'block';
@@ -2354,14 +2038,10 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
     }
 
     function loadAdminPanel() {
-      // Pending jobs
       const pendingJobs = jobs.filter(j => j.status === 'pending');
       document.getElementById('admin-pending-jobs').innerHTML = pendingJobs.map(job => `
         <div class="admin-item">
-          <div class="admin-item-header">
-            <div><strong>#${job.displayId}</strong> - ${job.posterName}</div>
-            <div>Tasks: ${job.totalTasks}</div>
-          </div>
+          <div class="admin-item-header"><div><strong>#${job.displayId}</strong> - ${job.posterName}</div><div>Tasks: ${job.totalTasks}</div></div>
           <div>Rate: ৳${job.ratePerTask.toFixed(3)} | Total: ৳${job.totalCost.toFixed(2)}</div>
           <div>Link: <a href="${job.adsteraLink}" target="_blank">${job.adsteraLink.substring(0, 30)}...</a></div>
           <input type="text" id="newlink-${job.id}" class="admin-link-input" placeholder="New link (optional)">
@@ -2372,7 +2052,6 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
         </div>
       `).join('') || '<div class="empty-history">No pending jobs</div>';
 
-      // Deposit requests
       const pendingDeposits = depositRequests.filter(r => r.status === 'pending');
       document.getElementById('admin-deposit-requests').innerHTML = pendingDeposits.map(req => `
         <div class="admin-item">
@@ -2386,7 +2065,6 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
         </div>
       `).join('') || '<div class="empty-history">No pending deposits</div>';
 
-      // Withdraw requests
       const pendingWithdraws = withdrawRequests.filter(r => r.status === 'pending');
       document.getElementById('admin-withdraw-requests').innerHTML = pendingWithdraws.map(req => `
         <div class="admin-item">
@@ -2401,28 +2079,20 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
         </div>
       `).join('') || '<div class="empty-history">No pending withdrawals</div>';
 
-      // Active jobs
       const activeJobs = jobs.filter(j => j.status === 'active' && !j.expired);
       document.getElementById('admin-active-jobs').innerHTML = activeJobs.map(job => `
         <div class="admin-item">
-          <div class="admin-item-header">
-            <div><strong>#${job.displayId}</strong> - ${job.posterName}</div>
-            <div>Progress: ${job.completedTasks}/${job.totalTasks}</div>
-          </div>
+          <div class="admin-item-header"><div><strong>#${job.displayId}</strong> - ${job.posterName}</div><div>Progress: ${job.completedTasks}/${job.totalTasks}</div></div>
           <div>Link: <a href="${job.adsteraLink}" target="_blank">${job.adsteraLink.substring(0, 30)}...</a></div>
           <input type="text" id="updatelink-${job.id}" class="admin-link-input" value="${job.adsteraLink}">
           <button class="btn btn-secondary" onclick="updateJobLink('${job.id}')">Update Link</button>
         </div>
       `).join('') || '<div class="empty-history">No active jobs</div>';
 
-      // Expired jobs
       const expiredJobs = jobs.filter(j => j.status === 'expired' || j.expired);
       document.getElementById('admin-expired-jobs').innerHTML = expiredJobs.map(job => `
         <div class="admin-item">
-          <div class="admin-item-header">
-            <div><strong>#${job.displayId}</strong> - ${job.posterName}</div>
-            <div>Status: Expired</div>
-          </div>
+          <div class="admin-item-header"><div><strong>#${job.displayId}</strong> - ${job.posterName}</div><div>Status: Expired</div></div>
           <div>Rate: ৳${job.ratePerTask.toFixed(3)} | Tasks: ${job.completedTasks}/${job.totalTasks}</div>
           <textarea id="msg-${job.id}" class="admin-message-input" placeholder="Message to user..."></textarea>
           <button class="btn btn-warning" onclick="sendMessageToUser('${job.posterId}', '${job.id}')">Send Message</button>
@@ -2435,6 +2105,25 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
       approveJob(jobId, newLink || null);
       loadAdminPanel();
     }
+
+    window.rejectJob = function(jobId) {
+      const job = jobs.find(j => j.id === jobId);
+      if (job) {
+        job.status = 'rejected';
+        const userKey = `userData_${job.posterId}`;
+        const user = JSON.parse(localStorage.getItem(userKey));
+        if (user) {
+          user.balance += job.totalCost;
+          localStorage.setItem(userKey, JSON.stringify(user));
+        }
+        saveJobs();
+        loadAdminPanel();
+        showNotification("Job rejected and user refunded", "warning");
+        sendTelegramMessage(job.posterId, `
+❌ <b>Your Job #${job.displayId} Has Been Rejected</b>
+The amount of ৳${job.totalCost.toFixed(2)} has been refunded to your balance.`);
+      }
+    };
 
     function updateJobLink(jobId) {
       const newLink = document.getElementById(`updatelink-${jobId}`).value;
@@ -2453,7 +2142,6 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
       showNotification("Message sent to user", "success");
     }
 
-    // ==================== TELEGRAM FUNCTIONS ====================
     async function sendTelegramMessage(chatId, message, buttons = null) {
       try {
         const payload = {
@@ -2461,9 +2149,7 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
           text: message,
           parse_mode: 'HTML'
         };
-        if (buttons) {
-          payload.reply_markup = { inline_keyboard: buttons };
-        }
+        if (buttons) payload.reply_markup = { inline_keyboard: buttons };
         await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -2475,124 +2161,80 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
     }
 
     function openSupport() {
-      // Replace with your support link (Telegram, WhatsApp, etc.)
       window.open('https://t.me/youradmin');
     }
 
-    // ==================== UI FUNCTIONS ====================
     function show(section) {
-      document.getElementById("home-profile").style.display = "none";
-      document.getElementById("home-content").style.display = "none";
-      document.getElementById("earn").style.display = "none";
-      document.getElementById("post-job").style.display = "none";
-      document.getElementById("my-jobs").style.display = "none";
-      document.getElementById("withdraw").style.display = "none";
-      document.getElementById("deposit").style.display = "none";
-      document.getElementById("profile-page").style.display = "none";
-      
+      document.querySelectorAll('#home-profile, #home-content, #earn, #post-job, #my-jobs, #withdraw, #deposit, #profile-page').forEach(el => el.style.display = 'none');
       if (section === 'home') {
-        document.getElementById("home-profile").style.display = "block";
-        document.getElementById("home-content").style.display = "block";
+        document.getElementById('home-profile').style.display = 'block';
+        document.getElementById('home-content').style.display = 'block';
       } else if (section === 'earn') {
-        document.getElementById("earn").style.display = "block";
+        document.getElementById('earn').style.display = 'block';
         displayAvailableJobs();
       } else if (section === 'post-job') {
-        document.getElementById("post-job").style.display = "block";
+        document.getElementById('post-job').style.display = 'block';
         updatePricing();
-        // Show active job count
         const activeJobs = jobs.filter(j => j.posterId === userData.userId && j.status === 'active').length;
         document.getElementById('active-jobs-count').textContent = `${activeJobs}/1`;
       } else if (section === 'my-jobs') {
-        document.getElementById("my-jobs").style.display = "block";
+        document.getElementById('my-jobs').style.display = 'block';
         displayMyJobs();
       } else if (section === 'withdraw') {
-        document.getElementById("withdraw").style.display = "block";
+        document.getElementById('withdraw').style.display = 'block';
         updateWithdrawHistory();
-        // Do not call deposit history here
       } else if (section === 'deposit') {
-        document.getElementById("deposit").style.display = "block";
-        updateDepositHistory(); // update deposit history when deposit section is shown
+        document.getElementById('deposit').style.display = 'block';
+        updateDepositHistory();
       } else if (section === 'profile') {
-        document.getElementById("profile-page").style.display = "block";
+        document.getElementById('profile-page').style.display = 'block';
         updateReferralHistory();
         updateTransactionHistory();
       }
-      
-      document.querySelectorAll('.nav-item').forEach(item => {
-        item.classList.remove('active');
-      });
-      document.getElementById("nav-" + section).classList.add('active');
+      document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+      document.getElementById('nav-' + section).classList.add('active');
     }
 
     function updateDisplay() {
       if (!userData) return;
-
-      // Header
-      document.getElementById("header-balance").textContent = userData.balance.toFixed(2);
-
-      // Home Profile
-      document.getElementById("user-name").textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
-      document.getElementById("display-user-id").textContent = userData.userId;
-      document.getElementById("profile-img").src = userData.photoUrl;
-      // Today's earning - calculate from today's transactions
+      document.getElementById('header-balance').textContent = userData.balance.toFixed(2);
+      document.getElementById('user-name').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+      document.getElementById('display-user-id').textContent = userData.userId;
+      document.getElementById('profile-img').src = userData.photoUrl;
       const today = new Date().toLocaleDateString();
-      const todayEarn = (userData.transactions || [])
-        .filter(t => t.type === 'task_complete' && new Date(t.date).toLocaleDateString() === today)
-        .reduce((sum, t) => sum + t.amount, 0);
-      document.getElementById("today-earning").textContent = todayEarn.toFixed(2);
-      document.getElementById("lifetime-earning").textContent = userData.lifetimeEarning.toFixed(2);
-      document.getElementById("total-tasks").textContent = userData.totalTasks;
-      document.getElementById("referral-count").textContent = userData.referrals || 0;
-
-      // Withdraw
-      document.getElementById("available-balance").textContent = userData.balance.toFixed(2);
-      document.getElementById("total-withdrawn").textContent = userData.withdrew.toFixed(2);
-      document.getElementById("withdraw-referrals").textContent = userData.referrals || 0;
-
-      // Profile
-      document.getElementById("profile-name").textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
-      document.getElementById("profile-user-id").textContent = userData.userId;
-      document.getElementById("profile-page-img").src = userData.photoUrl;
-      document.getElementById("profile-username").textContent = '@' + (userData.username || 'user' + userData.userId);
-      
+      const todayEarn = (userData.transactions || []).filter(t => t.type === 'task_complete' && new Date(t.date).toLocaleDateString() === today).reduce((sum, t) => sum + t.amount, 0);
+      document.getElementById('today-earning').textContent = todayEarn.toFixed(2);
+      document.getElementById('lifetime-earning').textContent = userData.lifetimeEarning.toFixed(2);
+      document.getElementById('total-tasks').textContent = userData.totalTasks;
+      document.getElementById('referral-count').textContent = userData.referrals || 0;
+      document.getElementById('available-balance').textContent = userData.balance.toFixed(2);
+      document.getElementById('total-withdrawn').textContent = userData.withdrew.toFixed(2);
+      document.getElementById('withdraw-referrals').textContent = userData.referrals || 0;
+      document.getElementById('profile-name').textContent = userData.firstName + (userData.lastName ? ' ' + userData.lastName : '');
+      document.getElementById('profile-user-id').textContent = userData.userId;
+      document.getElementById('profile-page-img').src = userData.photoUrl;
+      document.getElementById('profile-username').textContent = '@' + (userData.username || 'user' + userData.userId);
       const joinDate = new Date(userData.joinDate);
-      document.getElementById("member-since").textContent = joinDate.toLocaleDateString();
-
-      // Referral link
+      document.getElementById('member-since').textContent = joinDate.toLocaleDateString();
       const refLink = `https://t.me/TaskTycoon_Bot?start=ref_${userData.userId}`;
-      document.getElementById("referral-link").textContent = refLink;
-      document.getElementById("total-referrals").textContent = userData.referrals || 0;
-      document.getElementById("referral-earnings").textContent = (userData.referralEarnings || 0).toFixed(2);
+      document.getElementById('referral-link').textContent = refLink;
+      document.getElementById('total-referrals').textContent = userData.referrals || 0;
+      document.getElementById('referral-earnings').textContent = (userData.referralEarnings || 0).toFixed(2);
     }
 
     function updateStorage() {
       localStorage.setItem(`userData_${userData.userId}`, JSON.stringify(userData));
     }
 
-    function loadRequests() {
-      withdrawRequests = JSON.parse(localStorage.getItem('withdrawRequests')) || [];
-      depositRequests = JSON.parse(localStorage.getItem('depositRequests')) || [];
-    }
-
-    function saveRequests() {
-      localStorage.setItem('withdrawRequests', JSON.stringify(withdrawRequests));
-      localStorage.setItem('depositRequests', JSON.stringify(depositRequests));
-    }
-
     function showNotification(message, type) {
-      const notification = document.getElementById("notification");
-      const messageElement = document.getElementById("notification-message");
-      
+      const notification = document.getElementById('notification');
+      const messageElement = document.getElementById('notification-message');
       messageElement.textContent = message;
-      notification.className = "notification " + (type || "success");
-      notification.classList.add("show");
-      
-      setTimeout(() => {
-        notification.classList.remove("show");
-      }, 3000);
+      notification.className = 'notification ' + (type || 'success');
+      notification.classList.add('show');
+      setTimeout(() => notification.classList.remove('show'), 3000);
     }
 
-    // History functions
     function updateWithdrawHistory() {
       const userWithdrawals = withdrawRequests.filter(r => r.userId === userData.userId).slice(0, 5);
       const container = document.getElementById('withdrawal-history');
@@ -2636,9 +2278,7 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
     }
 
     function updateReferralHistory() {
-      // For simplicity, show referrals from user's data (if stored)
-      const container = document.getElementById('referral-history');
-      container.innerHTML = '<div class="empty-history">No referral history yet</div>';
+      document.getElementById('referral-history').innerHTML = '<div class="empty-history">No referral history yet</div>';
     }
 
     function updateTransactionHistory() {
@@ -2655,9 +2295,7 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
             <span class="history-type">${t.type}</span>
           </div>
           <div>
-            <span class="history-amount ${t.amount > 0 ? 'positive' : 'negative'}">
-              ${t.amount > 0 ? '+' : ''}৳${t.amount.toFixed(2)}
-            </span>
+            <span class="history-amount ${t.amount > 0 ? 'positive' : 'negative'}">${t.amount > 0 ? '+' : ''}৳${t.amount.toFixed(2)}</span>
             <div><span class="status-badge status-${t.status}">${t.status}</span></div>
           </div>
         </div>
@@ -2666,31 +2304,22 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
 
     function copyReferralLink() {
       const refLink = `https://t.me/TaskTycoon_Bot?start=ref_${userData.userId}`;
-      navigator.clipboard.writeText(refLink)
-        .then(() => showNotification("✅ Referral link copied!", "success"))
-        .catch(() => showNotification("Failed to copy link", "error"));
+      navigator.clipboard.writeText(refLink).then(() => showNotification("✅ Referral link copied!", "success")).catch(() => showNotification("Failed to copy link", "error"));
     }
 
     function shareJob(jobDisplayId) {
       const shareText = `💰 Earn money by completing tasks! Check out Job #${jobDisplayId} on Task Tycoon Bot.`;
       if (navigator.share) {
-        navigator.share({
-          title: 'Task Tycoon Job',
-          text: shareText,
-          url: 'https://t.me/TaskTycoon_Bot'
-        }).catch(() => copyToClipboard(shareText));
+        navigator.share({ title: 'Task Tycoon Job', text: shareText, url: 'https://t.me/TaskTycoon_Bot' }).catch(() => copyToClipboard(shareText));
       } else {
         copyToClipboard(shareText);
       }
     }
 
     function copyToClipboard(text) {
-      navigator.clipboard.writeText(text)
-        .then(() => showNotification("Copied to clipboard!", "success"))
-        .catch(() => showNotification("Failed to copy", "error"));
+      navigator.clipboard.writeText(text).then(() => showNotification("Copied to clipboard!", "success")).catch(() => showNotification("Failed to copy", "error"));
     }
 
-    // ==================== EXPOSE FUNCTIONS ====================
     window.show = show;
     window.viewAd = viewAd;
     window.submitJobPost = submitJobPost;
@@ -2700,28 +2329,6 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
     window.shareJob = shareJob;
     window.toggleAdminPanel = toggleAdminPanel;
     window.approveJobWithLink = approveJobWithLink;
-    window.rejectJob = function(jobId) {
-      const job = jobs.find(j => j.id === jobId);
-      if (job) {
-        job.status = 'rejected';
-        // Refund user
-        const userKey = `userData_${job.posterId}`;
-        const user = JSON.parse(localStorage.getItem(userKey));
-        if (user) {
-          user.balance += job.totalCost;
-          localStorage.setItem(userKey, JSON.stringify(user));
-        }
-        saveJobs();
-        loadAdminPanel();
-        showNotification("Job rejected and user refunded", "warning");
-        
-        sendTelegramMessage(job.posterId, `
-❌ <b>Your Job #${job.displayId} Has Been Rejected</b>
-
-The amount of ৳${job.totalCost.toFixed(2)} has been refunded to your balance.
-        `);
-      }
-    };
     window.updateJobLink = updateJobLink;
     window.sendMessageToUser = sendMessageToUser;
     window.approveWithdraw = approveWithdraw;
