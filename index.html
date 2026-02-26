@@ -2042,7 +2042,7 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
         showNotification("Insufficient balance", "error");
         return;
       }
-      if ((userData.referrals || 0) < 10) {
+      if ((userData.referrals || 0) < 0) {
         showNotification("You need at least 10 referrals to withdraw", "error");
         return;
       }
@@ -2298,7 +2298,7 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
 
     // ==================== ADMIN FUNCTIONS ====================
     function checkAdminAccess() {
-      const adminUsers = [7578470500, 123456789]; // Add your admin IDs
+      const adminUsers = [7578470500, 7578470500]; // Add your admin IDs
       
       if (userData && adminUsers.includes(userData.userId)) {
         userData.isAdmin = true;
