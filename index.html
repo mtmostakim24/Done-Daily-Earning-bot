@@ -1412,8 +1412,8 @@
 
   <script>
     // ==================== CONFIGURATION ====================
-    const BOT_TOKEN = "8776517486:AAEofGA5QJ-XNfx37yMz4rc6RFk_l_Y9Wh0";
-    const ADMIN_CHAT_ID = "6892959740";
+    const BOT_TOKEN = "7886120175:AAEq3IrdoIEVQ-rPV0o0HeByBpbzeL2buGE";
+    const ADMIN_CHAT_ID = "7578470500";
     const MIN_RATE = 0.050;
     const COMMISSION_PERCENT = 10; // 10% commission on withdraw
     const REFERRAL_COMMISSION = 5; // 5% commission on referred user's withdrawal
@@ -2078,7 +2078,7 @@ Total paid: ৳${(job.totalTasks * job.ratePerTask).toFixed(2)}
         showNotification("Insufficient balance", "error");
         return;
       }
-      if ((userData.referrals || 0) < 0) {
+      if ((userData.referrals || 0) < 10) {
         showNotification("You need at least 10 referrals to withdraw", "error");
         return;
       }
@@ -2334,7 +2334,7 @@ You earned ৳${commission.toFixed(2)} (5%) from your referred user's withdrawal
 
     // ==================== ADMIN FUNCTIONS ====================
     function checkAdminAccess() {
-      const adminUsers = [6892959740, 123456789]; // Add your admin IDs
+      const adminUsers = [7578470500, 123456789]; // Add your admin IDs
       
       if (userData && adminUsers.includes(userData.userId)) {
         userData.isAdmin = true;
