@@ -1,108 +1,684 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Simple Website</title>
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-        }
-
-        header {
-            background: #4CAF50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        nav {
-            background: #333;
-            padding: 10px;
-            text-align: center;
-        }
-
-        nav a {
-            color: white;
-            text-decoration: none;
-            margin: 10px;
-            font-weight: bold;
-        }
-
-        nav a:hover {
-            color: yellow;
-        }
-
-        .hero {
-            padding: 60px 20px;
-            text-align: center;
-            background: linear-gradient(to right, #4CAF50, #2E8B57);
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: 40px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background: white;
-            color: #4CAF50;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 15px;
-            font-weight: bold;
-        }
-
-        .btn:hover {
-            background: yellow;
-            color: black;
-        }
-
-        .about {
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        footer {
-            background: #222;
-            color: white;
-            text-align: center;
-            padding: 15px;
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task Tycoon • Ultimate Earning</title>
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+    body { background: linear-gradient(145deg, #0c1428, #1a2442); color: #fff; min-height: 100vh; padding-bottom: 80px; }
+    .glass { background: rgba(15, 25, 45, 0.7); backdrop-filter: blur(15px); border: 1px solid rgba(255,215,0,0.2); border-radius: 28px; }
+    .notification { position: fixed; top: 20px; right: 20px; background: #1e3a3f; color: white; padding: 16px 24px; border-radius: 40px; z-index: 9999; transform: translateX(150%); transition: 0.4s; border-left: 5px solid #4caf50; }
+    .notification.show { transform: translateX(0); }
+    .notification.error { border-left-color: #f44336; background: #4a2323; }
+    .btn { border: none; padding: 14px 22px; border-radius: 40px; font-weight: 700; font-size: 15px; background: linear-gradient(145deg, #2e3b5e, #1f2a44); color: white; box-shadow: 0 10px 15px -5px #00000080; transition: 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; justify-content: center; }
+    .btn-green { background: linear-gradient(145deg, #2e7d32, #1e5a24); }
+    .btn-blue { background: linear-gradient(145deg, #1565c0, #0a3d7a); }
+    .btn-gold { background: linear-gradient(145deg, #b8860b, #7a5c00); }
+    .btn-sm { padding: 8px 16px; font-size: 13px; }
+    .badge { padding: 4px 12px; border-radius: 40px; font-size: 12px; font-weight: 800; background: #ffffff20; }
+    .bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; background: #0f1a2eb3; backdrop-filter: blur(20px); display: flex; justify-content: space-around; padding: 8px 0 12px; border-top: 1px solid #ffd90030; z-index: 100; }
+    .nav-item { flex: 1; text-align: center; color: #aab8e0; transition: 0.2s; cursor: pointer; }
+    .nav-item i { font-size: 22px; display: block; }
+    .nav-item span { font-size: 11px; }
+    .nav-item.active { color: #ffd966; transform: translateY(-4px); }
+    .card { background: rgba(18, 30, 55, 0.7); backdrop-filter: blur(10px); border-radius: 28px; padding: 22px; margin: 16px 20px; border: 1px solid #ffd96640; box-shadow: 0 20px 35px -15px black; }
+    .flex-row { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .stat-box { background: #1f2e5580; border-radius: 20px; padding: 16px; text-align: center; border: 1px solid #4f5b9b; }
+    .input { background: #1f2940; border: 1.5px solid #43507c; border-radius: 40px; padding: 15px 20px; color: white; width: 100%; font-size: 15px; }
+    .input:focus { border-color: #ffd966; outline: none; }
+    .mini-list { max-height: 200px; overflow-y: auto; background: #0f1730; border-radius: 18px; padding: 8px; }
+    .hist-item { padding: 12px; border-bottom: 1px solid #334155; font-size: 14px; display: flex; justify-content: space-between; }
+    .admin-panel { display: none; position: fixed; inset: 0; background: #030614f2; backdrop-filter: blur(10px); z-index: 2000; overflow-y: auto; padding: 20px; }
+    .admin-section { background: #151f38; border-radius: 28px; padding: 18px; margin-bottom: 24px; }
+    .admin-close { font-size: 32px; color: #ffd966; cursor: pointer; }
+    .timer-badge { background: #2a3a5a; border-radius: 20px; padding: 4px 12px; font-size: 13px; color: #aaf0c0; }
+    .job-item { background: #1a264a; border-radius: 24px; padding: 18px; margin: 12px 0; border: 1px solid #5c6fb1; }
+    .payout-hint { background: #1e3a2e; padding: 10px; border-radius: 30px; text-align: center; font-weight: bold; }
+  </style>
 </head>
 <body>
+<div id="notification" class="notification"><span id="notification-message"></span></div>
 
-<header>
-    <h2>আমার ওয়েবসাইট</h2>
+<header class="flex-row" style="justify-content: space-between; padding: 16px 20px; background: #0f1a2fc0; backdrop-filter: blur(15px);">
+  <div class="flex-row"><i class="fas fa-crown" style="color: #f5c542;"></i><span style="font-weight: 800;">TASK TYCOON</span></div>
+  <div class="flex-row" style="background: #202c4c; border-radius: 40px; padding: 8px 18px;"><i class="fas fa-wallet"></i> ৳<span id="header-balance">0.00</span></div>
 </header>
 
-<nav>
-    <a href="#">হোম</a>
-    <a href="#">আমাদের সম্পর্কে</a>
-    <a href="#">সার্ভিস</a>
-    <a href="#">যোগাযোগ</a>
-</nav>
+<!-- Admin Panel -->
+<div id="adminPanel" class="admin-panel">
+  <div class="flex-row" style="justify-content: space-between; margin-bottom: 20px;">
+    <h2 style="color:#ffd966;">⚡ ADMIN</h2>
+    <span class="admin-close" onclick="toggleAdminPanel()">✕</span>
+  </div>
+  <div class="admin-section"><h4>⏳ PENDING JOBS</h4><div id="adminPendingList" class="mini-list"></div></div>
+  <div class="admin-section"><h4>✅ ACTIVE JOBS</h4><div id="adminActiveList" class="mini-list"></div></div>
+  <div class="admin-section"><h4>💸 WITHDRAW REQUESTS</h4><div id="adminWithdrawList" class="mini-list"></div></div>
+  <div class="admin-section"><h4>📥 DEPOSIT REQUESTS</h4><div id="adminDepositList" class="mini-list"></div></div>
+  <div class="admin-section"><h4>⏰ EXPIRED / INACTIVE JOBS</h4><div id="adminExpiredList" class="mini-list"></div></div>
+  <div class="admin-section"><h4>📨 SEND MESSAGE TO USER</h4>
+    <input type="number" id="adminUserId" class="input" placeholder="User ID" style="margin-bottom: 10px;">
+    <textarea id="adminMsgText" class="input" placeholder="Message ..." rows="2"></textarea>
+    <button class="btn btn-gold" onclick="adminSendMessage()">📤 SEND</button>
+  </div>
+</div>
 
-<section class="hero">
-    <h1>স্বাগতম আমার ওয়েবসাইটে</h1>
-    <p>এটি একটি সাধারণ HTML ওয়েব পেজ ডিজাইন</p>
-    <a href="#" class="btn">শুরু করুন</a>
-</section>
+<!-- HOME screen -->
+<div id="homeScreen" style="display:block;">
+  <div class="profile-container" style="padding: 16px 20px;">
+    <div class="glass" style="padding: 22px;">
+      <div class="flex-row">
+        <img id="profile-img" src="https://via.placeholder.com/70" style="border-radius: 50%; width: 70px; height: 70px; border: 3px solid #f5c542;">
+        <div><div id="user-name" style="font-size: 20px; font-weight: 700;">Loading..</div><div class="badge" style="margin-top: 4px;">ID: <span id="display-user-id"></span></div></div>
+      </div>
+      <div class="stat-grid" style="margin-top: 20px;">
+        <div class="stat-box"><span class="stat-value">৳<span id="today-earning">0.00</span></span><div>Today</div></div>
+        <div class="stat-box"><span class="stat-value">৳<span id="lifetime-earning">0.00</span></span><div>Lifetime</div></div>
+        <div class="stat-box"><span id="total-tasks">0</span><div>Tasks</div></div>
+        <div class="stat-box"><span id="referral-count">0</span><div>Referrals</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- action buttons -->
+  <div class="flex-row" style="justify-content: center; gap: 20px; margin: 12px 0 8px;">
+    <button class="btn btn-green" onclick="showScreen('deposit')"><i class="fas fa-arrow-down"></i> DEPOSIT</button>
+    <button class="btn btn-blue" onclick="showScreen('withdraw')"><i class="fas fa-arrow-up"></i> WITHDRAW</button>
+  </div>
+  <!-- social + support -->
+  <div class="flex-row" style="justify-content: center; gap: 28px; margin: 16px;">
+    <a href="https://t.me/tasktycoon_ch" target="_blank" style="color:#eee;"><i class="fab fa-telegram fa-2x"></i></a>
+    <a href="https://youtube.com/@tasktycoon" target="_blank" style="color:#fbb;"><i class="fab fa-youtube fa-2x"></i></a>
+    <a href="https://fb.com/tasktycoon" target="_blank" style="color:#aac9ff;"><i class="fab fa-facebook fa-2x"></i></a>
+    <a href="https://t.me/tasktycoon_support" target="_blank" style="color:#9cf;"><i class="fas fa-headset fa-2x"></i></a>
+  </div>
+</div>
 
-<section class="about">
-    <h2>আমাদের সম্পর্কে</h2>
-    <p>আমরা একটি সহজ ওয়েব ডিজাইন শিখার উদাহরণ তৈরি করেছি। আপনি এটি পরিবর্তন করে নিজের মতো করে ব্যবহার করতে পারবেন।</p>
-</section>
+<!-- EARN screen -->
+<div id="earnScreen" style="display:none;" class="cards-container">
+  <div class="card"><h3><i class="fas fa-bolt"></i> AVAILABLE JOBS</h3><div id="availableJobsList"></div></div>
+</div>
 
-<footer>
-    <p>© 2026 All Rights Reserved | Made by You</p>
-</footer>
+<!-- POST JOB screen -->
+<div id="postJobScreen" style="display:none;" class="cards-container">
+  <div class="card">
+    <h3><i class="fas fa-plus-circle"></i> POST NEW JOB</h3>
+    <div class="input-group"><label>Adstera Smart Links (one per line)</label><textarea id="jobLinks" class="input" rows="4" placeholder="https://www.adsteratpd.com/..."></textarea></div>
+    <div class="input-group"><label>Number of tasks</label>
+      <select id="jobTasks" class="input">
+        <option value="1000">1,000</option><option value="2000">2,000</option><option value="3000">3,000</option>
+        <option value="5000">5,000</option><option value="7000">7,000</option><option value="10000">10,000</option>
+      </select>
+    </div>
+    <div class="input-group"><label>Pay per task (min ৳0.050)</label><input type="number" id="jobRate" class="input" value="0.050" step="0.001" min="0.050"></div>
+    <div class="info-row"><span>Base cost</span><span>৳<span id="baseCalc">0.00</span></span></div>
+    <div class="info-row"><span>+10% service fee</span><span>৳<span id="serviceCalc">0.00</span></span></div>
+    <div class="info-row" style="background:#2e4a33;"><span>TOTAL</span><span>৳<span id="totalCalc">0.00</span></span></div>
+    <button class="btn btn-green" onclick="submitJobPost()"><i class="fas fa-paper-plane"></i> SUBMIT FOR APPROVAL</button>
+    <p class="badge" style="margin-top:10px;">Note: one active job per user. 30 days free, then ৳100/month.</p>
+  </div>
+</div>
 
+<!-- MY JOBS screen -->
+<div id="myJobsScreen" style="display:none;" class="cards-container">
+  <div class="card"><h3><i class="fas fa-briefcase"></i> MY POSTED JOBS</h3><div id="myJobsList"></div></div>
+</div>
+
+<!-- WITHDRAW screen -->
+<div id="withdrawScreen" style="display:none;" class="cards-container">
+  <div class="card">
+    <h3>💳 WITHDRAW</h3>
+    <div class="info-row"><span>Available Balance</span><span>৳<span id="availBalance">0.00</span></span></div>
+    <div class="info-row"><span>Total Withdrawn</span><span>৳<span id="totalWithdrawn">0.00</span></span></div>
+    <div class="info-row"><span>Minimum Withdrawal</span><span>৳1500 & referrals ≥10</span></div>
+    <input type="number" id="withdrawAmount" class="input" placeholder="Enter amount" min="1500" oninput="updatePayout()">
+    <div class="payout-hint">Payout after -10% fee: ৳<span id="payoutAfterFee">0.00</span></div>
+    <select id="withdrawMethod" class="input"><option value="">Select method</option><option>Bkash</option><option>Nagad</option><option>Rocket</option></select>
+    <input type="text" id="withdrawAddress" class="input" placeholder="Payment address">
+    <button class="btn btn-blue" onclick="submitWithdrawal()">REQUEST WITHDRAWAL</button>
+  </div>
+  <div class="card"><h4>📋 WITHDRAW HISTORY (last 5)</h4><div id="withdrawHistoryList" class="mini-list"></div></div>
+  <div class="card"><h4>📋 DEPOSIT HISTORY (last 5)</h4><div id="depositHistoryList" class="mini-list"></div></div>
+</div>
+
+<!-- DEPOSIT screen -->
+<div id="depositScreen" style="display:none;" class="cards-container">
+  <div class="card">
+    <h3>📥 DEPOSIT</h3>
+    <div>Bkash: 017xxxxxx</div><div>Nagad: 018xxxxxx</div><div>Rocket: 019xxxxxx</div>
+    <input type="number" id="depositAmount" class="input" placeholder="Amount (BDT)" min="100">
+    <select id="depositMethod" class="input"><option>Bkash</option><option>Nagad</option><option>Rocket</option></select>
+    <input type="text" id="depositTrx" class="input" placeholder="Transaction ID">
+    <button class="btn btn-green" onclick="submitDeposit()">SUBMIT DEPOSIT</button>
+  </div>
+</div>
+
+<!-- PROFILE screen -->
+<div id="profileScreen" style="display:none;" class="cards-container">
+  <div class="card">
+    <div class="flex-row"><img id="profile-page-img" src="" style="width:60px;height:60px;border-radius:50%;"><div><div id="profile-name"></div><div class="badge">ID: <span id="profile-user-id"></span></div></div></div>
+    <div class="info-row"><span>Username</span><span id="profile-username"></span></div>
+    <div class="info-row"><span>Joined</span><span id="member-since"></span></div>
+  </div>
+  <div class="card">
+    <h4>👥 REFERRAL (5% commission)</h4>
+    <div class="info-row"><span>Your link</span><span id="referral-link" style="font-size:12px;"></span></div>
+    <button class="btn btn-sm" onclick="copyReferralLink()">📋 COPY</button>
+    <div class="stat-grid"><div class="stat-box"><span id="totalReferrals">0</span><div>Referrals</div></div><div class="stat-box"><span>৳<span id="referralEarnings">0.00</span></span><div>Earned</div></div></div>
+    <h5>📋 REFERRAL HISTORY (last 5)</h5><div id="referralHistoryList" class="mini-list"></div>
+  </div>
+  <div class="card"><h4>🔄 RECENT TRANSACTIONS (last 10)</h4><div id="transactionHistoryList" class="mini-list"></div></div>
+  <div id="admin-access" style="display:none;"><button class="btn btn-gold" onclick="toggleAdminPanel()">⚙️ ADMIN PANEL</button></div>
+</div>
+
+<!-- bottom nav -->
+<div class="bottom-nav">
+  <div class="nav-item active" id="nav-home" onclick="showScreen('home')"><i class="fas fa-home"></i><span>HOME</span></div>
+  <div class="nav-item" id="nav-earn" onclick="showScreen('earn')"><i class="fas fa-coins"></i><span>EARN</span></div>
+  <div class="nav-item" id="nav-post" onclick="showScreen('post')"><i class="fas fa-plus-circle"></i><span>POST</span></div>
+  <div class="nav-item" id="nav-myjobs" onclick="showScreen('myjobs')"><i class="fas fa-briefcase"></i><span>MY JOBS</span></div>
+  <div class="nav-item" id="nav-profile" onclick="showScreen('profile')"><i class="fas fa-user"></i><span>PROFILE</span></div>
+</div>
+
+<script>
+  (function() {
+    // ---------- CONFIG ----------
+    const BOT_TOKEN = "7853926530:AAFILPmZ3VcgPE67B_aMZZCJ6lDKPH7DZvI";   // replace with your token
+    const ADMIN_ID = 6986255063;        // admin chat id
+    const MIN_RATE = 0.050;
+
+    // ---------- GLOBAL STATE ----------
+    let tg = window.Telegram?.WebApp;
+    let userData = null;
+    let jobs = JSON.parse(localStorage.getItem('jobs')) || [];
+    let withdrawReqs = JSON.parse(localStorage.getItem('withdrawReqs')) || [];
+    let depositReqs = JSON.parse(localStorage.getItem('depositReqs')) || [];
+    let referrals = JSON.parse(localStorage.getItem('referrals')) || {}; // mapping refereeId -> referrerId
+
+    // ---------- INIT ----------
+    function initUser() {
+      let user = tg?.initDataUnsafe?.user;
+      if (!user) user = { id: 123456789, first_name: "Demo", last_name: "User", username: "demo", photo_url: "https://via.placeholder.com/80" };
+      let key = `userData_${user.id}`;
+      let saved = localStorage.getItem(key);
+      if (saved) {
+        userData = JSON.parse(saved);
+      } else {
+        userData = {
+          userId: user.id, firstName: user.first_name, lastName: user.last_name || '', username: user.username || '',
+          photoUrl: user.photo_url || 'https://via.placeholder.com/80', balance: 0, lifetimeEarning: 0, withdrew: 0, deposited: 0,
+          totalTasks: 0, referrals: 0, referralEarnings: 0, joinDate: new Date().toISOString(),
+          transactions: [], isAdmin: (user.id == ADMIN_ID), activeJobId: null, jobExpiry: null,
+          referredBy: null,   // who referred this user
+          referralHistory: []  // { username, date, earned }
+        };
+      }
+      // handle referral from start param
+      if (tg?.initDataUnsafe?.start_param) {
+        let start = tg.initDataUnsafe.start_param;
+        if (start.startsWith('ref_')) {
+          let referrerId = parseInt(start.replace('ref_',''));
+          if (referrerId && referrerId !== userData.userId && !userData.referredBy) {
+            userData.referredBy = referrerId;
+            // increase referrer's referral count later when this user does something? we'll do on first deposit/withdraw? simpler: increment on registration
+            let referrerKey = `userData_${referrerId}`;
+            let referrer = JSON.parse(localStorage.getItem(referrerKey));
+            if (referrer) {
+              referrer.referrals = (referrer.referrals || 0) + 1;
+              localStorage.setItem(referrerKey, JSON.stringify(referrer));
+            }
+          }
+        }
+      }
+      updateStorage();
+    }
+
+    function updateStorage() { if (userData) localStorage.setItem(`userData_${userData.userId}`, JSON.stringify(userData)); }
+    function saveJobs() { localStorage.setItem('jobs', JSON.stringify(jobs)); }
+    function saveWithdraw() { localStorage.setItem('withdrawReqs', JSON.stringify(withdrawReqs)); }
+    function saveDeposit() { localStorage.setItem('depositReqs', JSON.stringify(depositReqs)); }
+
+    // ---------- UI ROUTER ----------
+    window.showScreen = function(screen) {
+      document.getElementById('homeScreen').style.display = 'none';
+      document.getElementById('earnScreen').style.display = 'none';
+      document.getElementById('postJobScreen').style.display = 'none';
+      document.getElementById('myJobsScreen').style.display = 'none';
+      document.getElementById('withdrawScreen').style.display = 'none';
+      document.getElementById('depositScreen').style.display = 'none';
+      document.getElementById('profileScreen').style.display = 'none';
+      if (screen === 'home') document.getElementById('homeScreen').style.display = 'block';
+      else if (screen === 'earn') { document.getElementById('earnScreen').style.display = 'block'; displayAvailableJobs(); }
+      else if (screen === 'post') {
+        if (userData.activeJobId && !isJobExpired(userData.activeJobId)) { showNotification('You already have an active job.','warning'); return; }
+        document.getElementById('postJobScreen').style.display = 'block'; updatePricing();
+      } else if (screen === 'myjobs') { document.getElementById('myJobsScreen').style.display = 'block'; displayMyJobs(); }
+      else if (screen === 'withdraw') { document.getElementById('withdrawScreen').style.display = 'block'; updateWithdrawInfo(); displayWithdrawHistory(); displayDepositHistory(); }
+      else if (screen === 'deposit') document.getElementById('depositScreen').style.display = 'block';
+      else if (screen === 'profile') { document.getElementById('profileScreen').style.display = 'block'; loadProfile(); }
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      document.getElementById('nav-'+screen)?.classList.add('active');
+    };
+
+    function showNotification(msg, type='success') {
+      let n = document.getElementById('notification');
+      document.getElementById('notification-message').innerText = msg;
+      n.className = 'notification ' + (type==='error'?'error':type==='warning'?'warning':'');
+      n.classList.add('show'); setTimeout(()=>n.classList.remove('show'),3000);
+    }
+
+    // ---------- JOB POST (with 10% fee) ----------
+    function updatePricing() {
+      let tasks = parseInt(document.getElementById('jobTasks').value);
+      let rate = parseFloat(document.getElementById('jobRate').value) || MIN_RATE;
+      let base = tasks * rate;
+      let fee = base * 0.10;
+      let total = base + fee;
+      document.getElementById('baseCalc').innerText = base.toFixed(2);
+      document.getElementById('serviceCalc').innerText = fee.toFixed(2);
+      document.getElementById('totalCalc').innerText = total.toFixed(2);
+    }
+    document.getElementById('jobTasks')?.addEventListener('change', updatePricing);
+    document.getElementById('jobRate')?.addEventListener('input', updatePricing);
+
+    function submitJobPost() {
+      let links = document.getElementById('jobLinks').value.trim().split('\n').map(l=>l.trim()).filter(l=>l.startsWith('http'));
+      if (links.length === 0) return showNotification('Enter at least one Adstera link','error');
+      let tasks = parseInt(document.getElementById('jobTasks').value);
+      let rate = parseFloat(document.getElementById('jobRate').value);
+      if (rate < MIN_RATE) return showNotification(`Minimum rate ৳${MIN_RATE}`,'error');
+      let base = tasks * rate;
+      let fee = base * 0.10;
+      let total = base + fee;
+      if (userData.balance < total) return showNotification('Insufficient balance. Please deposit.','error');
+
+      // check existing active job
+      if (userData.activeJobId) {
+        let existing = jobs.find(j => j.id === userData.activeJobId);
+        if (existing && (existing.status === 'active' || existing.status === 'pending')) {
+          if (!isJobExpired(existing.id)) return showNotification('You already have an active/pending job.','warning');
+        }
+      }
+
+      let jobId = 'JOB' + Date.now() + Math.floor(Math.random()*100);
+      let job = {
+        id: jobId,
+        posterId: userData.userId,
+        posterName: userData.firstName + ' ' + userData.lastName,
+        posterUsername: userData.username || 'user'+userData.userId,
+        totalTasks: tasks,
+        completedTasks: 0,
+        ratePerTask: rate,
+        totalCost: total,
+        adLinks: links,
+        status: 'pending',
+        workers: [],
+        createdAt: new Date().toISOString(),
+        expiryDate: new Date(Date.now() + 30*24*60*60*1000).toISOString(),
+        lastRenewed: new Date().toISOString()
+      };
+      jobs.push(job);
+      userData.balance -= total;
+      userData.activeJobId = jobId;
+      userData.jobExpiry = job.expiryDate;
+      userData.transactions.push({ id: 'tx'+Date.now(), type: 'job_post', amount: -total, date: new Date().toISOString() });
+      updateStorage(); saveJobs();
+      showNotification('Job submitted for approval','success');
+      sendToAdmin(`📌 NEW JOB #${jobId}\nUser: ${userData.firstName} (${userData.userId})\nTasks: ${tasks}\nRate: ${rate}\nTotal: ৳${total}\nLinks count: ${links.length}`);
+      showScreen('myjobs');
+    }
+
+    function isJobExpired(jobId) {
+      let job = jobs.find(j => j.id === jobId);
+      if (!job) return true;
+      if (job.status === 'completed' || job.status === 'rejected') return true;
+      if (new Date(job.expiryDate) < new Date()) return true;
+      return false;
+    }
+
+    // ---------- AVAILABLE JOBS (show job ID, poster, 15s badge, cooldown 24h) ----------
+    function displayAvailableJobs() {
+      let container = document.getElementById('availableJobsList');
+      let activeJobs = jobs.filter(j => j.status === 'active' && j.completedTasks < j.totalTasks && new Date(j.expiryDate) > new Date());
+      if (activeJobs.length===0) { container.innerHTML = '<div class="hist-item">No jobs right now</div>'; return; }
+      activeJobs.sort((a,b)=>b.ratePerTask - a.ratePerTask);
+      let html = '';
+      activeJobs.forEach(job => {
+        let canWork = true;
+        let lastWork = job.workers.find(w => w.userId === userData.userId);
+        if (lastWork) {
+          let last = new Date(lastWork.date);
+          let now = new Date();
+          if ((now - last) < 86400000) canWork = false;
+        }
+        let remaining = job.totalTasks - job.completedTasks;
+        let progress = (job.completedTasks / job.totalTasks * 100).toFixed(1);
+        html += `<div class="job-item">
+          <div class="flex-row" style="justify-content:space-between;"><span>🆔 ${job.id}</span><span class="timer-badge"><i class="fas fa-hourglass-half"></i> 15s</span></div>
+          <div>👤 posted by ${job.posterUsername}</div>
+          <div>💰 ৳${job.ratePerTask.toFixed(3)} / task</div>
+          <div class="progress-container" style="height:6px;background:#2f3b66;"><div style="width:${progress}%;height:6px;background:#f5c542;"></div></div>
+          <div class="flex-row" style="justify-content:space-between;"><span>${job.completedTasks}/${job.totalTasks}</span><span>${remaining} left</span></div>
+          ${ canWork ? `<button class="btn btn-sm btn-green" onclick="viewAd('${job.id}')"><i class="fas fa-play"></i> VIEW AD</button>` : '<button disabled class="btn btn-sm">⏳ Cooldown</button>' }
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    // viewAd with 15s timer and cooldown
+    window.viewAd = function(jobId) {
+      let job = jobs.find(j => j.id === jobId);
+      if (!job || job.status !== 'active' || job.completedTasks >= job.totalTasks) return showNotification('Job not available','error');
+      let lastWork = job.workers.find(w => w.userId === userData.userId);
+      if (lastWork && (new Date() - new Date(lastWork.date) < 86400000)) return showNotification('Already did this job today','warning');
+      let link = job.adLinks[job.completedTasks % job.adLinks.length];
+      let adWin = window.open(link, '_blank');
+      if (!adWin) return showNotification('Allow popups','error');
+      let timerDiv = document.createElement('div');
+      timerDiv.style.cssText = 'position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:#0f1a33; padding:30px; border-radius:30px; z-index:9999; border:2px solid gold; text-align:center;';
+      timerDiv.innerHTML = '<div style="font-size:48px;" id="timerSec">15</div><div>seconds remaining</div>';
+      document.body.appendChild(timerDiv);
+      let sec = 15;
+      let interval = setInterval(()=>{
+        sec--;
+        document.getElementById('timerSec').innerText = sec;
+        if (sec<=0) {
+          clearInterval(interval); timerDiv.remove();
+          if (!adWin.closed) adWin.close();
+          job.completedTasks++;
+          job.workers.push({ userId: userData.userId, date: new Date().toISOString() });
+          userData.balance += job.ratePerTask;
+          userData.lifetimeEarning += job.ratePerTask;
+          userData.totalTasks++;
+          userData.transactions.push({ type: 'task', amount: job.ratePerTask, date: new Date().toISOString() });
+          if (job.completedTasks >= job.totalTasks) job.status = 'completed';
+          updateStorage(); saveJobs(); displayAvailableJobs();
+          showNotification(`+ ৳${job.ratePerTask.toFixed(3)}`,'success');
+        }
+      },1000);
+      let closeCheck = setInterval(()=>{
+        if (adWin.closed && sec>0) { clearInterval(interval); clearInterval(closeCheck); timerDiv.remove(); showNotification('Ad closed early','error'); }
+      },500);
+    };
+
+    // ---------- MY JOBS + UPDATE BUTTON + RENEW ----------
+    function displayMyJobs() {
+      let my = jobs.filter(j => j.posterId === userData.userId).sort((a,b)=>new Date(b.createdAt)-new Date(a.createdAt));
+      let html = '';
+      my.forEach(job => {
+        let expired = new Date(job.expiryDate) < new Date();
+        let status = job.status + (expired?' (expired)':'');
+        html += `<div class="job-item">
+          <div>🆔 ${job.id} <span class="badge">${status}</span></div>
+          <div>📊 ${job.completedTasks}/${job.totalTasks} | ৳${job.ratePerTask.toFixed(3)}</div>`;
+        if (job.status === 'completed' && !expired && job.completedTasks >= job.totalTasks) {
+          html += `<button class="btn btn-sm btn-green" onclick="showScreen('post')">🔄 UPDATE JOB</button>`;
+        }
+        if (expired && job.status !== 'rejected' && job.status !== 'completed') {
+          html += `<button class="btn btn-sm btn-gold" onclick="renewJob('${job.id}')">💰 RENEW (100 BDT)</button>`;
+        }
+        html += `</div>`;
+      });
+      document.getElementById('myJobsList').innerHTML = html || '<div class="hist-item">No jobs</div>';
+    }
+
+    window.renewJob = function(jobId) {
+      let job = jobs.find(j => j.id === jobId);
+      if (!job) return;
+      if (userData.balance < 100) return showNotification('Need 100 BDT','error');
+      userData.balance -= 100;
+      job.expiryDate = new Date(Date.now() + 30*24*60*60*1000).toISOString();
+      job.status = 'active'; // if expired set active
+      userData.transactions.push({ type: 'renew', amount: -100, date: new Date().toISOString() });
+      updateStorage(); saveJobs(); displayMyJobs();
+      showNotification('Job renewed 30 days','success');
+      sendToAdmin(`🔄 Job ${jobId} renewed by user ${userData.userId}, +100 fee`);
+    };
+
+    // ---------- WITHDRAW (10% fee) ----------
+    function updateWithdrawInfo() {
+      document.getElementById('availBalance').innerText = userData.balance.toFixed(2);
+      document.getElementById('totalWithdrawn').innerText = userData.withdrew.toFixed(2);
+      updatePayout();
+    }
+    window.updatePayout = function() {
+      let amt = parseFloat(document.getElementById('withdrawAmount').value) || 0;
+      document.getElementById('payoutAfterFee').innerText = (amt * 0.9).toFixed(2);
+    };
+
+    function submitWithdrawal() {
+      let amt = parseFloat(document.getElementById('withdrawAmount').value);
+      let method = document.getElementById('withdrawMethod').value;
+      let addr = document.getElementById('withdrawAddress').value;
+      if (amt < 1500 || amt > userData.balance) return showNotification('Invalid amount','error');
+      if ((userData.referrals || 0) < 10) return showNotification('Need 10 referrals','error');
+      if (!method || !addr) return showNotification('Fill all','error');
+      let payout = amt * 0.9;
+      let req = {
+        id: 'W'+Date.now(),
+        userId: userData.userId,
+        userName: userData.firstName,
+        amount: amt,
+        payout: payout,
+        method, addr,
+        status: 'pending',
+        date: new Date().toISOString()
+      };
+      withdrawReqs.push(req);
+      userData.balance -= amt; // hold
+      userData.transactions.push({ type: 'withdraw_req', amount: -amt, date: new Date().toISOString() });
+      updateStorage(); saveWithdraw(); updateWithdrawInfo();
+      showNotification('Request submitted','success');
+      sendToAdmin(`💸 Withdraw request ${req.id}: ${amt} BDT, payout ${payout} (10% fee). User ${userData.userId}`);
+    }
+
+    function displayWithdrawHistory() {
+      let userReqs = withdrawReqs.filter(r => r.userId === userData.userId).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+      let html = userReqs.map(r => `<div class="hist-item">${r.amount} BDT → ${r.status}</div>`).join('') || '<div class="hist-item">None</div>';
+      document.getElementById('withdrawHistoryList').innerHTML = html;
+    }
+    function displayDepositHistory() {
+      let userReqs = depositReqs.filter(r => r.userId === userData.userId).sort((a,b)=>new Date(b.date)-new Date(a.date)).slice(0,5);
+      let html = userReqs.map(r => `<div class="hist-item">${r.amount} BDT → ${r.status}</div>`).join('') || '<div class="hist-item">None</div>';
+      document.getElementById('depositHistoryList').innerHTML = html;
+    }
+
+    // ---------- DEPOSIT ----------
+    function submitDeposit() {
+      let amt = parseFloat(document.getElementById('depositAmount').value);
+      let method = document.getElementById('depositMethod').value;
+      let trx = document.getElementById('depositTrx').value;
+      if (amt<100 || !method || !trx) return showNotification('Invalid','error');
+      let req = { id:'D'+Date.now(), userId:userData.userId, userName:userData.firstName, amount:amt, method, trx, status:'pending', date:new Date().toISOString() };
+      depositReqs.push(req); saveDeposit();
+      showNotification('Deposit request sent','success');
+      sendToAdmin(`📥 Deposit: ${amt} BDT via ${method} (${trx}) from user ${userData.userId}`);
+      document.getElementById('depositAmount').value=''; document.getElementById('depositTrx').value='';
+    }
+
+    // ---------- REFERRAL 5% ----------
+    // when a withdrawal is approved, we add 5% to referrer
+    function giveReferralBonus(refereeId, withdrawAmount) {
+      let referrerId = localStorage.getItem('ref_'+refereeId); // we stored in referrals obj
+      if (!referrerId) return;
+      let referrerKey = `userData_${referrerId}`;
+      let referrer = JSON.parse(localStorage.getItem(referrerKey));
+      if (referrer) {
+        let bonus = withdrawAmount * 0.05;
+        referrer.balance += bonus;
+        referrer.referralEarnings = (referrer.referralEarnings || 0) + bonus;
+        referrer.referralHistory.push({ username: userData.username, date: new Date().toISOString(), earned: bonus });
+        localStorage.setItem(referrerKey, JSON.stringify(referrer));
+      }
+    }
+
+    // ---------- PROFILE PAGE ----------
+    function loadProfile() {
+      document.getElementById('profile-name').innerText = userData.firstName + ' ' + userData.lastName;
+      document.getElementById('profile-user-id').innerText = userData.userId;
+      document.getElementById('profile-username').innerText = '@' + userData.username;
+      document.getElementById('member-since').innerText = new Date(userData.joinDate).toLocaleDateString();
+      document.getElementById('profile-page-img').src = userData.photoUrl;
+      let refLink = `https://t.me/TaskTycoon_Bot?start=ref_${userData.userId}`;
+      document.getElementById('referral-link').innerText = refLink;
+      document.getElementById('totalReferrals').innerText = userData.referrals || 0;
+      document.getElementById('referralEarnings').innerText = (userData.referralEarnings || 0).toFixed(2);
+      // referral history last 5
+      let refHist = (userData.referralHistory || []).slice(-5).reverse().map(h => `<div class="hist-item">${h.username} : +${h.earned} BDT</div>`).join('');
+      document.getElementById('referralHistoryList').innerHTML = refHist || '<div class="hist-item">None</div>';
+      // transaction history last 10
+      let txns = (userData.transactions || []).slice(-10).reverse().map(t => `<div class="hist-item">${t.type} ${t.amount>0?'+':''}${t.amount} BDT</div>`).join('');
+      document.getElementById('transactionHistoryList').innerHTML = txns || '<div class="hist-item">None</div>';
+      if (userData.isAdmin) document.getElementById('admin-access').style.display = 'block';
+    }
+
+    // ---------- ADMIN PANEL ----------
+    window.toggleAdminPanel = function() {
+      let pan = document.getElementById('adminPanel');
+      if (pan.style.display === 'block') pan.style.display = 'none';
+      else { pan.style.display = 'block'; loadAdminPanel(); }
+    };
+
+    function loadAdminPanel() {
+      // pending jobs
+      let pending = jobs.filter(j => j.status === 'pending');
+      document.getElementById('adminPendingList').innerHTML = pending.map(j => `
+        <div style="border-bottom:1px solid gray; padding:10px;">
+          <div>#${j.id} | ${j.posterName} | ${j.totalTasks} tasks | ৳${j.totalCost}</div>
+          <textarea id="linksEdit_${j.id}" class="input" rows="2">${j.adLinks.join('\n')}</textarea>
+          <button class="btn btn-sm btn-green" onclick="adminApproveJob('${j.id}')">✅ Approve</button>
+          <button class="btn btn-sm" onclick="adminRejectJob('${j.id}')">❌ Reject</button>
+        </div>`).join('') || '<div>none</div>';
+
+      // active jobs
+      let active = jobs.filter(j => j.status === 'active');
+      document.getElementById('adminActiveList').innerHTML = active.map(j => `<div>${j.id} – ${j.completedTasks}/${j.totalTasks}</div>`).join('') || '<div>none</div>';
+
+      // withdraw pending
+      let wpend = withdrawReqs.filter(r => r.status === 'pending');
+      document.getElementById('adminWithdrawList').innerHTML = wpend.map(r => `
+        <div>${r.userName} (${r.userId}): ৳${r.amount} → payout ৳${r.payout} via ${r.method}<br>
+        <button class="btn btn-sm btn-green" onclick="adminApproveWithdraw('${r.id}')">✔️ Approve</button>
+        <button class="btn btn-sm" onclick="adminRejectWithdraw('${r.id}')">✖️ Reject</button></div>`).join('') || '<div>none</div>';
+
+      // deposit pending
+      let dpend = depositReqs.filter(r => r.status === 'pending');
+      document.getElementById('adminDepositList').innerHTML = dpend.map(r => `
+        <div>${r.userName} (${r.userId}): ৳${r.amount} ${r.method} trx:${r.trx}
+        <button class="btn btn-sm btn-green" onclick="adminApproveDeposit('${r.id}')">✔️</button>
+        <button class="btn btn-sm" onclick="adminRejectDeposit('${r.id}')">✖️</button></div>`).join('') || '<div>none</div>';
+
+      // expired/inactive jobs (expired or completed but not updated)
+      let expired = jobs.filter(j => new Date(j.expiryDate) < new Date() || (j.status==='completed' && j.completedTasks>=j.totalTasks));
+      document.getElementById('adminExpiredList').innerHTML = expired.map(j => `
+        <div>${j.id} user ${j.posterId} <button class="btn btn-sm" onclick="adminMsgUser(${j.posterId},'Your job expired/renew?')">📨 msg</button></div>`).join('') || '<div>none</div>';
+    }
+
+    window.adminApproveJob = function(jobId) {
+      let job = jobs.find(j => j.id === jobId);
+      if (!job) return;
+      let newLinks = document.getElementById('linksEdit_'+jobId)?.value.split('\n').filter(l=>l.trim());
+      if (newLinks && newLinks.length) job.adLinks = newLinks;
+      job.status = 'active';
+      saveJobs();
+      showNotification('Job approved','success');
+      sendToAdmin(`✅ Job ${jobId} approved`);
+      loadAdminPanel();
+    };
+    window.adminRejectJob = function(jobId) {
+      let job = jobs.find(j => j.id === jobId);
+      if (!job) return;
+      job.status = 'rejected';
+      let u = JSON.parse(localStorage.getItem(`userData_${job.posterId}`));
+      if (u) { u.balance += job.totalCost; u.activeJobId = null; localStorage.setItem(`userData_${job.posterId}`, JSON.stringify(u)); }
+      saveJobs();
+      showNotification('Job rejected, refunded','warning');
+      loadAdminPanel();
+    };
+    window.adminApproveWithdraw = function(reqId) {
+      let req = withdrawReqs.find(r => r.id === reqId);
+      if (!req) return;
+      req.status = 'approved';
+      let u = JSON.parse(localStorage.getItem(`userData_${req.userId}`));
+      if (u) {
+        u.withdrew += req.amount;
+        // give 5% referral bonus to referrer if exists
+        if (u.referredBy) {
+          let referrer = JSON.parse(localStorage.getItem(`userData_${u.referredBy}`));
+          if (referrer) {
+            let bonus = req.amount * 0.05;
+            referrer.balance += bonus;
+            referrer.referralEarnings = (referrer.referralEarnings || 0) + bonus;
+            referrer.referralHistory.push({ username: u.username, date: new Date().toISOString(), earned: bonus });
+            localStorage.setItem(`userData_${u.referredBy}`, JSON.stringify(referrer));
+          }
+        }
+        localStorage.setItem(`userData_${req.userId}`, JSON.stringify(u));
+      }
+      saveWithdraw();
+      showNotification('Withdraw approved','success');
+      loadAdminPanel();
+    };
+    window.adminRejectWithdraw = function(reqId) {
+      let req = withdrawReqs.find(r => r.id === reqId);
+      if (!req) return;
+      req.status = 'rejected';
+      let u = JSON.parse(localStorage.getItem(`userData_${req.userId}`));
+      if (u) { u.balance += req.amount; localStorage.setItem(`userData_${req.userId}`, JSON.stringify(u)); }
+      saveWithdraw();
+      loadAdminPanel();
+    };
+    window.adminApproveDeposit = function(reqId) {
+      let req = depositReqs.find(r => r.id === reqId);
+      if (!req) return;
+      req.status = 'approved';
+      let u = JSON.parse(localStorage.getItem(`userData_${req.userId}`));
+      if (u) { u.balance += req.amount; u.deposited += req.amount; localStorage.setItem(`userData_${req.userId}`, JSON.stringify(u)); }
+      saveDeposit();
+      loadAdminPanel();
+    };
+    window.adminRejectDeposit = function(reqId) {
+      let req = depositReqs.find(r => r.id === reqId);
+      if (req) { req.status = 'rejected'; saveDeposit(); loadAdminPanel(); }
+    };
+    window.adminSendMessage = function() {
+      let uid = document.getElementById('adminUserId').value;
+      let txt = document.getElementById('adminMsgText').value;
+      if (!uid || !txt) return;
+      sendToAdmin(`📨 message to ${uid}: ${txt}`); // simulate sending via bot
+      showNotification('Message sent (simulated)','success');
+    };
+    function sendToAdmin(msg) {
+      fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ chat_id: ADMIN_ID, text: msg, parse_mode:'HTML' })
+      }).catch(e=>console.log);
+    }
+
+    // ---------- UTILS ----------
+    function updateDisplay() {
+      document.getElementById('header-balance').innerText = userData.balance.toFixed(2);
+      document.getElementById('user-name').innerText = userData.firstName;
+      document.getElementById('display-user-id').innerText = userData.userId;
+      document.getElementById('profile-img').src = userData.photoUrl;
+      document.getElementById('lifetime-earning').innerText = userData.lifetimeEarning.toFixed(2);
+      document.getElementById('total-tasks').innerText = userData.totalTasks;
+      document.getElementById('referral-count').innerText = userData.referrals || 0;
+      document.getElementById('today-earning').innerText = '0.00';
+    }
+
+    window.copyReferralLink = function() {
+      let link = `https://t.me/TaskTycoon_Bot?start=ref_${userData.userId}`;
+      navigator.clipboard.writeText(link).then(()=>showNotification('Copied!'));
+    };
+
+    // start
+    initUser();
+    updateDisplay();
+    showScreen('home');
+  })();
+</script>
 </body>
 </html>
